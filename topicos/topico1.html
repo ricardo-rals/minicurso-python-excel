@@ -1,0 +1,348 @@
+        <div id="topico1" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">🐍</span>Tópico 1: Introdução ao Python</h2>
+                <h3>O que é Python?</h3>
+                <ul>
+                    <li><strong>Linguagem de programação de alto nível</strong> criada por Guido van Rossum em 1991</li>
+                    <li><strong>Sintaxe simples e legível</strong> - parece com inglês!</li>
+                    <li><strong>Interpretada</strong> - não precisa compilar antes de executar</li>
+                    <li><strong>Multiparadigma</strong> - suporta programação procedural, orientada a objetos e funcional</li>
+                </ul>
+
+                <div class="destaque">
+                    <strong>💡 Por que Python?</strong>
+                    Python é uma das linguagens mais populares do mundo, ideal para iniciantes e poderosa para profissionais!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Para que serve Python?</h2>
+                <h3>Áreas de Aplicação:</h3>
+                <ul>
+                    <li><strong>🤖 Automação:</strong> Automatizar tarefas repetitivas, manipulação de arquivos, web scraping</li>
+                    <li><strong>📊 Análise de Dados:</strong> Processamento e visualização de grandes volumes de dados</li>
+                    <li><strong>🌐 Desenvolvimento Web:</strong> Sites e APIs (Django, Flask)</li>
+                    <li><strong>🧠 Inteligência Artificial:</strong> Machine Learning, Deep Learning</li>
+                    <li><strong>🎮 Desenvolvimento de Jogos:</strong> Pygame e outras bibliotecas</li>
+                    <li><strong>📈 Ciência de Dados:</strong> Análise estatística e modelagem</li>
+                </ul>
+
+                <div class="exemplo-box">
+                    <strong>✨ Nosso foco neste curso:</strong>
+                    Automação de tarefas com Excel, análise de dados e geração de relatórios!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💻</span>Instalação do Python</h2>
+                <h3>Passo a Passo:</h3>
+
+                <ol style="font-size: 1.1em; line-height: 2;">
+                    <li><strong>Acesse:</strong> python.org/downloads</li>
+                    <li><strong>Baixe:</strong> a versão mais recente para seu sistema operacional</li>
+                    <li><strong>Execute:</strong> o instalador</li>
+                    <li><strong>IMPORTANTE:</strong> Marque a opção "Add Python to PATH"</li>
+                    <li><strong>Clique:</strong> em "Install Now"</li>
+                </ol>
+
+                <div class="destaque">
+                    <strong>⚠️ Atenção!</strong>
+                    Não esqueça de marcar "Add Python to PATH" durante a instalação. Isso permite executar Python de qualquer lugar no terminal!
+                </div>
+
+                <h3 style="margin-top: 30px;">Verificando a Instalação:</h3>
+                <div class="code-block">
+                    <code># No terminal/prompt de comando, digite:
+python --version
+# ou
+python3 --version</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚙️</span>Ambiente de Desenvolvimento</h2>
+                <h3>Opções de IDE/Editor:</h3>
+
+                <table>
+                    <tr>
+                        <th>Ferramenta</th>
+                        <th>Vantagens</th>
+                        <th>Ideal Para</th>
+                    </tr>
+                    <tr>
+                        <td><strong>VS Code</strong></td>
+                        <td>Leve, extensível, debugger integrado</td>
+                        <td>Projetos completos, desenvolvimento profissional</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jupyter Notebook</strong></td>
+                        <td>Interativo, visualização imediata, ótimo para dados</td>
+                        <td>Análise de dados, aprendizado, experimentos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PyCharm</strong></td>
+                        <td>IDE completa, muitos recursos</td>
+                        <td>Projetos grandes e complexos</td>
+                    </tr>
+                </table>
+
+                <div class="exemplo-box">
+                    <strong>📝 Recomendação para este curso:</strong>
+                    Vamos usar o <strong>VS Code</strong> pela sua versatilidade e facilidade de uso!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📦</span>Instalação de Bibliotecas</h2>
+                <h3>O que são bibliotecas?</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Bibliotecas são pacotes de código reutilizável que adicionam funcionalidades ao Python.
+                </p>
+
+                <h3>Usando o PIP (Python Package Installer):</h3>
+                <div class="code-block">
+                    <code># Sintaxe básica:
+pip install nome_da_biblioteca
+
+# Exemplos práticos:
+pip install openpyxl    # Para trabalhar com Excel
+pip install pandas      # Para análise de dados
+pip install matplotlib  # Para criar gráficos
+
+# Ver bibliotecas instaladas:
+pip list
+
+# Atualizar uma biblioteca:
+pip install --upgrade nome_da_biblioteca</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>💡 Dica:</strong>
+                    Sempre use um ambiente virtual (venv) para projetos maiores para manter as dependências organizadas!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">👋</span>Primeiro Programa: Hello World!</h2>
+                <h3>O Clássico Primeiro Programa:</h3>
+
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print("Hello World!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Hello World!</div>
+                    </div>
+                </div>
+
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    A função <code style="background: #f8f9fa; padding: 3px 8px; border-radius: 3px;">print()</code>
+                    exibe texto ou valores na tela.
+                </p>
+
+                <h3>Vamos experimentar mais:</h3>
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print("Olá, Python!")
+print("Bem-vindo ao minicurso")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Olá, Python!
+Bem-vindo ao minicurso</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Múltiplos argumentos (separados por espaço)
+print("Python", "para", "Excel")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python para Excel</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Concatenação de strings
+print("Python" + " " + "é" + " " + "incrível!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python é incrível!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔢</span>Explorando o print()</h2>
+                <h3>Imprimindo números e operações:</h3>
+
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print(2025)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">2025</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print(10 + 5)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">15</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print(7 * 8)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">56</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Mesclando texto e números
+print("O resultado é:", 10 + 5)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">O resultado é: 15</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Linha em branco
+print()
+print("Texto após linha vazia")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">
+Texto após linha vazia</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✨</span>Recursos Especiais do print()</h2>
+
+                <div class="slide-content">
+                    <h3>Parâmetro sep (separador):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print("Python", "é", "incrível", sep="-")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python-é-incrível</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print(2025, 10, 27, sep="/")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">2025/10/27</div>
+                    </div>
+
+                    <h3>Parâmetro end (final da linha):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print("Primeira linha", end=" - ")
+print("Continuação na mesma linha")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeira linha - Continuação na mesma linha</div>
+                    </div>
+
+                    <h3>Caracteres especiais:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># \n = nova linha
+print("Linha 1\nLinha 2\nLinha 3")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Linha 1
+Linha 2
+Linha 3</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># \t = tabulação
+print("Nome:\tJoão\nIdade:\t25")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Nome:	João
+Idade:	25</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Exercícios Práticos - Introdução</h2>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Apresentação Pessoal</strong>
+                    <p>Crie um programa que exiba seu nome, idade e cidade em linhas separadas.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">print("Nome: Maria Silva")
+print("Idade: 25 anos")
+print("Cidade: São Paulo")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Nome: Maria Silva
+Idade: 25 anos
+Cidade: São Paulo</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Calculadora Visual</strong>
+                    <p>Imprima o resultado de 5 operações matemáticas diferentes.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">print("10 + 5 =", 10 + 5)
+print("10 - 5 =", 10 - 5)
+print("10 * 5 =", 10 * 5)
+print("10 / 5 =", 10 / 5)
+print("10 ** 2 =", 10 ** 2)</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">10 + 5 = 15
+10 - 5 = 5
+10 * 5 = 50
+10 / 5 = 2.0
+10 ** 2 = 100</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 3: Criando um Banner</strong>
+                    <p>Use print() para criar um banner decorativo com seu nome.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">print("=" * 40)
+print("     BEM-VINDO AO PYTHON!")
+print("=" * 40)
+print()
+print("  Desenvolvido por: João Silva")
+print("=" * 40)</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">========================================
+     BEM-VINDO AO PYTHON!
+========================================
+
+  Desenvolvido por: João Silva
+========================================</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador1">1 / 9</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

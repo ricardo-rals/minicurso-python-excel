@@ -1,0 +1,499 @@
+        <div id="topico3" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📋</span>Tópico 3: Listas em Python</h2>
+                <h3>O que são Listas?</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Listas são estruturas de dados que armazenam múltiplos valores em uma única variável.
+                    São <strong>ordenadas, mutáveis e permitem valores duplicados</strong>.
+                </p>
+                
+                <div class="code-block">
+                    <code># Criando listas:
+numeros = [1, 2, 3, 4, 5]
+frutas = ["maçã", "banana", "laranja"]
+misto = [1, "texto", 3.14, True]
+vazia = []
+
+print(numeros)    # [1, 2, 3, 4, 5]
+print(frutas)     # ['maçã', 'banana', 'laranja']
+print(len(frutas))  # 3 (quantidade de elementos)</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Características das Listas:</strong>
+                    <ul>
+                        <li>Usam colchetes [ ]</li>
+                        <li>Elementos separados por vírgula</li>
+                        <li>Podem conter diferentes tipos de dados</li>
+                        <li>São indexadas começando do zero</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Acessando Elementos de Listas</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Usamos <strong>índices</strong> para acessar elementos individuais. O primeiro elemento tem índice 0.
+                </p>
+                
+                <div class="code-block">
+                    <code># Lista exemplo:
+frutas = ["maçã", "banana", "laranja", "uva", "manga"]
+
+# Acessando por índice positivo:
+print(frutas[0])   # "maçã" (primeiro)
+print(frutas[1])   # "banana" (segundo)
+print(frutas[4])   # "manga" (quinto)
+
+# Acessando por índice negativo (de trás para frente):
+print(frutas[-1])  # "manga" (último)
+print(frutas[-2])  # "uva" (penúltimo)
+
+# Fatiamento (slicing):
+print(frutas[1:3])    # ["banana", "laranja"]
+print(frutas[:3])     # ["maçã", "banana", "laranja"]
+print(frutas[2:])     # ["laranja", "uva", "manga"]
+print(frutas[-3:])    # ["laranja", "uva", "manga"]
+
+# Modificando elementos:
+frutas[0] = "morango"
+print(frutas)  # ["morango", "banana", "laranja", "uva", "manga"]</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Atenção:</strong>
+                    Tentar acessar um índice que não existe gera erro: IndexError
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">➕</span>Método append() - Adicionar Elementos</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O método <strong>append()</strong> adiciona um elemento ao final da lista.
+                </p>
+                
+                <div class="code-block">
+                    <code># Usando append():
+frutas = ["maçã", "banana"]
+print(frutas)  # ['maçã', 'banana']
+
+frutas.append("laranja")
+print(frutas)  # ['maçã', 'banana', 'laranja']
+
+frutas.append("uva")
+print(frutas)  # ['maçã', 'banana', 'laranja', 'uva']
+
+# Exemplo prático: construindo uma lista
+notas = []
+notas.append(8.5)
+notas.append(7.0)
+notas.append(9.0)
+notas.append(6.5)
+print(notas)  # [8.5, 7.0, 9.0, 6.5]
+
+media = sum(notas) / len(notas)
+print(f"Média: {media}")
+
+# Adicionando com input:
+compras = []
+compras.append(input("Item 1: "))
+compras.append(input("Item 2: "))
+compras.append(input("Item 3: "))
+print("Lista de compras:", compras)</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>📌 Nota:</strong>
+                    O append() modifica a lista original, não cria uma nova lista.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🗑️</span>Método remove() - Remover Elementos</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O método <strong>remove()</strong> remove a primeira ocorrência de um valor específico.
+                </p>
+                
+                <div class="code-block">
+                    <code># Usando remove():
+frutas = ["maçã", "banana", "laranja", "banana", "uva"]
+print(frutas)
+
+frutas.remove("banana")  # Remove a primeira "banana"
+print(frutas)  # ['maçã', 'laranja', 'banana', 'uva']
+
+frutas.remove("uva")
+print(frutas)  # ['maçã', 'laranja', 'banana']
+
+# Outras formas de remover:
+
+# 1. pop() - remove por índice e retorna o valor
+numeros = [10, 20, 30, 40]
+removido = numeros.pop(1)  # Remove índice 1
+print(removido)  # 20
+print(numeros)   # [10, 30, 40]
+
+ultimo = numeros.pop()  # Remove o último
+print(ultimo)   # 40
+print(numeros)  # [10, 30]
+
+# 2. del - remove por índice
+cores = ["azul", "verde", "vermelho"]
+del cores[0]
+print(cores)  # ['verde', 'vermelho']
+
+# 3. clear() - remove todos os elementos
+lista = [1, 2, 3]
+lista.clear()
+print(lista)  # []</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Cuidado:</strong>
+                    Se o elemento não existir na lista, remove() gera erro: ValueError
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📏</span>Função len() - Tamanho da Lista</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    A função <strong>len()</strong> retorna o número de elementos na lista.
+                </p>
+                
+                <div class="code-block">
+                    <code># Usando len():
+frutas = ["maçã", "banana", "laranja"]
+print(len(frutas))  # 3
+
+numeros = [10, 20, 30, 40, 50]
+print(len(numeros))  # 5
+
+vazia = []
+print(len(vazia))  # 0
+
+# Exemplos práticos:
+
+# Verificar se lista está vazia:
+if len(frutas) == 0:
+    print("Lista vazia")
+else:
+    print(f"A lista tem {len(frutas)} elementos")
+
+# Acessar o último elemento:
+ultima_fruta = frutas[len(frutas) - 1]
+print(ultima_fruta)  # ou simplesmente: frutas[-1]
+
+# Calcular média:
+notas = [8.5, 7.0, 9.0, 6.5]
+media = sum(notas) / len(notas)
+print(f"Média: {media:.2f}")
+
+# Criar um programa que aceita várias entradas:
+alunos = []
+quantidade = int(input("Quantos alunos? "))
+
+for i in range(quantidade):
+    nome = input(f"Nome do aluno {i+1}: ")
+    alunos.append(nome)
+
+print(f"\nTotal de alunos: {len(alunos)}")
+print("Lista de alunos:", alunos)</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Percorrer Listas com For</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O loop <strong>for</strong> permite processar cada elemento de uma lista.
+                </p>
+                
+                <div class="code-block">
+                    <code># Forma 1: Percorrer diretamente os elementos
+frutas = ["maçã", "banana", "laranja"]
+
+for fruta in frutas:
+    print(fruta)
+# maçã
+# banana
+# laranja
+
+# Forma 2: Percorrer usando índices
+for i in range(len(frutas)):
+    print(f"Posição {i}: {frutas[i]}")
+# Posição 0: maçã
+# Posição 1: banana
+# Posição 2: laranja
+
+# Forma 3: Usar enumerate (índice + valor)
+for i, fruta in enumerate(frutas):
+    print(f"{i+1}. {fruta}")
+# 1. maçã
+# 2. banana
+# 3. laranja</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💪</span>Exemplos Práticos com Listas</h2>
+                
+                <div class="code-block">
+                    <code># Exemplo 1: Calcular soma de números
+numeros = [10, 20, 30, 40, 50]
+soma = 0
+
+for numero in numeros:
+    soma += numero
+
+print(f"Soma total: {soma}")  # 150
+
+# Ou usar a função sum():
+print(f"Soma: {sum(numeros)}")
+
+# Exemplo 2: Encontrar o maior valor
+numeros = [45, 23, 78, 12, 90, 34]
+maior = numeros[0]
+
+for numero in numeros:
+    if numero > maior:
+        maior = numero
+
+print(f"Maior número: {maior}")  # 90
+
+# Ou usar a função max():
+print(f"Maior: {max(numeros)}")
+
+# Exemplo 3: Filtrar números pares
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+pares = []
+
+for numero in numeros:
+    if numero % 2 == 0:
+        pares.append(numero)
+
+print(f"Números pares: {pares}")  # [2, 4, 6, 8, 10]</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Métodos Úteis de Listas</h2>
+                
+                <div class="code-block">
+                    <code># insert() - adiciona em posição específica
+frutas = ["maçã", "banana", "laranja"]
+frutas.insert(1, "uva")  # Adiciona "uva" na posição 1
+print(frutas)  # ['maçã', 'uva', 'banana', 'laranja']
+
+# count() - conta ocorrências
+numeros = [1, 2, 3, 2, 4, 2, 5]
+print(numeros.count(2))  # 3
+
+# index() - encontra posição de um elemento
+frutas = ["maçã", "banana", "laranja"]
+posicao = frutas.index("banana")
+print(posicao)  # 1
+
+# sort() - ordena a lista
+numeros = [5, 2, 8, 1, 9]
+numeros.sort()
+print(numeros)  # [1, 2, 5, 8, 9]
+
+# reverse() - inverte a ordem
+numeros.reverse()
+print(numeros)  # [9, 8, 5, 2, 1]
+
+# copy() - cria uma cópia
+original = [1, 2, 3]
+copia = original.copy()
+copia.append(4)
+print(original)  # [1, 2, 3]
+print(copia)     # [1, 2, 3, 4]
+
+# extend() - adiciona elementos de outra lista
+lista1 = [1, 2, 3]
+lista2 = [4, 5, 6]
+lista1.extend(lista2)
+print(lista1)  # [1, 2, 3, 4, 5, 6]</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Listas</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Gerenciador de Tarefas</strong>
+                    <p>Crie um programa que permita adicionar, remover e listar tarefas.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">tarefas = []
+
+while True:
+    print("\n=== GERENCIADOR DE TAREFAS ===")
+    print("1. Adicionar tarefa")
+    print("2. Remover tarefa")
+    print("3. Listar tarefas")
+    print("0. Sair")
+    
+    opcao = input("Escolha: ")
+    
+    if opcao == "1":
+        tarefa = input("Digite a tarefa: ")
+        tarefas.append(tarefa)
+        print("✅ Tarefa adicionada!")
+    elif opcao == "2":
+        if len(tarefas) > 0:
+            for i, t in enumerate(tarefas):
+                print(f"{i}. {t}")
+            idx = int(input("Número da tarefa: "))
+            tarefas.pop(idx)
+            print("✅ Tarefa removida!")
+    elif opcao == "3":
+        print("\n📋 TAREFAS:")
+        for i, t in enumerate(tarefas):
+            print(f"{i+1}. {t}")
+    elif opcao == "0":
+        break</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">=== GERENCIADOR DE TAREFAS ===
+1. Adicionar tarefa
+2. Remover tarefa
+3. Listar tarefas
+0. Sair
+Escolha: 1
+Digite a tarefa: Estudar Python
+✅ Tarefa adicionada!</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Análise de Notas</strong>
+                    <p>Peça 5 notas, calcule média, maior, menor e notas acima da média.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">notas = []
+
+for i in range(5):
+    nota = float(input(f"Nota {i+1}: "))
+    notas.append(nota)
+
+media = sum(notas) / len(notas)
+maior = max(notas)
+menor = min(notas)
+
+acima_media = []
+for nota in notas:
+    if nota > media:
+        acima_media.append(nota)
+
+print(f"\n📊 ANÁLISE:")
+print(f"Média: {media:.2f}")
+print(f"Maior nota: {maior}")
+print(f"Menor nota: {menor}")
+print(f"Notas acima da média: {acima_media}")
+print(f"Quantidade acima da média: {len(acima_media)}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Nota 1: 8.5
+Nota 2: 7.0
+Nota 3: 9.0
+Nota 4: 6.5
+Nota 5: 7.5
+
+📊 ANÁLISE:
+Média: 7.70
+Maior nota: 9.0
+Menor nota: 6.5
+Notas acima da média: [8.5, 9.0]
+Quantidade acima da média: 2</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🛒</span>Mais Exercícios - Listas</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 3: Lista de Compras</strong>
+                    <p>Peça itens de compra até que o usuário digite "fim".</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">compras = []
+
+print("Digite os itens (digite 'fim' para encerrar):")
+while True:
+    item = input("Item: ")
+    if item.lower() == "fim":
+        break
+    compras.append(item)
+
+print("\n🛒 LISTA DE COMPRAS:")
+for i, item in enumerate(compras, 1):
+    print(f"{i}. {item}")
+print(f"\nTotal de itens: {len(compras)}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite os itens (digite 'fim' para encerrar):
+Item: Arroz
+Item: Feijão
+Item: Macarrão
+Item: fim
+
+🛒 LISTA DE COMPRAS:
+1. Arroz
+2. Feijão
+3. Macarrão
+
+Total de itens: 3</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="destaque">
+                    <strong>💪 Desafio Extra: Remover Duplicados</strong>
+                    <p>Remova todos os valores duplicados de uma lista.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">lista = [1, 2, 2, 3, 4, 3, 5, 1, 6]
+print("Lista original:", lista)
+
+lista_unica = []
+for numero in lista:
+    if numero not in lista_unica:
+        lista_unica.append(numero)
+
+print("Lista sem duplicados:", lista_unica)
+
+# Ou usando set (mais fácil):
+lista_unica2 = list(set(lista))
+print("Usando set:", lista_unica2)</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Lista original: [1, 2, 2, 3, 4, 3, 5, 1, 6]
+Lista sem duplicados: [1, 2, 3, 4, 5, 6]
+Usando set: [1, 2, 3, 4, 5, 6]</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador3">1 / 10</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

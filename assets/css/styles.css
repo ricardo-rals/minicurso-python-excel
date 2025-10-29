@@ -1,0 +1,392 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Menu Principal */
+.menu-principal {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.titulo-curso {
+    text-align: center;
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitulo-curso {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.integrantes {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.integrantes h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.integrantes ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.integrantes li {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #667eea;
+}
+
+.topicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.topico-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.topico-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.topico-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.topico-card p {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Slides */
+.slides-container {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    min-height: 600px;
+    padding: 60px;
+    background: white;
+}
+
+.slide.active {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide h2 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+}
+
+.slide h3 {
+    color: #764ba2;
+    font-size: 1.8em;
+    margin: 25px 0 15px 0;
+}
+
+.slide ul {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.slide li {
+    margin: 15px 0;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+.code-block {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.code-block code {
+    font-size: 1em;
+    white-space: pre;
+}
+
+/* Estilo Jupyter Notebook */
+.jupyter-cell {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 15px 0;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jupyter-input {
+    background: #f7f7f7;
+    padding: 3px 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.jupyter-input::before {
+    content: "In [" counter(cell-counter) "]:";
+    counter-increment: cell-counter;
+    font-weight: bold;
+    color: #303f9f;
+    margin-right: 10px;
+}
+
+.jupyter-code {
+    background: #ffffff;
+    padding: 15px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.jupyter-output {
+    background: #fafafa;
+    padding: 3px 10px;
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.jupyter-output::before {
+    content: "Out[" counter(cell-counter) "]:";
+    font-weight: bold;
+    color: #d84315;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.jupyter-result {
+    background: #fafafa;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    color: #333;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.jupyter-print {
+    background: #ffffff;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    color: #000;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.slide-content {
+    counter-reset: cell-counter;
+}
+
+/* Comentários em código */
+.comment {
+    color: #6a9955;
+}
+
+.string {
+    color: #ce9178;
+}
+
+.keyword {
+    color: #569cd6;
+}
+
+.number {
+    color: #b5cea8;
+}
+
+/* Soluções expansíveis */
+details {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: bold;
+    color: #667eea;
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+summary:hover {
+    color: #764ba2;
+}
+
+details[open] summary {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+details[open] {
+    background: #ffffff;
+    border: 1px solid #667eea;
+}
+
+.exemplo-box {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.exemplo-box strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.destaque {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #ffc107;
+    margin: 20px 0;
+}
+
+/* Controles de Navegação */
+.controles {
+    background: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #764ba2;
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.contador-slides {
+    color: #666;
+    font-weight: bold;
+}
+
+.btn-voltar-menu {
+    background: #dc3545;
+    margin-right: auto;
+}
+
+.btn-voltar-menu:hover {
+    background: #c82333;
+}
+
+/* Tabela de comparação */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #667eea;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.emoji {
+    font-size: 1.5em;
+    margin-right: 10px;
+}

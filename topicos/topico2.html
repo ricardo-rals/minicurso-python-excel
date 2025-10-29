@@ -1,0 +1,2112 @@
+        <div id="topico2" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📝</span>Tópico 2: Fundamentos do Python</h2>
+                <h3>Tipos de Variáveis</h3>
+                <p style="font-size: 1.1em;">Variáveis são espaços na memória onde armazenamos informações.</p>
+                
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Exemplos</th>
+                    </tr>
+                    <tr>
+                        <td><strong>int</strong></td>
+                        <td>Números inteiros</td>
+                        <td>10, -5, 0, 1000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>float</strong></td>
+                        <td>Números decimais</td>
+                        <td>3.14, -0.5, 2.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>str</strong></td>
+                        <td>Texto (strings)</td>
+                        <td>"Python", 'Olá', "123"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bool</strong></td>
+                        <td>Valores lógicos</td>
+                        <td>True, False</td>
+                    </tr>
+                </table>
+
+                <div class="slide-content">
+                    <h3 style="margin-top: 30px;">Exemplos práticos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">idade = 25
+print(idade)
+print(type(idade))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">25
+&lt;class 'int'&gt;</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">altura = 1.75
+print(altura)
+print(type(altura))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">1.75
+&lt;class 'float'&gt;</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Maria"
+print(nome)
+print(type(nome))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maria
+&lt;class 'str'&gt;</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">ativo = True
+print(ativo)
+print(type(ativo))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">True
+&lt;class 'bool'&gt;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔤</span>Trabalhando com Variáveis</h2>
+                
+                <div class="slide-content">
+                    <h3>Declarando e usando variáveis:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Python detecta o tipo automaticamente
+numero = 42
+preco = 19.99
+produto = "Notebook"
+disponivel = True
+
+print(numero, preco, produto, disponivel)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">42 19.99 Notebook True</div>
+                    </div>
+
+                    <h3>Reatribuindo valores:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">x = 10
+print("x =", x)
+
+x = 20  # Alterando o valor
+print("Agora x =", x)
+
+x = x + 5  # Usando o valor antigo
+print("Novo x =", x)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">x = 10
+Agora x = 20
+Novo x = 25</div>
+                    </div>
+
+                    <h3>Múltiplas atribuições:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Atribuir o mesmo valor a várias variáveis
+a = b = c = 100
+print(a, b, c)
+
+# Atribuir valores diferentes em uma linha
+x, y, z = 1, 2, 3
+print(x, y, z)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">100 100 100
+1 2 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📏</span>Convenções de Nomenclatura</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Python tem convenções de estilo definidas no <strong>PEP 8</strong> (Python Enhancement Proposal 8).
+                </p>
+                
+                <div class="slide-content">
+                    <h3>✅ Nomes de variáveis - snake_case:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># BOM - snake_case (letras minúsculas com underscores)
+nome_completo = "Maria Silva"
+idade_usuario = 25
+valor_total = 100.50
+numero_tentativas = 3
+
+# BOM - nomes descritivos
+preco_produto = 50.00
+quantidade_estoque = 100
+
+# EVITAR - nomes muito curtos ou confusos
+x = 50  # O que é x?
+p = 100  # O que é p?
+a1 = 3  # O que significa a1?</div>
+                    </div>
+
+                    <h3>❌ O que evitar:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># EVITAR - camelCase (use em outras linguagens, não em Python)
+# nomeCompleto = "João"
+# idadeUsuario = 30
+
+# EVITAR - começar com números
+# 1_numero = 10  # ERRO!
+
+# EVITAR - caracteres especiais
+# nome-usuario = "Ana"  # ERRO!
+# nome@usuario = "Ana"  # ERRO!
+
+# EVITAR - palavras reservadas
+# for = 10  # ERRO!
+# if = 20   # ERRO!
+# print = "texto"  # Sobrescreve a função print!</div>
+                    </div>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Dica de ouro:</strong>
+                    Escolha nomes que descrevam claramente o propósito da variável. 
+                    <code>preco_produto</code> é muito melhor que <code>p</code>!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎨</span>Boas Práticas - Nomenclatura</h2>
+                
+                <div class="slide-content">
+                    <h3>Constantes - MAIÚSCULAS:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Constantes (valores que não devem mudar)
+PI = 3.14159
+TAXA_JUROS = 0.05
+VELOCIDADE_LUZ = 299792458  # m/s
+MAIORIDADE = 18
+
+# Usando constantes
+raio = 5
+area = PI * (raio ** 2)
+print(f"Área do círculo: {area:.2f}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Área do círculo: 78.54</div>
+                    </div>
+
+                    <h3>Nomes em português ou inglês?</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Seja consistente! Escolha um idioma e mantenha
+# ✅ BOM - tudo em português
+nome_usuario = "Maria"
+idade_usuario = 25
+cidade_usuario = "São Paulo"
+
+# ✅ BOM - tudo em inglês
+user_name = "Maria"
+user_age = 25
+user_city = "São Paulo"
+
+# ❌ EVITAR - misturar idiomas
+nome_user = "Maria"  # Confuso!
+age_usuario = 25     # Inconsistente!</div>
+                    </div>
+
+                    <h3>Nomes compostos descritivos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ EXCELENTE - nomes claros e descritivos
+temperatura_maxima = 35
+temperatura_minima = 18
+temperatura_atual = 28
+
+saldo_conta_corrente = 1500.00
+limite_credito_disponivel = 500.00
+
+# ✅ Use nomes que fazem sentido no contexto
+nota_matematica = 8.5
+nota_portugues = 7.0
+media_final = (nota_matematica + nota_portugues) / 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✨</span>Boas Práticas - Código Limpo</h2>
+                
+                <div class="slide-content">
+                    <h3>1. Use espaços em branco para legibilidade:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - espaçamento adequado
+resultado = (10 + 5) * 2
+lista = [1, 2, 3, 4, 5]
+nome = "Python"
+
+# ❌ RUIM - sem espaços
+resultado=(10+5)*2
+lista=[1,2,3,4,5]
+nome="Python"
+
+# ✅ BOM - espaço após vírgulas
+print("Nome:", nome, "Idade:", 25)
+
+# ❌ RUIM - sem espaços
+print("Nome:",nome,"Idade:",25)</div>
+                    </div>
+
+                    <h3>2. Use comentários significativos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - comentários úteis
+# Calcula o desconto de 10% para clientes VIP
+desconto_vip = preco * 0.10
+
+# Converte temperatura de Celsius para Fahrenheit
+fahrenheit = (celsius * 9/5) + 32
+
+# ❌ RUIM - comentários óbvios
+x = 10  # atribui 10 para x
+y = x + 5  # soma x com 5
+
+# ✅ EXCELENTE - explica o "porquê"
+# Limite de 3 tentativas para evitar ataques de força bruta
+max_tentativas = 3</div>
+                    </div>
+
+                    <h3>3. Quebre linhas longas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - linha quebrada para legibilidade
+mensagem_boas_vindas = (
+    "Olá! Bem-vindo ao sistema de gerenciamento "
+    "de estoque. Digite suas credenciais para continuar."
+)
+
+# ✅ BOM - cálculos complexos em múltiplas linhas
+valor_total = (
+    preco_base +
+    taxa_servico +
+    imposto -
+    desconto
+)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔍</span>Boas Práticas - Estrutura do Código</h2>
+                
+                <div class="slide-content">
+                    <h3>4. Indentação consistente (4 espaços):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - 4 espaços de indentação
+if idade >= 18:
+    print("Maior de idade")
+    print("Pode votar")
+    if tem_titulo:
+        print("E já pode votar!")
+
+# ❌ RUIM - indentação inconsistente
+if idade >= 18:
+  print("Maior de idade")  # 2 espaços
+    print("Pode votar")    # 4 espaços
+   print("Confuso!")       # 3 espaços</div>
+                    </div>
+
+                    <h3>5. Linhas em branco para organização:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - seções separadas por linhas em branco
+# Entrada de dados
+nome = input("Nome: ")
+idade = int(input("Idade: "))
+
+# Processamento
+ano_nascimento = 2025 - idade
+
+# Saída
+print(f"{nome} nasceu em {ano_nascimento}")
+
+
+# ❌ RUIM - tudo junto
+nome = input("Nome: ")
+idade = int(input("Idade: "))
+ano_nascimento = 2025 - idade
+print(f"{nome} nasceu em {ano_nascimento}")</div>
+                    </div>
+
+                    <h3>6. Uma instrução por linha:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - uma instrução por linha
+x = 10
+y = 20
+z = 30
+
+# ❌ RUIM - múltiplas instruções em uma linha
+x = 10; y = 20; z = 30  # Evite usar ponto e vírgula</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚡</span>Dicas de Performance e Eficiência</h2>
+                
+                <div class="slide-content">
+                    <h3>1. Use operadores apropriados:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - use += para incrementar
+contador = 0
+contador += 1  # Mais claro e eficiente
+
+# ❌ RUIM - mais verboso
+contador = contador + 1
+
+# Outros operadores úteis
+x = 10
+x += 5   # x = x + 5
+x -= 3   # x = x - 3
+x *= 2   # x = x * 2
+x //= 4  # x = x // 4
+print(x)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">3</div>
+                    </div>
+
+                    <h3>2. Comparações encadeadas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - comparação encadeada (pythonic)
+idade = 25
+if 18 <= idade <= 65:
+    print("Adulto em idade ativa")
+
+# ❌ RUIM - mais verboso
+if idade >= 18 and idade <= 65:
+    print("Adulto em idade ativa")
+
+# Outro exemplo
+nota = 8.5
+if 0 <= nota <= 10:
+    print("Nota válida")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Adulto em idade ativa
+Nota válida</div>
+                    </div>
+
+                    <h3>3. Use f-strings para formatação:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Maria"
+idade = 25
+cidade = "São Paulo"
+
+# ✅ EXCELENTE - f-strings (Python 3.6+)
+mensagem = f"{nome} tem {idade} anos e mora em {cidade}"
+print(mensagem)
+
+# ✅ BOM - format()
+mensagem = "{} tem {} anos e mora em {}".format(nome, idade, cidade)
+
+# ❌ RUIM - concatenação
+mensagem = nome + " tem " + str(idade) + " anos e mora em " + cidade
+
+# F-strings com expressões
+preco = 49.99
+print(f"Preço com desconto: R$ {preco * 0.9:.2f}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maria tem 25 anos e mora em São Paulo
+Preço com desconto: R$ 44.99</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🛡️</span>Tratamento de Erros Básico</h2>
+                
+                <div class="slide-content">
+                    <h3>Validando entrada de dados:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ RUIM - pode gerar erro se usuário digitar texto
+# idade = int(input("Idade: "))
+
+# ✅ BOM - validação básica
+idade_texto = input("Digite sua idade: ")
+
+if idade_texto.isdigit():
+    idade = int(idade_texto)
+    print(f"Você tem {idade} anos")
+else:
+    print("Erro: Digite apenas números!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite sua idade: 25
+Você tem 25 anos</div>
+                    </div>
+
+                    <h3>Try-except (tratamento de exceções):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ MELHOR AINDA - try-except
+try:
+    idade = int(input("Digite sua idade: "))
+    ano_nascimento = 2025 - idade
+    print(f"Você nasceu em {ano_nascimento}")
+except ValueError:
+    print("Erro: Digite um número válido!")
+
+# Exemplo com divisão
+try:
+    a = float(input("Dividendo: "))
+    b = float(input("Divisor: "))
+    resultado = a / b
+    print(f"Resultado: {resultado}")
+except ValueError:
+    print("Erro: Digite números válidos!")
+except ZeroDivisionError:
+    print("Erro: Não é possível dividir por zero!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite sua idade: 25
+Você nasceu em 2000</div>
+                    </div>
+                </div>
+
+                <div class="destaque">
+                    <strong>📌 Importante:</strong>
+                    Sempre valide dados de entrada do usuário! Isso previne erros e torna seu programa mais robusto.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Resumo - Boas Práticas</h2>
+                
+                <div class="exemplo-box">
+                    <strong>✅ Faça:</strong>
+                    <ul>
+                        <li>Use nomes descritivos em <code>snake_case</code></li>
+                        <li>Constantes em <code>MAIUSCULAS</code></li>
+                        <li>Comente o "porquê", não o "o quê"</li>
+                        <li>Use 4 espaços para indentação</li>
+                        <li>Deixe linhas em branco entre seções lógicas</li>
+                        <li>Use f-strings para formatação de texto</li>
+                        <li>Valide entradas do usuário</li>
+                        <li>Seja consistente no estilo</li>
+                    </ul>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>❌ Evite:</strong>
+                    <ul>
+                        <li>Nomes de uma letra (exceto em loops curtos)</li>
+                        <li>Misturar idiomas (português e inglês)</li>
+                        <li>Comentários óbvios ou redundantes</li>
+                        <li>Linhas muito longas (máx 79-100 caracteres)</li>
+                        <li>Múltiplas instruções em uma linha</li>
+                        <li>Sobrescrever funções built-in (print, input, etc)</li>
+                        <li>Indentação inconsistente</li>
+                    </ul>
+                </div>
+
+                <div class="destaque">
+                    <strong>📖 Leia o PEP 8:</strong>
+                    O guia oficial de estilo Python está disponível em 
+                    <a href="https://pep8.org/" target="_blank" style="color: #667eea;">pep8.org</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔤</span>Trabalhando com Strings</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Strings são sequências de caracteres usadas para representar texto.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Criando strings:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Aspas simples ou duplas
+nome1 = 'Python'
+nome2 = "Python"
+print(nome1, nome2)
+
+# Aspas triplas para múltiplas linhas
+mensagem = """
+Olá!
+Este é um texto
+com múltiplas linhas.
+"""
+print(mensagem)
+
+# String vazia
+texto_vazio = ""
+print("Vazia:", len(texto_vazio))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python Python
+
+Olá!
+Este é um texto
+com múltiplas linhas.
+
+Vazia: 0</div>
+                    </div>
+
+                    <h3>Concatenação (juntar strings):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Maria"
+sobrenome = "Silva"
+
+# Usando +
+nome_completo = nome + " " + sobrenome
+print(nome_completo)
+
+# Usando vírgula no print (adiciona espaço automaticamente)
+print(nome, sobrenome)
+
+# Repetição com *
+linha = "=" * 30
+print(linha)
+print("TÍTULO")
+print(linha)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maria Silva
+Maria Silva
+==============================
+TÍTULO
+==============================</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Métodos de Strings</h2>
+                
+                <div class="slide-content">
+                    <h3>Maiúsculas e minúsculas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">texto = "Python para Excel"
+
+print(texto.upper())      # MAIÚSCULAS
+print(texto.lower())      # minúsculas
+print(texto.title())      # Primeira Letra Maiúscula
+print(texto.capitalize()) # Só a primeira maiúscula
+
+# Verificações
+print("É maiúscula?", texto.isupper())
+print("É minúscula?", texto.islower())</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">PYTHON PARA EXCEL
+python para excel
+Python Para Excel
+Python para excel
+É maiúscula? False
+É minúscula? False</div>
+                    </div>
+
+                    <h3>Busca e verificação:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frase = "Python é uma linguagem incrível"
+
+# Verificar se contém
+print("Python" in frase)        # True
+print("Java" in frase)          # False
+
+# Começa ou termina com
+print(frase.startswith("Python"))  # True
+print(frase.endswith("incrível"))  # True
+
+# Encontrar posição
+posicao = frase.find("linguagem")
+print("Posição:", posicao)
+
+# Contar ocorrências
+print("Quantos 'a':", frase.count("a"))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">True
+False
+True
+True
+Posição: 14
+Quantos 'a': 5</div>
+                    </div>
+
+                    <h3>Remover espaços:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">texto = "   Python   "
+
+print(f"'{texto}'")
+print(f"'{texto.strip()}'")    # Remove dos dois lados
+print(f"'{texto.lstrip()}'")   # Remove da esquerda
+print(f"'{texto.rstrip()}'")   # Remove da direita</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">'   Python   '
+'Python'
+'Python   '
+'   Python'</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✂️</span>Fatiamento de Strings (Slicing)</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Podemos acessar partes específicas de uma string usando índices.
+                </p>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">texto = "Python"
+
+# Índices positivos (começam em 0)
+print(texto[0])    # P
+print(texto[1])    # y
+print(texto[5])    # n
+
+# Índices negativos (começam do final)
+print(texto[-1])   # n (último)
+print(texto[-2])   # o (penúltimo)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">P
+y
+n
+n
+o</div>
+                    </div>
+
+                    <h3>Fatiamento com intervalo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">texto = "Python para Excel"
+
+# [inicio:fim] - fim não é incluído
+print(texto[0:6])     # Python
+print(texto[7:11])    # para
+
+# Omitindo início ou fim
+print(texto[:6])      # Python (do início até 6)
+print(texto[7:])      # para Excel (de 7 até o fim)
+
+# Com passo
+print(texto[::2])     # Pto aaExe (de 2 em 2)
+print(texto[::-1])    # lecxE arap nohtyP (invertido)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python
+para
+Python
+para Excel
+Pto aaExe
+lecxE arap nohtyP</div>
+                    </div>
+
+                    <h3>Exemplo prático: extrair domínio de email:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">email = "usuario@exemplo.com.br"
+
+# Encontrar posição do @
+posicao = email.find("@")
+
+# Extrair usuário e domínio
+usuario = email[:posicao]
+dominio = email[posicao+1:]
+
+print("Usuário:", usuario)
+print("Domínio:", dominio)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Usuário: usuario
+Domínio: exemplo.com.br</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Substituição e Divisão de Strings</h2>
+                
+                <div class="slide-content">
+                    <h3>Replace - substituir texto:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frase = "Python é bom. Python é fácil."
+
+# Substituir uma palavra
+nova_frase = frase.replace("Python", "JavaScript")
+print(nova_frase)
+
+# Substituir apenas a primeira ocorrência
+nova_frase = frase.replace("Python", "JavaScript", 1)
+print(nova_frase)
+
+# Remover caracteres
+telefone = "(11) 98888-7777"
+telefone_limpo = telefone.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
+print(telefone_limpo)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">JavaScript é bom. JavaScript é fácil.
+JavaScript é bom. Python é fácil.
+11988887777</div>
+                    </div>
+
+                    <h3>Split - dividir string em lista:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Dividir por espaços
+frase = "Python é uma linguagem incrível"
+palavras = frase.split()
+print(palavras)
+print("Número de palavras:", len(palavras))
+
+# Dividir por vírgula
+frutas = "maçã,banana,laranja,uva"
+lista_frutas = frutas.split(",")
+print(lista_frutas)
+
+# Dividir data
+data = "27/10/2025"
+dia, mes, ano = data.split("/")
+print(f"Dia: {dia}, Mês: {mes}, Ano: {ano}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">['Python', 'é', 'uma', 'linguagem', 'incrível']
+Número de palavras: 5
+['maçã', 'banana', 'laranja', 'uva']
+Dia: 27, Mês: 10, Ano: 2025</div>
+                    </div>
+
+                    <h3>Join - juntar lista em string:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">palavras = ["Python", "é", "incrível"]
+
+# Juntar com espaço
+frase = " ".join(palavras)
+print(frase)
+
+# Juntar com hífen
+frase = "-".join(palavras)
+print(frase)
+
+# Exemplo: criar CSV
+dados = ["João", "25", "São Paulo"]
+linha_csv = ",".join(dados)
+print(linha_csv)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Python é incrível
+Python-é-incrível
+João,25,São Paulo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💡</span>Formatação de Strings Avançada</h2>
+                
+                <div class="slide-content">
+                    <h3>F-strings com formatação:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Maria"
+idade = 25
+altura = 1.68
+saldo = 1234.56
+
+# Básico
+print(f"Nome: {nome}, Idade: {idade}")
+
+# Alinhamento
+print(f"{'Produto':<15} {'Preço':>10}")
+print(f"{'Notebook':<15} {2500.00:>10.2f}")
+print(f"{'Mouse':<15} {45.90:>10.2f}")
+
+# Formatação numérica
+print(f"Altura: {altura:.1f}m")  # 1 casa decimal
+print(f"Saldo: R$ {saldo:,.2f}")  # Vírgula como separador
+
+# Porcentagem
+aproveitamento = 0.875
+print(f"Aproveitamento: {aproveitamento:.1%}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Nome: Maria, Idade: 25
+Produto            Preço
+Notebook         2500.00
+Mouse              45.90
+Altura: 1.7m
+Saldo: R$ 1,234.56
+Aproveitamento: 87.5%</div>
+                    </div>
+
+                    <h3>Expressões dentro de f-strings:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">preco = 100
+quantidade = 3
+
+# Cálculos dentro da string
+print(f"Total: R$ {preco * quantidade:.2f}")
+
+# Chamadas de função
+nome = "maria silva"
+print(f"Nome: {nome.title()}")
+
+# Condicionais
+idade = 20
+status = f"{'Maior' if idade >= 18 else 'Menor'} de idade"
+print(status)
+
+# Dicionários
+aluno = {"nome": "João", "nota": 8.5}
+print(f"Aluno: {aluno['nome']}, Nota: {aluno['nota']}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Total: R$ 300.00
+Nome: Maria Silva
+Maior de idade
+Aluno: João, Nota: 8.5</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⌨️</span>Entrada de Dados</h2>
+                <h3>A função input()</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Permite que o usuário digite informações durante a execução do programa.
+                </p>
+
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = input("Digite seu nome: ")
+print("Olá,", nome)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite seu nome: Maria
+Olá, Maria</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># IMPORTANTE: input() sempre retorna STRING
+idade = input("Digite sua idade: ")
+print("Tipo:", type(idade))
+print("Valor:", idade)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite sua idade: 25
+Tipo: &lt;class 'str'&gt;
+Valor: 25</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Programa de apresentação
+nome = input("Qual é o seu nome? ")
+cidade = input("De onde você é? ")
+comida = input("Qual sua comida favorita? ")
+
+print("\n--- Resumo ---")
+print("Seu nome é", nome)
+print("Você mora em", cidade)
+print("E gosta de", comida)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Qual é o seu nome? João
+De onde você é? São Paulo
+Qual sua comida favorita? Pizza
+
+--- Resumo ---
+Seu nome é João
+Você mora em São Paulo
+E gosta de Pizza</div>
+                    </div>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Atenção:</strong>
+                    O input() SEMPRE retorna texto (string), mesmo que o usuário digite números!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Conversão de Tipos</h2>
+                <h3>Transformando dados entre tipos</h3>
+                
+                <div class="slide-content">
+                    <h3>Convertendo para inteiro - int():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">idade_texto = "25"
+idade_numero = int(idade_texto)
+print("Texto:", idade_texto, "- Tipo:", type(idade_texto))
+print("Número:", idade_numero, "- Tipo:", type(idade_numero))
+print("Pode somar:", idade_numero + 5)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Texto: 25 - Tipo: &lt;class 'str'&gt;
+Número: 25 - Tipo: &lt;class 'int'&gt;
+Pode somar: 30</div>
+                    </div>
+
+                    <h3>Convertendo para float:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">preco_texto = "19.99"
+preco_numero = float(preco_texto)
+print("Preço:", preco_numero)
+print("Preço dobrado:", preco_numero * 2)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Preço: 19.99
+Preço dobrado: 39.98</div>
+                    </div>
+
+                    <h3>Convertendo para string - str():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 100
+texto = str(numero)
+print("Código: " + texto)
+print("Tipo:", type(texto))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Código: 100
+Tipo: &lt;class 'str'&gt;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💻</span>Exemplo Completo: Calculadora de Idade</h2>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">ano_nascimento = input("Em que ano você nasceu? ")
+ano_nascimento = int(ano_nascimento)
+idade = 2025 - ano_nascimento
+print("Você tem", idade, "anos")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Em que ano você nasceu? 2000
+Você tem 25 anos</div>
+                    </div>
+
+                    <div class="exemplo-box">
+                        <strong>💡 Dica Prática:</strong>
+                        É muito comum fazer em uma linha só:
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Captura e converte em uma linha
+idade = int(input("Digite sua idade: "))
+print("No próximo ano você terá", idade + 1, "anos")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite sua idade: 25
+No próximo ano você terá 26 anos</div>
+                    </div>
+
+                    <h3>Programa Completo: Calculadora de IMC</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">peso = float(input("Digite seu peso (kg): "))
+altura = float(input("Digite sua altura (m): "))
+
+imc = peso / (altura ** 2)
+
+print("\nSeu IMC é:", round(imc, 2))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite seu peso (kg): 70
+Digite sua altura (m): 1.75
+
+Seu IMC é: 22.86</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚠️</span>Cuidados com Conversão</h2>
+                
+                <div class="slide-content">
+                    <h3>O que funciona:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># String numérica para int
+x = int("123")
+print(x)  # 123
+
+# Int para float
+y = float(10)
+print(y)  # 10.0
+
+# Qualquer coisa para string
+z = str(True)
+print(z)  # "True"</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">123
+10.0
+True</div>
+                    </div>
+
+                    <h3>O que gera erro:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Texto não numérico para int
+# x = int("abc")  # ValueError
+
+# Float diretamente para int perde casas decimais
+y = int(3.99)
+print(y)  # 3 (não arredonda, apenas corta!)
+
+# String com decimal para int
+# z = int("10.5")  # ValueError - use float() primeiro</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">3</div>
+                    </div>
+
+                    <div class="destaque">
+                        <strong>📌 Importante:</strong>
+                        <ul>
+                            <li>int("10.5") gera erro! Use float("10.5") primeiro</li>
+                            <li>int(3.99) resulta em 3, não 4 (não arredonda)</li>
+                            <li>Para arredondar, use round(3.99) antes de converter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">➕</span>Operadores Aritméticos</h2>
+                
+                <table>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Operação</th>
+                        <th>Exemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                    <tr>
+                        <td><strong>+</strong></td>
+                        <td>Adição</td>
+                        <td>10 + 5</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td><strong>-</strong></td>
+                        <td>Subtração</td>
+                        <td>10 - 5</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>*</strong></td>
+                        <td>Multiplicação</td>
+                        <td>10 * 5</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td><strong>/</strong></td>
+                        <td>Divisão</td>
+                        <td>10 / 5</td>
+                        <td>2.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>//</strong></td>
+                        <td>Divisão inteira</td>
+                        <td>10 // 3</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>%</strong></td>
+                        <td>Módulo (resto)</td>
+                        <td>10 % 3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>**</strong></td>
+                        <td>Potência</td>
+                        <td>2 ** 3</td>
+                        <td>8</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔢</span>Exemplos Práticos - Operadores</h2>
+                
+                <div class="slide-content">
+                    <h3>Operações básicas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">a = 10
+b = 3
+
+print("Soma:", a + b)
+print("Subtração:", a - b)
+print("Multiplicação:", a * b)
+print("Divisão:", a / b)
+print("Divisão inteira:", a // b)
+print("Resto:", a % b)
+print("Potência:", a ** b)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Soma: 13
+Subtração: 7
+Multiplicação: 30
+Divisão: 3.3333333333333335
+Divisão inteira: 3
+Resto: 1
+Potência: 1000</div>
+                    </div>
+
+                    <h3>Calculando média:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nota1 = 8.5
+nota2 = 7.0
+nota3 = 9.0
+media = (nota1 + nota2 + nota3) / 3
+print("Média:", round(media, 2))</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Média: 8.17</div>
+                    </div>
+
+                    <h3>Calculando área:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">base = 5
+altura = 3
+area = base * altura
+print("Área do retângulo:", area, "m²")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Área do retângulo: 15 m²</div>
+                    </div>
+
+                    <h3>Verificando par ou ímpar:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 17
+resto = numero % 2
+print("Resto da divisão por 2:", resto)
+# Se resto é 0, é par. Se é 1, é ímpar.</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Resto da divisão por 2: 1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📐</span>Ordem de Precedência</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Python segue a ordem matemática: parênteses, potência, multiplicação/divisão, adição/subtração.
+                </p>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Sem parênteses
+resultado = 5 + 3 * 2
+print(resultado)  # 3 * 2 = 6, depois 5 + 6 = 11</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">11</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Com parênteses
+resultado = (5 + 3) * 2
+print(resultado)  # (5 + 3) = 8, depois 8 * 2 = 16</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">16</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Exemplo complexo
+resultado = 2 + 3 * 4 ** 2 - 10 / 2
+print(resultado)
+# 4 ** 2 = 16
+# 3 * 16 = 48
+# 10 / 2 = 5.0
+# 2 + 48 - 5.0 = 45.0</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">45.0</div>
+                    </div>
+
+                    <div class="destaque">
+                        <strong>💡 Boa prática:</strong>
+                        Use parênteses para deixar as expressões mais claras, mesmo quando não são obrigatórios!
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Operadores de Atribuição Compostos</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Atalhos para modificar o valor de uma variável.
+                </p>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">x = 10
+print("x inicial:", x)
+
+x += 5  # Mesmo que: x = x + 5
+print("Após x += 5:", x)
+
+x -= 3  # Mesmo que: x = x - 3
+print("Após x -= 3:", x)
+
+x *= 2  # Mesmo que: x = x * 2
+print("Após x *= 2:", x)
+
+x /= 4  # Mesmo que: x = x / 4
+print("Após x /= 4:", x)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">x inicial: 10
+Após x += 5: 15
+Após x -= 3: 12
+Após x *= 2: 24
+Após x /= 4: 6.0</div>
+                    </div>
+
+                    <h3>Exemplo prático: contador</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">contador = 0
+print("Início:", contador)
+
+contador += 1
+print("Incremento 1:", contador)
+
+contador += 1
+print("Incremento 2:", contador)
+
+contador += 1
+print("Incremento 3:", contador)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Início: 0
+Incremento 1: 1
+Incremento 2: 2
+Incremento 3: 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚖️</span>Operadores Relacionais</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Usados para comparar valores. Sempre retornam True ou False.
+                </p>
+                
+                <table>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Significado</th>
+                        <th>Exemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                    <tr>
+                        <td><strong>==</strong></td>
+                        <td>Igual a</td>
+                        <td>5 == 5</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong>!=</strong></td>
+                        <td>Diferente de</td>
+                        <td>5 != 3</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong>></strong></td>
+                        <td>Maior que</td>
+                        <td>5 > 3</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong><</strong></td>
+                        <td>Menor que</td>
+                        <td>5 < 3</td>
+                        <td>False</td>
+                    </tr>
+                    <tr>
+                        <td><strong>>=</strong></td>
+                        <td>Maior ou igual</td>
+                        <td>5 >= 5</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong><=</strong></td>
+                        <td>Menor ou igual</td>
+                        <td>5 <= 3</td>
+                        <td>False</td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+                    <code># Exemplos práticos:
+idade = 18
+maior_de_idade = idade >= 18
+print(maior_de_idade)  # True
+
+nota = 7.5
+aprovado = nota >= 7.0
+print("Aprovado:", aprovado)  # True</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔗</span>Operadores Lógicos</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Combinam expressões booleanas (True/False).
+                </p>
+                
+                <table>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                    <tr>
+                        <td><strong>and</strong></td>
+                        <td>E lógico (ambos verdadeiros)</td>
+                        <td>True and True</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong>or</strong></td>
+                        <td>OU lógico (pelo menos um verdadeiro)</td>
+                        <td>True or False</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><strong>not</strong></td>
+                        <td>NÃO lógico (inverte)</td>
+                        <td>not True</td>
+                        <td>False</td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+                    <code># Exemplos práticos:
+# Verificar faixa etária
+idade = 20
+adolescente = idade >= 13 and idade <= 19
+print(adolescente)  # False
+
+# Verificar fim de semana
+dia = "sábado"
+fim_de_semana = dia == "sábado" or dia == "domingo"
+print(fim_de_semana)  # True
+
+# Verificar disponibilidade
+ocupado = False
+disponivel = not ocupado
+print(disponivel)  # True
+
+# Exemplo completo
+nota = 8.5
+frequencia = 80
+aprovado = nota >= 7.0 and frequencia >= 75
+print("Aprovado:", aprovado)  # True</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔀</span>Estruturas Condicionais: if, elif, else</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Permitem que o programa tome decisões baseadas em condições.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>if básico:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">idade = 18
+
+if idade >= 18:
+    print("Você é maior de idade")
+    print("Pode dirigir")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Você é maior de idade
+Pode dirigir</div>
+                    </div>
+
+                    <h3>if-else:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nota = 8.5
+
+if nota >= 7.0:
+    print("Aprovado!")
+else:
+    print("Reprovado")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Aprovado!</div>
+                    </div>
+
+                    <h3>if-elif-else:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nota = 8.5
+
+if nota >= 9.0:
+    print("Excelente!")
+elif nota >= 7.0:
+    print("Bom!")
+elif nota >= 5.0:
+    print("Regular")
+else:
+    print("Insuficiente")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Bom!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Exemplos Práticos - Condicionais</h2>
+                
+                <div class="slide-content">
+                    <h3>Verificar par ou ímpar:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 17
+
+if numero % 2 == 0:
+    print(numero, "é par")
+else:
+    print(numero, "é ímpar")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">17 é ímpar</div>
+                    </div>
+
+                    <h3>Calculadora simples:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">a = 10
+b = 5
+operacao = "+"
+
+if operacao == "+":
+    print("Resultado:", a + b)
+elif operacao == "-":
+    print("Resultado:", a - b)
+elif operacao == "*":
+    print("Resultado:", a * b)
+elif operacao == "/":
+    print("Resultado:", a / b)
+else:
+    print("Operação inválida")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Resultado: 15</div>
+                    </div>
+
+                    <h3>Classificação de temperatura:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">temperatura = 28
+
+if temperatura < 0:
+    print("Congelante!")
+elif temperatura < 15:
+    print("Frio")
+elif temperatura < 25:
+    print("Agradável")
+elif temperatura < 35:
+    print("Quente")
+else:
+    print("Muito quente!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Quente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔗</span>Condicionais Aninhados</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Um if dentro de outro if permite verificações mais complexas.
+                </p>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">idade = 20
+tem_carteira = True
+
+if idade >= 18:
+    print("Você é maior de idade")
+    if tem_carteira:
+        print("E pode dirigir!")
+    else:
+        print("Mas precisa tirar carteira")
+else:
+    print("Você é menor de idade")
+    print("Não pode dirigir ainda")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Você é maior de idade
+E pode dirigir!</div>
+                    </div>
+
+                    <h3>Sistema de descontos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">valor = 150
+tem_cupom = True
+
+if valor >= 100:
+    desconto = 0.1  # 10%
+    if tem_cupom:
+        desconto = 0.2  # 20% com cupom
+    valor_final = valor * (1 - desconto)
+    print(f"Valor original: R$ {valor}")
+    print(f"Desconto: {desconto * 100}%")
+    print(f"Valor final: R$ {valor_final}")
+else:
+    print("Sem desconto. Valor:", valor)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Valor original: R$ 150
+Desconto: 20.0%
+Valor final: R$ 120.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎓</span>Sistema de Aprovação Completo</h2>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nota = 7.5
+frequencia = 80
+
+print("=== SISTEMA DE APROVAÇÃO ===")
+print(f"Nota: {nota}")
+print(f"Frequência: {frequencia}%")
+print()
+
+if nota >= 7.0 and frequencia >= 75:
+    print("Status: APROVADO")
+    print("Parabéns! Você passou na disciplina!")
+elif nota >= 5.0 and frequencia >= 75:
+    print("Status: RECUPERAÇÃO")
+    print("Você precisa fazer a prova de recuperação")
+elif frequencia < 75:
+    print("Status: REPROVADO POR FALTA")
+    print(f"Frequência mínima: 75%")
+else:
+    print("Status: REPROVADO")
+    print("Nota insuficiente")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">=== SISTEMA DE APROVAÇÃO ===
+Nota: 7.5
+Frequência: 80%
+
+Status: APROVADO
+Parabéns! Você passou na disciplina!</div>
+                    </div>
+
+                    <h3>Programa interativo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nota = float(input("Digite sua nota: "))
+frequencia = float(input("Digite sua frequência (%): "))
+
+if nota >= 7.0 and frequencia >= 75:
+    print("✅ APROVADO")
+elif nota >= 5.0 and frequencia >= 75:
+    print("⚠️ RECUPERAÇÃO")
+else:
+    print("❌ REPROVADO")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Digite sua nota: 8.5
+Digite sua frequência (%): 85
+✅ APROVADO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔁</span>Loop For e Range</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O loop <strong>for</strong> repete um bloco de código um número específico de vezes.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>For básico com range:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">for i in range(5):
+    print(i)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">0
+1
+2
+3
+4</div>
+                    </div>
+
+                    <h3>Range com início e fim:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">for i in range(1, 6):
+    print(i)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">1
+2
+3
+4
+5</div>
+                    </div>
+
+                    <h3>Range com passo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">for i in range(0, 11, 2):
+    print(i, end=" ")
+print()  # Nova linha</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">0 2 4 6 8 10 </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Exemplos Práticos - For</h2>
+                
+                <div class="slide-content">
+                    <h3>Tabuada:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 5
+print(f"Tabuada do {numero}:")
+for i in range(1, 11):
+    resultado = numero * i
+    print(f"{numero} x {i} = {resultado}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Tabuada do 5:
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50</div>
+                    </div>
+
+                    <h3>Soma de números:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">soma = 0
+for i in range(1, 11):
+    soma += i
+print(f"A soma de 1 a 10 é: {soma}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">A soma de 1 a 10 é: 55</div>
+                    </div>
+
+                    <h3>Contagem regressiva:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">print("Contagem regressiva:")
+for i in range(10, 0, -1):
+    print(i)
+print("🚀 Feliz Ano Novo!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Contagem regressiva:
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+🚀 Feliz Ano Novo!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔤</span>For com Strings</h2>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Python"
+for letra in nome:
+    print(letra)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">P
+y
+t
+h
+o
+n</div>
+                    </div>
+
+                    <h3>Contando vogais:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">texto = "Python para Excel"
+vogais = "aeiouAEIOU"
+contador = 0
+
+for letra in texto:
+    if letra in vogais:
+        contador += 1
+
+print(f"O texto tem {contador} vogais")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">O texto tem 6 vogais</div>
+                    </div>
+
+                    <h3>Criando padrões:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">for i in range(1, 6):
+    print("*" * i)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">*
+**
+***
+****
+*****</div>
+                    </div>
+
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">for i in range(5, 0, -1):
+    print("■" * i)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">■■■■■
+■■■■
+■■■
+■■
+■</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">♾️</span>Loop While</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O loop <strong>while</strong> repete enquanto uma condição for verdadeira.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>While básico:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">0
+1
+2
+3
+4</div>
+                    </div>
+
+                    <h3>Contagem regressiva:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 5
+while numero > 0:
+    print(numero)
+    numero -= 1
+print("Fim!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">5
+4
+3
+2
+1
+Fim!</div>
+                    </div>
+
+                    <h3>Acumulando valores:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">soma = 0
+numero = 1
+
+while numero <= 5:
+    soma += numero
+    print(f"Somando {numero}, total = {soma}")
+    numero += 1
+
+print(f"\nSoma final: {soma}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Somando 1, total = 1
+Somando 2, total = 3
+Somando 3, total = 6
+Somando 4, total = 10
+Somando 5, total = 15
+
+Soma final: 15</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎮</span>While com Break e Continue</h2>
+                
+                <div class="slide-content">
+                    <h3>Usando break (sair do loop):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">contador = 0
+while True:
+    print(contador)
+    contador += 1
+    if contador >= 5:
+        break  # Sai do loop
+print("Loop finalizado")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">0
+1
+2
+3
+4
+Loop finalizado</div>
+                    </div>
+
+                    <h3>Usando continue (pular iteração):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numero = 0
+while numero < 10:
+    numero += 1
+    if numero % 2 == 0:
+        continue  # Pula números pares
+    print(numero)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">1
+3
+5
+7
+9</div>
+                    </div>
+
+                    <h3>Menu interativo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">opcao = ""
+while opcao != "0":
+    print("\n=== MENU ===")
+    print("1. Opção 1")
+    print("2. Opção 2")
+    print("0. Sair")
+    opcao = input("Escolha: ")
+    
+    if opcao == "1":
+        print("Você escolheu a opção 1")
+    elif opcao == "2":
+        print("Você escolheu a opção 2")
+    elif opcao == "0":
+        print("Saindo...")
+    else:
+        print("Opção inválida!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">=== MENU ===
+1. Opção 1
+2. Opção 2
+0. Sair
+Escolha: 1
+Você escolheu a opção 1
+
+=== MENU ===
+1. Opção 1
+2. Opção 2
+0. Sair
+Escolha: 0
+Saindo...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Fundamentos (Parte 1)</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Calculadora Simples</strong>
+                    <p>Peça dois números ao usuário e mostre: soma, subtração, multiplicação e divisão.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">a = float(input("Primeiro número: "))
+b = float(input("Segundo número: "))
+
+print(f"\n{a} + {b} = {a + b}")
+print(f"{a} - {b} = {a - b}")
+print(f"{a} * {b} = {a * b}")
+print(f"{a} / {b} = {a / b}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Primeiro número: 10
+Segundo número: 5
+
+10.0 + 5.0 = 15.0
+10.0 - 5.0 = 5.0
+10.0 * 5.0 = 50.0
+10.0 / 5.0 = 2.0</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Par ou Ímpar</strong>
+                    <p>Peça um número ao usuário e informe se ele é par ou ímpar.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">numero = int(input("Digite um número: "))
+
+if numero % 2 == 0:
+    print(f"{numero} é PAR")
+else:
+    print(f"{numero} é ÍMPAR")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite um número: 17
+17 é ÍMPAR</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 3: Média de Notas</strong>
+                    <p>Peça 4 notas ao usuário, calcule a média e informe se está aprovado (média >= 7) ou reprovado.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+nota4 = float(input("Nota 4: "))
+
+media = (nota1 + nota2 + nota3 + nota4) / 4
+print(f"\nMédia: {media:.2f}")
+
+if media >= 7:
+    print("Status: APROVADO ✅")
+else:
+    print("Status: REPROVADO ❌")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Nota 1: 8.5
+Nota 2: 7.0
+Nota 3: 9.0
+Nota 4: 6.5
+
+Média: 7.75
+Status: APROVADO ✅</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Fundamentos (Parte 2)</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 4: Contagem Progressiva</strong>
+                    <p>Peça um número ao usuário e mostre todos os números de 1 até esse número.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">numero = int(input("Digite um número: "))
+
+print(f"Contando de 1 até {numero}:")
+for i in range(1, numero + 1):
+    print(i, end=" ")
+print()  # Nova linha</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite um número: 10
+Contando de 1 até 10:
+1 2 3 4 5 6 7 8 9 10 </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 5: Soma de Números</strong>
+                    <p>Some todos os números de 1 a 100 usando while.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">soma = 0
+numero = 1
+
+while numero <= 100:
+    soma += numero
+    numero += 1
+
+print(f"A soma de 1 a 100 é: {soma}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">A soma de 1 a 100 é: 5050</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="destaque">
+                    <strong>💪 Desafio Extra: Fatorial</strong>
+                    <p>Crie um programa que calcule o fatorial de um número.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">numero = int(input("Digite um número: "))
+fatorial = 1
+
+for i in range(1, numero + 1):
+    fatorial *= i
+
+print(f"{numero}! = {fatorial}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite um número: 5
+5! = 120</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador2">1 / 32</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

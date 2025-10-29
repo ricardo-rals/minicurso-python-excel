@@ -1,0 +1,650 @@
+        <div id="topico4" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">⚙️</span>Tópico 4: Funções em Python</h2>
+                <h3>O que são Funções?</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Funções são blocos de código reutilizáveis que executam uma tarefa específica.
+                    Elas tornam o código mais organizado, legível e fácil de manter.
+                </p>
+                
+                <div class="exemplo-box">
+                    <strong>💡 Vantagens de usar funções:</strong>
+                    <ul>
+                        <li><strong>Reutilização:</strong> Escreva uma vez, use várias vezes</li>
+                        <li><strong>Organização:</strong> Divide o código em partes lógicas</li>
+                        <li><strong>Manutenção:</strong> Mais fácil encontrar e corrigir erros</li>
+                        <li><strong>Legibilidade:</strong> Código mais claro e compreensível</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <code># Funções que já usamos:
+print("Olá!")      # Exibe texto
+len([1, 2, 3])     # Retorna tamanho
+input("Nome: ")    # Captura entrada
+sum([1, 2, 3])     # Soma elementos
+
+# Agora vamos criar nossas próprias funções!</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Definindo Funções com def</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Usamos a palavra-chave <strong>def</strong> para definir uma função.
+                </p>
+                
+                <div class="code-block">
+                    <code># Estrutura básica:
+def nome_da_funcao():
+    # código da função
+    print("Função executada!")
+
+# Chamando a função:
+nome_da_funcao()
+
+# Exemplo 1: Função simples
+def saudacao():
+    print("Olá! Bem-vindo ao Python!")
+    print("Vamos aprender sobre funções!")
+
+saudacao()  # Chama a função
+saudacao()  # Pode chamar quantas vezes quiser
+
+# Exemplo 2: Função que exibe um menu
+def exibir_menu():
+    print("=" * 30)
+    print("      MENU PRINCIPAL")
+    print("=" * 30)
+    print("1. Cadastrar")
+    print("2. Consultar")
+    print("3. Sair")
+    print("=" * 30)
+
+exibir_menu()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>📌 Regras importantes:</strong>
+                    <ul>
+                        <li>Nome da função deve ser descritivo</li>
+                        <li>Use letras minúsculas e underscores (snake_case)</li>
+                        <li>A definição termina com dois pontos (:)</li>
+                        <li>O corpo da função deve estar indentado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📥</span>Funções com Parâmetros</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Parâmetros permitem que você passe informações para a função.
+                </p>
+                
+                <div class="code-block">
+                    <code># Função com um parâmetro:
+def saudacao(nome):
+    print(f"Olá, {nome}! Bem-vindo!")
+
+saudacao("Maria")   # Olá, Maria! Bem-vindo!
+saudacao("João")    # Olá, João! Bem-vindo!
+
+# Função com múltiplos parâmetros:
+def apresentar(nome, idade, cidade):
+    print(f"Me chamo {nome}")
+    print(f"Tenho {idade} anos")
+    print(f"Moro em {cidade}")
+
+apresentar("Ana", 25, "São Paulo")
+
+# Parâmetros com valores padrão:
+def saudacao_personalizada(nome, saudacao="Olá"):
+    print(f"{saudacao}, {nome}!")
+
+saudacao_personalizada("Pedro")              # Olá, Pedro!
+saudacao_personalizada("Maria", "Oi")        # Oi, Maria!
+saudacao_personalizada("João", "Bem-vindo")  # Bem-vindo, João!
+
+# Exemplo prático: calculadora
+def somar(a, b):
+    resultado = a + b
+    print(f"{a} + {b} = {resultado}")
+
+somar(5, 3)    # 5 + 3 = 8
+somar(10, 20)  # 10 + 20 = 30</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📤</span>Funções com Retorno</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    A palavra-chave <strong>return</strong> faz a função devolver um valor.
+                </p>
+                
+                <div class="code-block">
+                    <code># Função que retorna um valor:
+def somar(a, b):
+    return a + b
+
+resultado = somar(5, 3)
+print(resultado)  # 8
+
+# Usando o retorno em expressões:
+total = somar(10, 20) + somar(5, 15)
+print(total)  # 50
+
+# Função que retorna múltiplos valores:
+def operacoes(a, b):
+    soma = a + b
+    subtracao = a - b
+    multiplicacao = a * b
+    divisao = a / b
+    return soma, subtracao, multiplicacao, divisao
+
+s, sub, m, d = operacoes(10, 2)
+print(f"Soma: {s}, Subtração: {sub}")
+print(f"Multiplicação: {m}, Divisão: {d}")
+
+# Função com return condicional:
+def verificar_aprovacao(nota):
+    if nota >= 7.0:
+        return "Aprovado"
+    elif nota >= 5.0:
+        return "Recuperação"
+    else:
+        return "Reprovado"
+
+status = verificar_aprovacao(8.5)
+print(status)  # Aprovado</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Importante:</strong>
+                    Quando a função executa <code>return</code>, ela para imediatamente e retorna o valor.
+                    Código após o return não é executado!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Exemplo Completo: Função de Média</h2>
+                
+                <div class="code-block">
+                    <code># Versão 1: Média simples de 3 notas
+def calcular_media_simples(nota1, nota2, nota3):
+    soma = nota1 + nota2 + nota3
+    media = soma / 3
+    return media
+
+# Testando:
+resultado = calcular_media_simples(8.5, 7.0, 9.0)
+print(f"Média: {resultado:.2f}")  # Média: 8.17
+
+# Versão 2: Média de uma lista de notas
+def calcular_media(notas):
+    if len(notas) == 0:
+        return 0
+    
+    soma = sum(notas)
+    media = soma / len(notas)
+    return media
+
+# Testando:
+minhas_notas = [8.5, 7.0, 9.0, 6.5]
+media = calcular_media(minhas_notas)
+print(f"Média: {media:.2f}")  # Média: 7.75
+
+# Versão 3: Completa com status
+def analisar_notas(notas):
+    media = calcular_media(notas)
+    
+    if media >= 7.0:
+        status = "Aprovado"
+    elif media >= 5.0:
+        status = "Recuperação"
+    else:
+        status = "Reprovado"
+    
+    return media, status
+
+# Testando:
+notas_aluno = [8.5, 7.0, 9.0, 6.5]
+media_final, situacao = analisar_notas(notas_aluno)
+print(f"Média: {media_final:.2f}")
+print(f"Situação: {situacao}")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💡</span>Escopo de Variáveis</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Escopo define onde uma variável pode ser acessada.
+                </p>
+                
+                <div class="code-block">
+                    <code># Variável global (acessível em todo o programa):
+contador = 0
+
+def incrementar():
+    global contador  # Indica que vamos usar a variável global
+    contador += 1
+    print(f"Contador: {contador}")
+
+incrementar()  # Contador: 1
+incrementar()  # Contador: 2
+print(contador)  # 2
+
+# Variável local (só existe dentro da função):
+def calcular():
+    resultado = 10 + 5  # Variável local
+    return resultado
+
+print(calcular())  # 15
+# print(resultado)  # ERRO! resultado não existe fora da função
+
+# Exemplo de conflito:
+nome = "Global"
+
+def teste():
+    nome = "Local"  # Esta é uma variável diferente
+    print(f"Dentro da função: {nome}")
+
+teste()  # Dentro da função: Local
+print(f"Fora da função: {nome}")  # Fora da função: Global</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>💡 Boa prática:</strong>
+                    Evite usar variáveis globais dentro de funções. Prefira passar valores por parâmetros e retornar resultados.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Exemplos Práticos de Funções</h2>
+                
+                <div class="code-block">
+                    <code># Exemplo 1: Validar CPF (formato simples)
+def validar_cpf(cpf):
+    # Remove pontos e traços
+    cpf_limpo = cpf.replace(".", "").replace("-", "")
+    
+    if len(cpf_limpo) == 11 and cpf_limpo.isdigit():
+        return True
+    return False
+
+print(validar_cpf("123.456.789-00"))  # True
+print(validar_cpf("123456"))          # False
+
+# Exemplo 2: Converter temperatura
+def celsius_para_fahrenheit(celsius):
+    fahrenheit = (celsius * 9/5) + 32
+    return fahrenheit
+
+def fahrenheit_para_celsius(fahrenheit):
+    celsius = (fahrenheit - 32) * 5/9
+    return celsius
+
+print(f"25°C = {celsius_para_fahrenheit(25):.1f}°F")
+print(f"77°F = {fahrenheit_para_celsius(77):.1f}°C")
+
+# Exemplo 3: Verificar número primo
+def eh_primo(numero):
+    if numero < 2:
+        return False
+    
+    for i in range(2, numero):
+        if numero % i == 0:
+            return False
+    
+    return True
+
+print(eh_primo(7))   # True
+print(eh_primo(10))  # False</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Documentando Funções (Docstrings)</h2>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Docstrings são comentários especiais que explicam o que a função faz.
+                </p>
+                
+                <div class="code-block">
+                    <code># Usando docstrings:
+def calcular_media(notas):
+    """
+    Calcula a média aritmética de uma lista de notas.
+    
+    Parâmetros:
+        notas (list): Lista com as notas a serem calculadas
+    
+    Retorna:
+        float: A média das notas
+    
+    Exemplo:
+        >>> calcular_media([7.0, 8.0, 9.0])
+        8.0
+    """
+    if len(notas) == 0:
+        return 0
+    return sum(notas) / len(notas)
+
+# Acessando a documentação:
+print(calcular_media.__doc__)
+help(calcular_media)
+
+# Outro exemplo:
+def somar(a, b):
+    """Retorna a soma de dois números."""
+    return a + b
+
+def subtrair(a, b):
+    """Retorna a subtração de dois números."""
+    return a - b</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Boa prática:</strong>
+                    Sempre documente funções complexas. Isso ajuda outros programadores (e você no futuro!) a entender o código.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Funções (Parte 1)</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Calculadora Completa</strong>
+                    <p>Crie 4 funções (somar, subtrair, multiplicar, dividir) com menu.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">def somar(a, b):
+    return a + b
+
+def subtrair(a, b):
+    return a - b
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    if b != 0:
+        return a / b
+    return "Erro: divisão por zero"
+
+# Menu
+print("=== CALCULADORA ===")
+a = float(input("Primeiro número: "))
+b = float(input("Segundo número: "))
+
+print("\n1. Somar")
+print("2. Subtrair")
+print("3. Multiplicar")
+print("4. Dividir")
+
+op = input("Operação: ")
+
+if op == "1":
+    print(f"Resultado: {somar(a, b)}")
+elif op == "2":
+    print(f"Resultado: {subtrair(a, b)}")
+elif op == "3":
+    print(f"Resultado: {multiplicar(a, b)}")
+elif op == "4":
+    print(f"Resultado: {dividir(a, b)}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">=== CALCULADORA ===
+Primeiro número: 10
+Segundo número: 5
+
+1. Somar
+2. Subtrair
+3. Multiplicar
+4. Dividir
+Operação: 1
+Resultado: 15.0</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Função de IMC</strong>
+                    <p>Calcule o IMC e retorne a classificação.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">def calcular_imc(peso, altura):
+    """Calcula o IMC e retorna valor e classificação"""
+    imc = peso / (altura ** 2)
+    
+    if imc < 18.5:
+        classificacao = "Abaixo do peso"
+    elif imc < 25:
+        classificacao = "Peso normal"
+    elif imc < 30:
+        classificacao = "Sobrepeso"
+    else:
+        classificacao = "Obesidade"
+    
+    return imc, classificacao
+
+# Testando
+peso = float(input("Peso (kg): "))
+altura = float(input("Altura (m): "))
+
+imc, classificacao = calcular_imc(peso, altura)
+print(f"\nSeu IMC: {imc:.2f}")
+print(f"Classificação: {classificacao}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Peso (kg): 70
+Altura (m): 1.75
+
+Seu IMC: 22.86
+Classificação: Peso normal</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Funções (Parte 2)</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 3: Verificador de Palíndromo</strong>
+                    <p>Verifique se uma palavra é palíndromo.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">def eh_palindromo(palavra):
+    """Verifica se uma palavra é palíndromo"""
+    palavra = palavra.lower().replace(" ", "")
+    return palavra == palavra[::-1]
+
+# Testando
+palavra = input("Digite uma palavra: ")
+
+if eh_palindromo(palavra):
+    print(f"'{palavra}' É um palíndromo!")
+else:
+    print(f"'{palavra}' NÃO é um palíndromo.")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite uma palavra: arara
+'arara' É um palíndromo!</div>
+                            </div>
+
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code"># Mais exemplos
+print(eh_palindromo("arara"))      # True
+print(eh_palindromo("python"))     # False
+print(eh_palindromo("ovo"))        # True
+print(eh_palindromo("Ana"))        # True
+print(eh_palindromo("A base do teto desaba"))  # True</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">True
+False
+True
+True
+True</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 4: Contador de Vogais</strong>
+                    <p>Conte quantas vogais existem em um texto.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">def contar_vogais(texto):
+    """Conta o número de vogais em um texto"""
+    vogais = "aeiouAEIOU"
+    contador = 0
+    
+    for letra in texto:
+        if letra in vogais:
+            contador += 1
+    
+    return contador
+
+# Testando
+texto = input("Digite um texto: ")
+total = contar_vogais(texto)
+print(f"O texto tem {total} vogais")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Digite um texto: Python para Excel
+O texto tem 6 vogais</div>
+                            </div>
+
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code"># Versão melhorada - contando cada vogal
+def contar_vogais_detalhado(texto):
+    """Conta cada vogal separadamente"""
+    vogais = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0}
+    
+    for letra in texto.lower():
+        if letra in vogais:
+            vogais[letra] += 1
+    
+    return vogais
+
+resultado = contar_vogais_detalhado("Python para Excel")
+print(resultado)</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">{'a': 2, 'e': 1, 'i': 0, 'o': 1, 'u': 0}</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💪</span>Desafio Extra - Sistema de Cadastro</h2>
+                
+                <div class="destaque">
+                    <strong>Crie um sistema completo de cadastro de alunos usando funções!</strong>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">alunos = []  # Lista global
+
+def cadastrar_aluno(nome, nota):
+    """Adiciona um aluno à lista"""
+    aluno = {"nome": nome, "nota": nota}
+    alunos.append(aluno)
+    print(f"✅ {nome} cadastrado com sucesso!")
+
+def listar_alunos():
+    """Lista todos os alunos"""
+    if len(alunos) == 0:
+        print("Nenhum aluno cadastrado.")
+        return
+    
+    print("\n📋 LISTA DE ALUNOS:")
+    for i, aluno in enumerate(alunos, 1):
+        print(f"{i}. {aluno['nome']} - Nota: {aluno['nota']}")
+
+def calcular_media_turma():
+    """Calcula a média da turma"""
+    if len(alunos) == 0:
+        return 0
+    
+    soma = sum(aluno['nota'] for aluno in alunos)
+    return soma / len(alunos)
+
+def melhor_aluno():
+    """Retorna o melhor aluno"""
+    if len(alunos) == 0:
+        return None
+    
+    melhor = alunos[0]
+    for aluno in alunos:
+        if aluno['nota'] > melhor['nota']:
+            melhor = aluno
+    
+    return melhor
+
+# Menu
+while True:
+    print("\n=== SISTEMA DE ALUNOS ===")
+    print("1. Cadastrar aluno")
+    print("2. Listar alunos")
+    print("3. Média da turma")
+    print("4. Melhor aluno")
+    print("0. Sair")
+    
+    op = input("Opção: ")
+    
+    if op == "1":
+        nome = input("Nome: ")
+        nota = float(input("Nota: "))
+        cadastrar_aluno(nome, nota)
+    elif op == "2":
+        listar_alunos()
+    elif op == "3":
+        media = calcular_media_turma()
+        print(f"Média da turma: {media:.2f}")
+    elif op == "4":
+        melhor = melhor_aluno()
+        if melhor:
+            print(f"Melhor aluno: {melhor['nome']} - Nota: {melhor['nota']}")
+    elif op == "0":
+        print("Até logo!")
+        break</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">=== SISTEMA DE ALUNOS ===
+1. Cadastrar aluno
+2. Listar alunos
+3. Média da turma
+4. Melhor aluno
+0. Sair
+Opção: 1
+Nome: João
+Nota: 8.5
+✅ João cadastrado com sucesso!</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador4">1 / 12</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>
