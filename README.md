@@ -2,7 +2,7 @@
 
 Apresentação interativa de slides sobre Python com foco em automação e análise de dados em Excel.
 
-> **🔗 [Acesse a apresentação online](https://seu-usuario.github.io/minicurso-python/)**
+> **🔗 [Acesse a apresentação online](https://ricardo-rals.github.io/minicurso-python-excel/)**
 
 ---
 
