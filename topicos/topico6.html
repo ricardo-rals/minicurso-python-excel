@@ -1,0 +1,1006 @@
+        <div id="topico6" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📈</span>Tópico 6: Geração de Gráficos com Matplotlib</h2>
+                <h3>Visualização de Dados</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Uma imagem vale mais que mil palavras! Gráficos transformam dados em insights visuais,
+                    facilitando análise e tomada de decisões.
+                </p>
+
+                <ul>
+                    <li><strong>Matplotlib:</strong> Biblioteca mais popular para visualização em Python</li>
+                    <li><strong>Versátil:</strong> Crie desde gráficos simples até visualizações complexas</li>
+                    <li><strong>Integração:</strong> Funciona perfeitamente com Pandas e NumPy</li>
+                    <li><strong>Exportação:</strong> Salve em PNG, PDF, SVG e outros formatos</li>
+                </ul>
+
+                <div class="destaque">
+                    <strong>📦 Instalação:</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>pip install matplotlib</code>
+                    </div>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>📊 Tipos de gráficos que vamos aprender:</strong>
+                    <ul>
+                        <li>📊 Gráfico de Barras</li>
+                        <li>📈 Gráfico de Linha</li>
+                        <li>🥧 Gráfico de Pizza</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Gráfico de Barras</h2>
+                <h3>Ideal para comparar categorias</h3>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+# Dados
+produtos = ['Notebook', 'Mouse', 'Teclado', 'Monitor', 'WebCam']
+vendas = [5, 20, 15, 8, 12]
+
+# Criar gráfico de barras
+plt.figure(figsize=(10, 6))
+plt.bar(produtos, vendas, color='steelblue')
+
+# Personalização
+plt.title('Vendas por Produto', fontsize=16, fontweight='bold')
+plt.xlabel('Produto', fontsize=12)
+plt.ylabel('Quantidade Vendida', fontsize=12)
+plt.xticks(rotation=45, ha='right')  # Rotacionar rótulos
+plt.grid(axis='y', alpha=0.3)  # Grade horizontal
+plt.tight_layout()  # Ajustar layout
+
+# Exibir
+plt.show()
+
+# Ou salvar em arquivo
+plt.savefig('vendas.png', dpi=300, bbox_inches='tight')
+print("✅ Gráfico salvo!")</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Dica:</strong>
+                    Use <code>plt.tight_layout()</code> para evitar que rótulos sejam cortados!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎨</span>Personalizando Cores e Estilos</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+produtos = ['Notebook', 'Mouse', 'Teclado', 'Monitor']
+vendas = [5, 20, 15, 8]
+
+# Cores personalizadas
+cores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A']
+
+plt.figure(figsize=(10, 6))
+plt.bar(produtos, vendas, color=cores, edgecolor='black', linewidth=1.5)
+
+# Adicionar valores no topo das barras
+for i, valor in enumerate(vendas):
+    plt.text(i, valor + 0.5, str(valor), ha='center', fontweight='bold')
+
+plt.title('Vendas por Produto', fontsize=18, fontweight='bold', pad=20)
+plt.xlabel('Produto', fontsize=14)
+plt.ylabel('Quantidade', fontsize=14)
+plt.ylim(0, max(vendas) + 5)  # Ajustar limite do eixo Y
+plt.grid(axis='y', alpha=0.3, linestyle='--')
+
+plt.tight_layout()
+plt.savefig('vendas_colorido.png', dpi=300)
+plt.show()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>🎨 Paletas de cores populares:</strong>
+                    <ul style="margin-top: 10px; font-size: 0.9em;">
+                        <li><code>'viridis'</code>, <code>'plasma'</code>, <code>'inferno'</code> - Científicas</li>
+                        <li><code>'tab10'</code>, <code>'tab20'</code> - Categóricas</li>
+                        <li><code>'Blues'</code>, <code>'Reds'</code>, <code>'Greens'</code> - Sequenciais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 1</h2>
+                <h3>plt.figure() - Criação da figura</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>figsize</code></td>
+                        <td>Tamanho da figura (largura, altura) em polegadas</td>
+                        <td><code>figsize=(10, 6)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dpi</code></td>
+                        <td>Resolução em pontos por polegada</td>
+                        <td><code>dpi=100</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>facecolor</code></td>
+                        <td>Cor de fundo da figura</td>
+                        <td><code>facecolor='white'</code></td>
+                    </tr>
+                </table>
+
+                <h3>plt.bar() - Gráfico de barras</h3>
+
+                <table style="width: 100%; font-size: 0.9em;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>color</code></td>
+                        <td>Cor das barras</td>
+                        <td><code>color='steelblue'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>edgecolor</code></td>
+                        <td>Cor da borda das barras</td>
+                        <td><code>edgecolor='black'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>linewidth</code></td>
+                        <td>Espessura da borda</td>
+                        <td><code>linewidth=1.5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>width</code></td>
+                        <td>Largura das barras (0 a 1)</td>
+                        <td><code>width=0.8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>alpha</code></td>
+                        <td>Transparência (0=invisível, 1=opaco)</td>
+                        <td><code>alpha=0.7</code></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 2</h2>
+                <h3>plt.title() - Título do gráfico</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Valores Comuns</th>
+                    </tr>
+                    <tr>
+                        <td><code>fontsize</code></td>
+                        <td>Tamanho da fonte</td>
+                        <td><code>12, 14, 16, 18</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fontweight</code></td>
+                        <td>Peso da fonte</td>
+                        <td><code>'normal', 'bold', 'light'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>color</code></td>
+                        <td>Cor do texto</td>
+                        <td><code>'black', '#333333'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pad</code></td>
+                        <td>Espaçamento do título</td>
+                        <td><code>pad=20</code></td>
+                    </tr>
+                </table>
+
+                <h3>plt.xlabel() / plt.ylabel() - Rótulos dos eixos</h3>
+
+                <table style="width: 100%; font-size: 0.9em;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>fontsize</code></td>
+                        <td>Tamanho da fonte</td>
+                        <td><code>fontsize=12</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>labelpad</code></td>
+                        <td>Espaçamento do rótulo</td>
+                        <td><code>labelpad=10</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>rotation</code></td>
+                        <td>Rotação do texto (em graus)</td>
+                        <td><code>rotation=45</code></td>
+                    </tr>
+                </table>
+
+                <div class="exemplo-box" style="margin-top: 20px;">
+                    <strong>💡 Dica:</strong> Use <code>fontsize</code> consistente:
+                    Título (16-18), Eixos (12-14), Legendas (10-11)
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 3</h2>
+                <h3>plt.xticks() / plt.yticks() - Marcadores dos eixos</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>rotation</code></td>
+                        <td>Ângulo de rotação dos rótulos</td>
+                        <td><code>rotation=45</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>ha</code></td>
+                        <td>Alinhamento horizontal</td>
+                        <td><code>'left', 'center', 'right'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>va</code></td>
+                        <td>Alinhamento vertical</td>
+                        <td><code>'top', 'center', 'bottom'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fontsize</code></td>
+                        <td>Tamanho da fonte</td>
+                        <td><code>fontsize=10</code></td>
+                    </tr>
+                </table>
+
+                <h3>plt.grid() - Grade do gráfico</h3>
+
+                <table style="width: 100%; font-size: 0.9em;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>axis</code></td>
+                        <td>Qual eixo mostrar grade</td>
+                        <td><code>'both', 'x', 'y'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>alpha</code></td>
+                        <td>Transparência das linhas</td>
+                        <td><code>alpha=0.3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>linestyle</code></td>
+                        <td>Estilo da linha</td>
+                        <td><code>'-', '--', '-.', ':'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>color</code></td>
+                        <td>Cor das linhas da grade</td>
+                        <td><code>color='gray'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>linewidth</code></td>
+                        <td>Espessura das linhas</td>
+                        <td><code>linewidth=0.5</code></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 4</h2>
+                <h3>plt.plot() - Gráfico de linha</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>marker</code></td>
+                        <td>Estilo dos marcadores</td>
+                        <td><code>'o', 's', '^', '*', 'D', '+'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>markersize</code></td>
+                        <td>Tamanho dos marcadores</td>
+                        <td><code>markersize=8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>linewidth</code></td>
+                        <td>Espessura da linha</td>
+                        <td><code>linewidth=2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>linestyle</code></td>
+                        <td>Estilo da linha</td>
+                        <td><code>'-', '--', '-.', ':'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>color</code></td>
+                        <td>Cor da linha e marcadores</td>
+                        <td><code>'blue', '#FF0000'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>label</code></td>
+                        <td>Rótulo para legenda</td>
+                        <td><code>label='Vendas 2024'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>alpha</code></td>
+                        <td>Transparência</td>
+                        <td><code>alpha=0.7</code></td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+                    <code># Exemplo com todas as propriedades
+plt.plot(x, y,
+         marker='o',
+         markersize=10,
+         linewidth=2.5,
+         linestyle='--',
+         color='#3498db',
+         label='Série 1',
+         alpha=0.8)</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 5</h2>
+                <h3>plt.pie() - Gráfico de pizza</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>labels</code></td>
+                        <td>Rótulos das fatias</td>
+                        <td><code>labels=['A', 'B', 'C']</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>autopct</code></td>
+                        <td>Formato dos percentuais</td>
+                        <td><code>autopct='%1.1f%%'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>startangle</code></td>
+                        <td>Ângulo inicial (graus)</td>
+                        <td><code>startangle=90</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>explode</code></td>
+                        <td>Destacar fatias</td>
+                        <td><code>explode=(0.1, 0, 0)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>shadow</code></td>
+                        <td>Adicionar sombra</td>
+                        <td><code>shadow=True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>colors</code></td>
+                        <td>Cores das fatias</td>
+                        <td><code>colors=['red', 'blue']</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>textprops</code></td>
+                        <td>Propriedades do texto</td>
+                        <td><code>{'fontsize': 12}</code></td>
+                    </tr>
+                </table>
+
+                <h3>plt.legend() - Legenda</h3>
+
+                <table style="width: 100%; font-size: 0.9em;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Valores</th>
+                    </tr>
+                    <tr>
+                        <td><code>loc</code></td>
+                        <td>Posição da legenda</td>
+                        <td><code>'best', 'upper left', 'lower right'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fontsize</code></td>
+                        <td>Tamanho da fonte</td>
+                        <td><code>fontsize=11</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>frameon</code></td>
+                        <td>Mostrar moldura</td>
+                        <td><code>True / False</code></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Propriedades dos Gráficos - Parte 6</h2>
+                <h3>plt.savefig() - Salvar gráfico</h3>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>dpi</code></td>
+                        <td>Resolução (pontos por polegada)</td>
+                        <td><code>dpi=300</code> (impressão)<br><code>dpi=150</code> (web)</td>
+                    </tr>
+                    <tr>
+                        <td><code>bbox_inches</code></td>
+                        <td>Ajuste de bordas</td>
+                        <td><code>bbox_inches='tight'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>transparent</code></td>
+                        <td>Fundo transparente</td>
+                        <td><code>transparent=True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>facecolor</code></td>
+                        <td>Cor de fundo</td>
+                        <td><code>facecolor='white'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>format</code></td>
+                        <td>Formato do arquivo</td>
+                        <td><code>'png', 'pdf', 'svg', 'jpg'</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>quality</code></td>
+                        <td>Qualidade JPEG (1-100)</td>
+                        <td><code>quality=95</code></td>
+                    </tr>
+                </table>
+
+                <h3>plt.xlim() / plt.ylim() - Limites dos eixos</h3>
+
+                <table style="width: 100%; font-size: 0.9em;">
+                    <tr>
+                        <th>Uso</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>plt.xlim()</code></td>
+                        <td>Define limites do eixo X</td>
+                        <td><code>plt.xlim(0, 100)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>plt.ylim()</code></td>
+                        <td>Define limites do eixo Y</td>
+                        <td><code>plt.ylim(-10, 50)</code></td>
+                    </tr>
+                </table>
+
+                <div class="exemplo-box" style="margin-top: 20px;">
+                    <strong>📝 Exemplo completo:</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>plt.savefig('grafico.png',
+            dpi=300,
+            bbox_inches='tight',
+            facecolor='white',
+            transparent=False)</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">↔️</span>Gráfico de Barras Horizontais</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+produtos = ['Notebook', 'Mouse', 'Teclado', 'Monitor', 'WebCam']
+vendas = [5, 20, 15, 8, 12]
+
+# Gráfico de barras HORIZONTAL
+plt.figure(figsize=(10, 6))
+plt.barh(produtos, vendas, color='coral')
+
+plt.title('Vendas por Produto', fontsize=16, fontweight='bold')
+plt.xlabel('Quantidade Vendida', fontsize=12)
+plt.ylabel('Produto', fontsize=12)
+plt.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+# BARRAS AGRUPADAS (comparar múltiplas séries)
+import numpy as np
+
+categorias = ['Q1', 'Q2', 'Q3', 'Q4']
+vendas_2023 = [100, 150, 120, 180]
+vendas_2024 = [120, 170, 140, 200]
+
+x = np.arange(len(categorias))
+largura = 0.35
+
+plt.figure(figsize=(10, 6))
+plt.bar(x - largura/2, vendas_2023, largura, label='2023', color='skyblue')
+plt.bar(x + largura/2, vendas_2024, largura, label='2024', color='lightcoral')
+
+plt.xlabel('Trimestre')
+plt.ylabel('Vendas')
+plt.title('Comparação de Vendas 2023 vs 2024')
+plt.xticks(x, categorias)
+plt.legend()
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.show()</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📈</span>Gráfico de Linha</h2>
+                <h3>Ideal para mostrar tendências e evolução no tempo</h3>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+# Dados de vendas mensais
+meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun']
+receita = [45000, 52000, 48000, 61000, 58000, 67000]
+
+# Criar gráfico de linha
+plt.figure(figsize=(10, 6))
+plt.plot(meses, receita,
+         marker='o',           # Marcadores nos pontos
+         markersize=8,         # Tamanho dos marcadores
+         linewidth=2,          # Espessura da linha
+         color='green',        # Cor da linha
+         linestyle='-')        # Estilo: '-', '--', '-.', ':'
+
+# Personalização
+plt.title('Receita Mensal', fontsize=16, fontweight='bold')
+plt.xlabel('Mês', fontsize=12)
+plt.ylabel('Receita (R$)', fontsize=12)
+plt.grid(True, alpha=0.3)
+
+# Adicionar valores nos pontos
+for i, valor in enumerate(receita):
+    plt.text(i, valor + 1000, f'R$ {valor:,}', ha='center')
+
+plt.tight_layout()
+plt.show()</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Quando usar gráfico de linha?</strong>
+                    <ul>
+                        <li>Série temporal (dados ao longo do tempo)</li>
+                        <li>Tendências e variações</li>
+                        <li>Comparar múltiplas séries temporais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Múltiplas Linhas no Mesmo Gráfico</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun']
+vendas_produto_a = [100, 120, 115, 140, 135, 160]
+vendas_produto_b = [80, 95, 110, 105, 125, 130]
+vendas_produto_c = [60, 70, 85, 95, 90, 110]
+
+plt.figure(figsize=(12, 6))
+
+# Plotar múltiplas linhas
+plt.plot(meses, vendas_produto_a,
+         marker='o', linewidth=2, label='Produto A', color='blue')
+plt.plot(meses, vendas_produto_b,
+         marker='s', linewidth=2, label='Produto B', color='red')
+plt.plot(meses, vendas_produto_c,
+         marker='^', linewidth=2, label='Produto C', color='green')
+
+plt.title('Vendas Mensais por Produto', fontsize=16, fontweight='bold')
+plt.xlabel('Mês', fontsize=12)
+plt.ylabel('Unidades Vendidas', fontsize=12)
+plt.legend(loc='upper left', fontsize=11)  # Legenda
+plt.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>🔷 Tipos de marcadores:</strong><br>
+                    <code>'o'</code> círculo, <code>'s'</code> quadrado, <code>'^'</code> triângulo,
+                    <code>'*'</code> estrela, <code>'D'</code> diamante, <code>'+'</code> cruz
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🥧</span>Gráfico de Pizza</h2>
+                <h3>Ideal para mostrar proporções e percentuais</h3>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+# Dados
+produtos = ['Notebook', 'Mouse', 'Teclado', 'Monitor', 'WebCam']
+valores = [12500, 900, 1800, 6400, 2400]
+
+# Criar gráfico de pizza
+plt.figure(figsize=(8, 8))
+plt.pie(valores,
+        labels=produtos,
+        autopct='%1.1f%%',      # Mostrar percentuais
+        startangle=90,          # Ângulo inicial
+        shadow=True)            # Sombra
+
+plt.title('Distribuição de Vendas por Produto',
+          fontsize=16, fontweight='bold', pad=20)
+
+plt.axis('equal')  # Garantir que seja um círculo
+plt.tight_layout()
+plt.show()</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Quando usar gráfico de pizza?</strong>
+                    <ul>
+                        <li>Mostrar partes de um todo</li>
+                        <li>Comparar proporções (máximo 6-7 categorias)</li>
+                        <li>Destacar uma categoria específica</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎨</span>Pizza Personalizada e Explodida</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+produtos = ['Notebook', 'Mouse', 'Teclado', 'Monitor', 'WebCam']
+valores = [12500, 900, 1800, 6400, 2400]
+
+# Cores personalizadas
+cores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8']
+
+# Explodir uma fatia (destacar)
+explode = (0.1, 0, 0, 0, 0)  # Destaca Notebook
+
+plt.figure(figsize=(10, 8))
+wedges, texts, autotexts = plt.pie(
+    valores,
+    labels=produtos,
+    autopct='%1.1f%%',
+    startangle=90,
+    colors=cores,
+    explode=explode,
+    shadow=True,
+    textprops={'fontsize': 11, 'fontweight': 'bold'}
+)
+
+# Personalizar percentuais
+for autotext in autotexts:
+    autotext.set_color('white')
+    autotext.set_fontsize(12)
+    autotext.set_fontweight('bold')
+
+plt.title('Distribuição de Vendas por Produto',
+          fontsize=18, fontweight='bold', pad=20)
+
+plt.tight_layout()
+plt.show()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Cuidado:</strong>
+                    Evite usar gráficos de pizza com muitas categorias (máx. 6-7).
+                    Para mais categorias, prefira gráficos de barras!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Integrando Pandas com Matplotlib</h2>
+                <h3>Visualizando dados diretamente de DataFrames</h3>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Ler dados do Excel
+df = pd.read_excel("vendas.xlsx")
+
+# Método 1: Usar plot do Pandas
+df.plot(x='Produto', y='Quantidade',
+        kind='bar', color='steelblue', figsize=(10, 6))
+plt.title('Vendas por Produto')
+plt.ylabel('Quantidade')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Método 2: Matplotlib tradicional
+plt.figure(figsize=(10, 6))
+plt.bar(df['Produto'], df['Quantidade'], color='coral')
+plt.title('Vendas por Produto')
+plt.xlabel('Produto')
+plt.ylabel('Quantidade')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Método 3: Múltiplos gráficos
+df.plot(x='Produto', y=['Quantidade', 'Preço'],
+        kind='bar', figsize=(12, 6))
+plt.title('Quantidade e Preço por Produto')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Subplots - Múltiplos Gráficos</h2>
+                <h3>Criar dashboard com vários gráficos</h3>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_excel("vendas.xlsx")
+
+# Criar figura com 2x2 subplots
+fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+fig.suptitle('Dashboard de Vendas', fontsize=18, fontweight='bold')
+
+# Gráfico 1: Barras
+axes[0, 0].bar(df['Produto'], df['Quantidade'], color='steelblue')
+axes[0, 0].set_title('Quantidade Vendida')
+axes[0, 0].set_xlabel('Produto')
+axes[0, 0].tick_params(axis='x', rotation=45)
+axes[0, 0].grid(axis='y', alpha=0.3)
+
+# Gráfico 2: Barras horizontais
+axes[0, 1].barh(df['Produto'], df['Preço'], color='coral')
+axes[0, 1].set_title('Preço por Produto')
+axes[0, 1].set_xlabel('Preço (R$)')
+axes[0, 1].grid(axis='x', alpha=0.3)
+
+# Gráfico 3: Pizza
+df_total = df['Quantidade'] * df['Preço']
+axes[1, 0].pie(df_total, labels=df['Produto'], autopct='%1.1f%%')
+axes[1, 0].set_title('Distribuição do Faturamento')
+
+# Gráfico 4: Linha
+axes[1, 1].plot(df['Produto'], df['Quantidade'],
+                marker='o', linewidth=2, color='green')
+axes[1, 1].set_title('Tendência de Vendas')
+axes[1, 1].tick_params(axis='x', rotation=45)
+axes[1, 1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('dashboard.png', dpi=300)
+plt.show()</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💾</span>Salvando Gráficos</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+produtos = ['Notebook', 'Mouse', 'Teclado']
+vendas = [5, 20, 15]
+
+plt.figure(figsize=(10, 6))
+plt.bar(produtos, vendas, color='steelblue')
+plt.title('Vendas por Produto')
+plt.xlabel('Produto')
+plt.ylabel('Quantidade')
+
+# Salvar em diferentes formatos
+
+# 1. PNG (alta resolução)
+plt.savefig('grafico.png', dpi=300, bbox_inches='tight')
+
+# 2. PDF (vetorial - ideal para impressão)
+plt.savefig('grafico.pdf', bbox_inches='tight')
+
+# 3. SVG (vetorial - ideal para web)
+plt.savefig('grafico.svg', bbox_inches='tight')
+
+# 4. JPEG (menor tamanho)
+plt.savefig('grafico.jpg', dpi=150, quality=95, bbox_inches='tight')
+
+print("✅ Gráficos salvos em múltiplos formatos!")
+
+plt.show()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>💡 Parâmetros úteis:</strong>
+                    <ul style="margin-top: 10px; font-size: 0.9em;">
+                        <li><code>dpi</code>: Resolução (300 para impressão, 150 para web)</li>
+                        <li><code>bbox_inches='tight'</code>: Remove espaços brancos extras</li>
+                        <li><code>transparent=True</code>: Fundo transparente</li>
+                        <li><code>facecolor='white'</code>: Cor de fundo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎨</span>Estilos Prontos do Matplotlib</h2>
+
+                <div class="code-block">
+                    <code>import matplotlib.pyplot as plt
+
+# Ver estilos disponíveis
+print(plt.style.available)
+
+# Usar um estilo
+plt.style.use('seaborn-v0_8-darkgrid')
+# Outros estilos: 'ggplot', 'fivethirtyeight', 'bmh', 'dark_background'
+
+produtos = ['A', 'B', 'C', 'D']
+vendas = [10, 15, 8, 12]
+
+plt.figure(figsize=(10, 6))
+plt.bar(produtos, vendas)
+plt.title('Gráfico com Estilo Seaborn')
+plt.show()
+
+# Voltar ao estilo padrão
+plt.style.use('default')
+
+# Ou criar seu próprio estilo
+plt.rcParams['figure.figsize'] = (12, 6)
+plt.rcParams['font.size'] = 12
+plt.rcParams['axes.grid'] = True
+plt.rcParams['grid.alpha'] = 0.3</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>🎨 Estilos populares:</strong>
+                    <ul>
+                        <li><code>'seaborn-v0_8'</code> - Elegante para apresentações</li>
+                        <li><code>'ggplot'</code> - Estilo R ggplot2</li>
+                        <li><code>'fivethirtyeight'</code> - Estilo jornalístico</li>
+                        <li><code>'dark_background'</code> - Fundo escuro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercício Prático - Visualização</h2>
+
+                <div class="exemplo-box">
+                    <strong>🎯 Desafio: Dashboard de Análise de Vendas</strong>
+                    <p>Crie um dashboard com 4 gráficos mostrando:</p>
+                    <ol>
+                        <li>Gráfico de barras: Faturamento por produto</li>
+                        <li>Gráfico de linha: Evolução mensal de vendas</li>
+                        <li>Gráfico de pizza: Distribuição percentual</li>
+                        <li>Gráfico de barras horizontais: Top 5 produtos</li>
+                    </ol>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Ler dados
+df = pd.read_excel("vendas.xlsx")
+df['Faturamento'] = df['Quantidade'] * df['Preço']
+
+# Criar dashboard
+fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+fig.suptitle('Dashboard de Vendas', fontsize=18, fontweight='bold')
+
+# 1. Faturamento por produto
+axes[0, 0].bar(df['Produto'], df['Faturamento'], color='#3498db')
+axes[0, 0].set_title('Faturamento por Produto', fontweight='bold')
+axes[0, 0].set_xlabel('Produto')
+axes[0, 0].set_ylabel('Faturamento (R$)')
+axes[0, 0].tick_params(axis='x', rotation=45)
+axes[0, 0].grid(axis='y', alpha=0.3)
+
+# 2. Evolução (simulada)
+meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai']
+vendas = [45000, 52000, 48000, 61000, 58000]
+axes[0, 1].plot(meses, vendas, marker='o', linewidth=2, color='green')
+axes[0, 1].set_title('Evolução Mensal', fontweight='bold')
+axes[0, 1].grid(True, alpha=0.3)
+
+# 3. Distribuição
+axes[1, 0].pie(df['Faturamento'], labels=df['Produto'],
+               autopct='%1.1f%%', startangle=90)
+axes[1, 0].set_title('Distribuição de Faturamento', fontweight='bold')
+
+# 4. Top produtos
+df_top = df.nlargest(5, 'Quantidade')
+axes[1, 1].barh(df_top['Produto'], df_top['Quantidade'], color='coral')
+axes[1, 1].set_title('Top 5 Produtos', fontweight='bold')
+axes[1, 1].grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('dashboard_vendas.png', dpi=300)
+plt.show()
+print("✅ Dashboard criado com sucesso!")</code>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎓</span>Resumo - Tópico 6</h2>
+
+                <div class="destaque">
+                    <strong>📊 O que aprendemos:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>✅ Criar gráficos de <strong>barras</strong> verticais e horizontais</li>
+                        <li>✅ Criar gráficos de <strong>linha</strong> para séries temporais</li>
+                        <li>✅ Criar gráficos de <strong>pizza</strong> para proporções</li>
+                        <li>✅ Personalizar cores, fontes e estilos</li>
+                        <li>✅ Integrar Pandas com Matplotlib</li>
+                        <li>✅ Criar dashboards com múltiplos gráficos</li>
+                        <li>✅ Salvar gráficos em diferentes formatos</li>
+                    </ul>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>🚀 Próximo passo:</strong>
+                    No Tópico 7, vamos juntar tudo o que aprendemos e criar um
+                    <strong>projeto completo de automação</strong> que lê dados do Excel,
+                    realiza análises e gera relatórios com gráficos!
+                </div>
+
+                <div class="code-block">
+                    <code># Template básico
+import matplotlib.pyplot as plt
+
+# Dados
+x = [1, 2, 3, 4]
+y = [10, 20, 15, 25]
+
+# Plotar
+plt.figure(figsize=(10, 6))
+plt.plot(x, y, marker='o')
+plt.title('Meu Gráfico')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.grid(True)
+plt.savefig('grafico.png', dpi=300)
+plt.show()</code>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador6">1 / 20</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

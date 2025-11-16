@@ -1,0 +1,690 @@
+        <div id="topico7" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">🚀</span>Tópico 7: Projeto Final - Automação Completa</h2>
+                <h3>Juntando tudo o que aprendemos!</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Agora vamos criar um script de automação completo que integra
+                    todos os conceitos dos tópicos anteriores.
+                </p>
+
+                <div class="destaque">
+                    <strong>🎯 Objetivo do projeto:</strong>
+                    <p style="margin-top: 10px;">
+                        Criar um sistema automatizado que:
+                    </p>
+                    <ol style="margin-top: 10px;">
+                        <li>📖 <strong>Lê</strong> dados de um arquivo Excel</li>
+                        <li>🔢 <strong>Realiza</strong> cálculos e filtros automáticos</li>
+                        <li>📊 <strong>Gera</strong> gráficos com os resultados</li>
+                        <li>💾 <strong>Salva</strong> um relatório atualizado e formatado</li>
+                    </ol>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💼 Cenário de negócio:</strong>
+                    <p>Sistema de análise automatizada de vendas com cálculo de lucro,
+                    categorização de produtos, análise de estoque e geração de dashboard executivo.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>Estrutura do Projeto</h2>
+                <h3>Vamos dividir em 4 etapas principais:</h3>
+
+                <div class="code-block">
+                    <code># Estrutura do script de automação
+
+# ETAPA 1: Importação de bibliotecas
+import pandas as pd
+import matplotlib.pyplot as plt
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+# ETAPA 2: Leitura e preparação dos dados
+# - Ler arquivo Excel
+# - Validar dados
+# - Limpar valores inconsistentes
+
+# ETAPA 3: Análise e cálculos automáticos
+# - Calcular totais e médias
+# - Categorizar produtos
+# - Identificar produtos críticos
+# - Calcular lucros
+
+# ETAPA 4: Geração de relatórios
+# - Criar gráficos
+# - Gerar planilha formatada
+# - Exportar dashboard
+
+print("✅ Automação concluída!")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📖</span>Etapa 1: Leitura dos Dados</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+print("=" * 60)
+print("SISTEMA DE AUTOMAÇÃO DE ANÁLISE DE VENDAS")
+print("=" * 60)
+
+# Ler arquivo Excel
+print("\n📖 Etapa 1: Lendo dados do arquivo Excel...")
+
+try:
+    df = pd.read_excel("dados_vendas.xlsx")
+    print(f"✅ Dados carregados com sucesso!")
+    print(f"   Total de registros: {len(df)}")
+    print(f"   Colunas: {', '.join(df.columns)}")
+
+    # Exibir primeiras linhas
+    print("\n📊 Primeiros registros:")
+    print(df.head())
+
+    # Verificar dados nulos
+    if df.isnull().any().any():
+        print("\n⚠️  Atenção: Dados nulos encontrados!")
+        print(df.isnull().sum())
+
+        # Tratar dados nulos
+        df = df.dropna()  # Ou df.fillna(0)
+        print("✅ Dados nulos removidos!")
+
+except FileNotFoundError:
+    print("❌ Erro: Arquivo não encontrado!")
+    exit()
+except Exception as e:
+    print(f"❌ Erro ao ler arquivo: {e}")
+    exit()</code>
+                </div>
+
+                <div class="destaque">
+                    <strong>💡 Boas práticas:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Sempre use <code>try/except</code> para tratar erros</li>
+                        <li>Valide os dados antes de processar</li>
+                        <li>Forneça feedback claro ao usuário</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔢</span>Etapa 2: Cálculos Automáticos</h2>
+
+                <div class="code-block">
+                    <code>print("\n🔢 Etapa 2: Realizando cálculos automáticos...")
+
+# 1. Calcular valor total por produto
+df['Total'] = df['Quantidade'] * df['Preço Unitário']
+
+# 2. Categorizar produtos por preço
+def categorizar_produto(preco):
+    if preco > 500:
+        return 'Premium'
+    elif preco > 100:
+        return 'Standard'
+    else:
+        return 'Básico'
+
+df['Categoria'] = df['Preço Unitário'].apply(categorizar_produto)
+
+# 3. Analisar status do estoque
+def status_estoque(quantidade):
+    if quantidade < 10:
+        return 'Estoque Baixo'
+    elif quantidade < 20:
+        return 'Estoque Médio'
+    else:
+        return 'Estoque Alto'
+
+df['Status Estoque'] = df['Quantidade'].apply(status_estoque)
+
+# 4. Calcular lucro (assumindo custo = 60% do preço)
+df['Custo Unitário'] = df['Preço Unitário'] * 0.6
+df['Lucro Unitário'] = df['Preço Unitário'] - df['Custo Unitário']
+df['Lucro Total'] = df['Lucro Unitário'] * df['Quantidade']
+
+# 5. Calcular métricas gerais
+faturamento_total = df['Total'].sum()
+lucro_total = df['Lucro Total'].sum()
+margem_media = (lucro_total / faturamento_total) * 100
+
+print("✅ Cálculos realizados:")
+print(f"   • Categorização de produtos")
+print(f"   • Análise de estoque")
+print(f"   • Cálculo de lucro")
+print(f"\n📊 Resumo:")
+print(f"   • Faturamento total: R$ {faturamento_total:,.2f}")
+print(f"   • Lucro total: R$ {lucro_total:,.2f}")
+print(f"   • Margem média: {margem_media:.1f}%")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Etapa 3: Geração de Gráficos</h2>
+
+                <div class="code-block">
+                    <code>print("\n📊 Etapa 3: Gerando gráficos de análise...")
+
+# Criar dashboard com 4 gráficos
+fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+fig.suptitle('Dashboard de Análise de Vendas',
+             fontsize=18, fontweight='bold', y=1.00)
+
+# Gráfico 1: Faturamento por Produto
+axes[0, 0].bar(df['Produto'], df['Total'], color='#3498db')
+axes[0, 0].set_title('Faturamento por Produto', fontweight='bold')
+axes[0, 0].set_xlabel('Produto')
+axes[0, 0].set_ylabel('Total (R$)')
+axes[0, 0].tick_params(axis='x', rotation=45)
+axes[0, 0].grid(axis='y', alpha=0.3)
+
+# Gráfico 2: Lucro por Produto
+axes[0, 1].barh(df['Produto'], df['Lucro Total'], color='#2ecc71')
+axes[0, 1].set_title('Lucro por Produto', fontweight='bold')
+axes[0, 1].set_xlabel('Lucro (R$)')
+axes[0, 1].grid(axis='x', alpha=0.3)
+
+# Gráfico 3: Distribuição por Categoria
+categoria_counts = df['Categoria'].value_counts()
+cores = ['#e74c3c', '#f39c12', '#95a5a6']
+axes[1, 0].pie(categoria_counts.values,
+               labels=categoria_counts.index,
+               autopct='%1.1f%%',
+               colors=cores)
+axes[1, 0].set_title('Distribuição por Categoria', fontweight='bold')
+
+# Gráfico 4: Status de Estoque
+cores_estoque = ['#e74c3c' if q < 10 else '#f39c12' if q < 20 else '#2ecc71'
+                 for q in df['Quantidade']]
+axes[1, 1].bar(df['Produto'], df['Quantidade'], color=cores_estoque)
+axes[1, 1].set_title('Status de Estoque', fontweight='bold')
+axes[1, 1].axhline(y=10, color='r', linestyle='--', alpha=0.5, label='Mínimo')
+axes[1, 1].axhline(y=20, color='orange', linestyle='--', alpha=0.5, label='Ideal')
+axes[1, 1].legend()
+axes[1, 1].grid(axis='y', alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('dashboard_vendas.png', dpi=300, bbox_inches='tight')
+print("✅ Dashboard salvo como 'dashboard_vendas.png'")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💾</span>Etapa 4: Relatório Formatado</h2>
+
+                <div class="code-block">
+                    <code>from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+print("\n💾 Etapa 4: Gerando relatório formatado...")
+
+# Criar workbook
+wb = Workbook()
+ws = wb.active
+ws.title = "Relatório de Vendas"
+
+# Cabeçalho principal
+ws['A1'] = "RELATÓRIO DE ANÁLISE DE VENDAS"
+ws['A1'].font = Font(size=16, bold=True, color="FFFFFF")
+ws['A1'].fill = PatternFill(start_color="2C3E50",
+                            end_color="2C3E50",
+                            fill_type="solid")
+ws.merge_cells('A1:I1')
+ws['A1'].alignment = Alignment(horizontal="center")
+
+# Resumo executivo
+ws['A3'] = "RESUMO EXECUTIVO"
+ws['A3'].font = Font(size=12, bold=True)
+
+ws['A4'] = "Total de Produtos:"
+ws['B4'] = len(df)
+ws['A5'] = "Faturamento Total:"
+ws['B5'] = f"R$ {faturamento_total:,.2f}"
+ws['A6'] = "Lucro Total:"
+ws['B6'] = f"R$ {lucro_total:,.2f}"
+ws['A7'] = "Margem Média:"
+ws['B7'] = f"{margem_media:.1f}%"
+
+# Cabeçalhos da tabela
+ws['A9'] = "DADOS DETALHADOS"
+ws['A9'].font = Font(size=12, bold=True)
+
+headers = ['Produto', 'Quantidade', 'Preço Unit.', 'Total',
+           'Categoria', 'Status', 'Lucro Unit.', 'Lucro Total']
+
+for col, header in enumerate(headers, start=1):
+    cell = ws.cell(row=10, column=col)
+    cell.value = header
+    cell.font = Font(bold=True, color="FFFFFF")
+    cell.fill = PatternFill(start_color="3498DB",
+                           end_color="3498DB",
+                           fill_type="solid")
+    cell.alignment = Alignment(horizontal="center")
+
+# Dados
+for idx, row in df.iterrows():
+    ws.cell(row=idx+11, column=1, value=row['Produto'])
+    ws.cell(row=idx+11, column=2, value=row['Quantidade'])
+    ws.cell(row=idx+11, column=3, value=row['Preço Unitário'])
+    ws.cell(row=idx+11, column=4, value=row['Total'])
+    ws.cell(row=idx+11, column=5, value=row['Categoria'])
+    ws.cell(row=idx+11, column=6, value=row['Status Estoque'])
+    ws.cell(row=idx+11, column=7, value=row['Lucro Unitário'])
+    ws.cell(row=idx+11, column=8, value=row['Lucro Total'])
+
+wb.save("relatorio_final.xlsx")
+print("✅ Relatório salvo como 'relatorio_final.xlsx'")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Código Completo do Projeto</h2>
+
+                <div class="code-block">
+                    <code>"""
+Sistema de Automação de Análise de Vendas
+Autor: Grupo 4 - Minicurso Python para Excel
+"""
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+def categorizar_produto(preco):
+    """Categoriza produto por faixa de preço"""
+    if preco > 500:
+        return 'Premium'
+    elif preco > 100:
+        return 'Standard'
+    else:
+        return 'Básico'
+
+def status_estoque(quantidade):
+    """Determina status do estoque"""
+    if quantidade < 10:
+        return 'Estoque Baixo'
+    elif quantidade < 20:
+        return 'Estoque Médio'
+    else:
+        return 'Estoque Alto'
+
+def main():
+    """Função principal do sistema"""
+    print("=" * 60)
+    print("SISTEMA DE AUTOMAÇÃO DE ANÁLISE DE VENDAS")
+    print("=" * 60)
+
+    # ETAPA 1: Leitura
+    print("\n📖 Lendo dados...")
+    df = pd.read_excel("dados_vendas.xlsx")
+    print(f"✅ {len(df)} registros carregados")
+
+    # ETAPA 2: Cálculos
+    print("\n🔢 Realizando análises...")
+    df['Total'] = df['Quantidade'] * df['Preço Unitário']
+    df['Categoria'] = df['Preço Unitário'].apply(categorizar_produto)
+    df['Status Estoque'] = df['Quantidade'].apply(status_estoque)
+    df['Lucro Total'] = df['Quantidade'] * df['Preço Unitário'] * 0.4
+
+    # ETAPA 3: Gráficos
+    print("\n📊 Gerando gráficos...")
+    # [código dos gráficos]
+
+    # ETAPA 4: Relatório
+    print("\n💾 Salvando relatório...")
+    df.to_excel("relatorio_final.xlsx", index=False)
+
+    print("\n✅ Automação concluída!")
+
+if __name__ == "__main__":
+    main()</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Melhorias e Funcionalidades Extras</h2>
+
+                <div class="exemplo-box">
+                    <strong>🚀 Funcionalidades avançadas que você pode adicionar:</strong>
+                </div>
+
+                <div class="code-block">
+                    <code># 1. Processar múltiplos arquivos
+import glob
+
+arquivos = glob.glob("vendas_*.xlsx")
+dfs = [pd.read_excel(f) for f in arquivos]
+df_completo = pd.concat(dfs, ignore_index=True)
+
+# 2. Enviar relatório por email (com smtplib)
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+
+# [código para envio de email]
+
+# 3. Agendar execução automática
+# Usar biblioteca schedule ou Task Scheduler do Windows
+
+# 4. Adicionar interface gráfica
+import tkinter as tk
+from tkinter import filedialog
+
+def selecionar_arquivo():
+    arquivo = filedialog.askopenfilename()
+    processar_arquivo(arquivo)
+
+# 5. Gerar relatório em PDF
+from matplotlib.backends.backend_pdf import PdfPages
+
+with PdfPages('relatorio.pdf') as pdf:
+    # Salvar gráficos no PDF
+    pdf.savefig(fig)
+
+# 6. Criar aplicação web
+# Usar Flask ou Streamlit
+
+# 7. Backup automático
+import shutil
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+shutil.copy("relatorio.xlsx", f"backup_{timestamp}.xlsx")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚠️</span>Tratamento de Erros</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+import sys
+
+def processar_vendas(arquivo):
+    """Processa arquivo de vendas com tratamento de erros"""
+
+    try:
+        # Verificar se arquivo existe
+        if not arquivo.endswith('.xlsx'):
+            raise ValueError("Arquivo deve ser .xlsx")
+
+        # Ler dados
+        df = pd.read_excel(arquivo)
+
+        # Validar colunas obrigatórias
+        colunas_obrigatorias = ['Produto', 'Quantidade', 'Preço Unitário']
+        for coluna in colunas_obrigatorias:
+            if coluna not in df.columns:
+                raise ValueError(f"Coluna '{coluna}' não encontrada!")
+
+        # Validar tipos de dados
+        if not pd.api.types.is_numeric_dtype(df['Quantidade']):
+            raise TypeError("Coluna 'Quantidade' deve conter números")
+
+        # Validar valores
+        if (df['Quantidade'] < 0).any():
+            raise ValueError("Quantidade não pode ser negativa")
+
+        if (df['Preço Unitário'] <= 0).any():
+            raise ValueError("Preço deve ser maior que zero")
+
+        return df
+
+    except FileNotFoundError:
+        print(f"❌ Erro: Arquivo '{arquivo}' não encontrado")
+        sys.exit(1)
+
+    except ValueError as e:
+        print(f"❌ Erro de validação: {e}")
+        sys.exit(1)
+
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")
+        sys.exit(1)
+
+# Usar a função
+df = processar_vendas("dados_vendas.xlsx")
+print("✅ Dados validados com sucesso!")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Documentação e Logs</h2>
+
+                <div class="code-block">
+                    <code>import logging
+from datetime import datetime
+
+# Configurar logging
+logging.basicConfig(
+    filename='automacao.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+def processar_dados():
+    """Processa dados com logging"""
+
+    logging.info("=" * 60)
+    logging.info("Iniciando automação de vendas")
+
+    try:
+        # Etapa 1
+        logging.info("Lendo arquivo Excel...")
+        df = pd.read_excel("vendas.xlsx")
+        logging.info(f"{len(df)} registros carregados")
+
+        # Etapa 2
+        logging.info("Realizando cálculos...")
+        df['Total'] = df['Quantidade'] * df['Preço']
+        logging.info("Cálculos concluídos")
+
+        # Etapa 3
+        logging.info("Gerando gráficos...")
+        # [código dos gráficos]
+        logging.info("Gráficos salvos")
+
+        # Etapa 4
+        logging.info("Salvando relatório...")
+        df.to_excel("relatorio.xlsx", index=False)
+        logging.info("Relatório salvo com sucesso")
+
+        logging.info("Automação concluída com sucesso!")
+        return True
+
+    except Exception as e:
+        logging.error(f"Erro durante processamento: {e}")
+        return False
+
+# Executar
+sucesso = processar_dados()
+
+if sucesso:
+    print("✅ Processo concluído! Verifique automacao.log")
+else:
+    print("❌ Erro no processo! Verifique automacao.log")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⏰</span>Agendamento de Tarefas</h2>
+
+                <div class="code-block">
+                    <code># Opção 1: Biblioteca schedule
+import schedule
+import time
+
+def executar_automacao():
+    """Executa o script de automação"""
+    print(f"Executando automação em {datetime.now()}")
+    # [seu código de automação aqui]
+    print("Automação concluída!")
+
+# Agendar execução
+schedule.every().day.at("09:00").do(executar_automacao)
+schedule.every().monday.at("08:00").do(executar_automacao)
+schedule.every(2).hours.do(executar_automacao)
+
+print("Agendador iniciado...")
+while True:
+    schedule.run_pending()
+    time.sleep(60)  # Verificar a cada minuto
+
+# Opção 2: Windows Task Scheduler
+# 1. Criar arquivo .bat:
+#    python C:\caminho\automacao.py
+# 2. Agendar no Task Scheduler do Windows
+
+# Opção 3: Cron (Linux)
+# crontab -e
+# 0 9 * * * python /caminho/automacao.py</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Instalação do schedule:</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>pip install schedule</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercício Final - Projeto Completo</h2>
+
+                <div class="exemplo-box">
+                    <strong>🎯 Desafio: Sistema de Análise de Vendas Completo</strong>
+                    <p>Crie um sistema completo que:</p>
+                    <ol>
+                        <li>Lê múltiplos arquivos Excel de vendas</li>
+                        <li>Consolida todos os dados em um único DataFrame</li>
+                        <li>Realiza análises avançadas:
+                            <ul>
+                                <li>Vendas por período</li>
+                                <li>Produtos mais e menos vendidos</li>
+                                <li>Análise de lucratividade</li>
+                                <li>Previsão de reposição de estoque</li>
+                            </ul>
+                        </li>
+                        <li>Gera dashboard completo com 6 gráficos</li>
+                        <li>Cria relatório Excel formatado com múltiplas abas</li>
+                        <li>Salva log de execução</li>
+                        <li>Envia notificação de conclusão</li>
+                    </ol>
+                </div>
+
+                <div class="destaque">
+                    <strong>💪 Dicas para o desafio:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Use funções para organizar o código</li>
+                        <li>Implemente tratamento de erros robusto</li>
+                        <li>Adicione comentários explicativos</li>
+                        <li>Teste com diferentes cenários de dados</li>
+                        <li>Documente o processo no código</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎓</span>Resumo - Tópico 7</h2>
+
+                <div class="destaque">
+                    <strong>🚀 Parabéns! Você completou o minicurso!</strong>
+                    <p style="margin-top: 10px;">Agora você sabe:</p>
+                    <ul style="margin-top: 10px;">
+                        <li>✅ Fundamentos de Python</li>
+                        <li>✅ Manipular arquivos Excel com Openpyxl e Pandas</li>
+                        <li>✅ Criar visualizações com Matplotlib</li>
+                        <li>✅ Desenvolver scripts de automação completos</li>
+                        <li>✅ Tratar erros e adicionar logs</li>
+                        <li>✅ Agendar tarefas automáticas</li>
+                    </ul>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>📚 Próximos passos:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>🎯 Pratique criando seus próprios projetos</li>
+                        <li>📖 Estude bibliotecas avançadas: NumPy, Seaborn, Plotly</li>
+                        <li>🌐 Aprenda desenvolvimento web: Flask, Django, Streamlit</li>
+                        <li>🤖 Explore Machine Learning e Data Science</li>
+                        <li>💼 Automatize tarefas do seu trabalho!</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+                    <code># Template básico de automação
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def main():
+    # 1. Ler dados
+    df = pd.read_excel("dados.xlsx")
+
+    # 2. Processar
+    df['Total'] = df['Qtd'] * df['Preço']
+
+    # 3. Visualizar
+    plt.bar(df['Produto'], df['Total'])
+    plt.savefig('resultado.png')
+
+    # 4. Salvar
+    df.to_excel("relatorio.xlsx", index=False)
+
+    print("✅ Concluído!")
+
+if __name__ == "__main__":
+    main()</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎉</span>Conclusão do Minicurso</h2>
+
+                <div style="text-align: center; padding: 40px 20px;">
+                    <h1 style="color: #667eea; font-size: 3em;">🐍</h1>
+                    <h2 style="color: #667eea;">Parabéns!</h2>
+                    <p style="font-size: 1.3em; margin: 30px 0;">
+                        Você concluiu o minicurso<br>
+                        <strong>Python para Excel</strong>
+                    </p>
+
+                    <div class="destaque" style="margin: 40px auto; max-width: 600px;">
+                        <strong>👥 Desenvolvido por:</strong>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li>Gabriele dos Santos Medrado</li>
+                            <li>Gustavo Oliveira Alves</li>
+                            <li>João Augusto Coelho Chagas</li>
+                            <li>Ricardo Augusto Lima da Silva</li>
+                            <li>Geovane Chaves Pires</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-size: 1.2em; color: #667eea; margin-top: 40px;">
+                        Continue praticando e explorando!<br>
+                        O céu é o limite! 🚀
+                    </p>
+                </div>
+
+                <div class="exemplo-box" style="margin-top: 40px;">
+                    <strong>📬 Recursos adicionais:</strong>
+                    <ul>
+                        <li>📖 Documentação oficial do Python: python.org</li>
+                        <li>📊 Pandas: pandas.pydata.org</li>
+                        <li>📈 Matplotlib: matplotlib.org</li>
+                        <li>💡 Stack Overflow: stackoverflow.com</li>
+                        <li>🎓 Kaggle: kaggle.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador7">1 / 14</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>
