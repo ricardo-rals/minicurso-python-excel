@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios - Tópico 7: Excel com Python</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/exercicios.css">
+</head>
+<body>
+    <div class="container">
+        <div id="exercicios-topico7" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📊</span>Exercícios - Tópico 7: Excel com Python (Pandas)</h2>
+
+                <div class="destaque-pandas">
+                    📌 Nota: Para estes exercícios, use a biblioteca Pandas. Instale com: pip install pandas openpyxl
+                </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 1: Criação Básica de DataFrame</div>
+            <div class="exercicio-titulo">Criando DataFrame</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame a partir de um dicionário com as chaves 'Nome' e 'Idade', e pelo menos 3 registros. Imprima o DataFrame.
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 2: Leitura de CSV</div>
+            <div class="exercicio-titulo">Importação de Dados</div>
+            <div class="exercicio-enunciado">
+                Simule a leitura de um arquivo CSV chamado dados.csv (assuma que ele existe) usando pd.read_csv(). Imprima as 5 primeiras linhas (.head()).
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 3: Seleção de Colunas</div>
+            <div class="exercicio-titulo">Acesso a Colunas</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame como no Exercício 1. Selecione e imprima apenas a coluna 'Nome'.
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 4: Filtro Simples</div>
+            <div class="exercicio-titulo">Filtragem de Dados</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame com as colunas 'País' e 'População'. Filtre e imprima as linhas onde a 'População' é maior que 1000 (simulado).
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 5: Cálculo Estatístico</div>
+            <div class="exercicio-titulo">Estatísticas Descritivas</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame com uma coluna 'Vendas' (com 5 valores numéricos). Calcule e imprima a soma total e a média das vendas usando os métodos do Pandas (.sum(), .mean()).
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 6: Adição de Coluna</div>
+            <div class="exercicio-titulo">Criação de Nova Coluna</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame com a coluna 'Salário'. Adicione uma nova coluna 'Bônus' calculada como 20% do 'Salário'. Imprima o DataFrame com a nova coluna.
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 7: Ordenação de Dados</div>
+            <div class="exercicio-titulo">Ordenação de DataFrame</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame com as colunas 'Nome' e 'Pontuação'. Ordene o DataFrame com base na coluna 'Pontuação' de forma decrescente (ascending=False) e imprima o resultado.
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 8: Agrupamento Simples</div>
+            <div class="exercicio-titulo">GroupBy</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame com as colunas 'Filial' (A, B, A, B) e 'Receita' (valores numéricos). Agrupe os dados por 'Filial' e calcule a soma da Receita para cada filial (.groupby().sum()).
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 9: Remoção de Colunas</div>
+            <div class="exercicio-titulo">Exclusão de Coluna</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame. Remova a coluna 'Idade' e imprima o DataFrame restante.
+            </div>
+        </div>
+
+        <div class="exercicio-item">
+            <div class="exercicio-numero">Exercício 10: Exportação para Excel</div>
+            <div class="exercicio-titulo">Salvar em Excel</div>
+            <div class="exercicio-enunciado">
+                Crie um DataFrame simples. Use o método .to_excel() para exportar os dados para um arquivo Excel chamado relatorio.xlsx (não inclua o índice).
+            </div>
+        </div>
+
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+

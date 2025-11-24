@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 1: Sistema de Controle Financeiro Automático</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>💰 Projeto 1: Sistema de Controle Financeiro Automático</h1>
+                <p>Automatize sua planilha financeira com Python</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um sistema que automaticamente processa gastos do mês, classifica por categoria,
+                    calcula totais e gera gráficos visuais. Quando você abrir a planilha, tudo é recalculado
+                    automaticamente via Python!
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Ler planilhas Excel/CSV</strong> com Pandas</li>
+                    <li><strong>Classificar e agrupar dados</strong> por categoria</li>
+                    <li><strong>Somar categorias</strong> usando groupby()</li>
+                    <li><strong>Gerar gráficos automáticos</strong> (pizza e barra) com Matplotlib</li>
+                    <li><strong>Atualizar arquivo Excel</strong> formatado com Openpyxl</li>
+                    <li><strong>Aplicar formatação</strong> profissional em células</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Importa gastos do mês</strong> de arquivo CSV ou Excel</li>
+                    <li><strong>Classifica automaticamente</strong> por categoria (Ex: mercado, gasolina, contas, lazer)</li>
+                    <li><strong>Calcula totais</strong> por categoria e total geral</li>
+                    <li><strong>Gera gráficos</strong> de pizza (distribuição) e barra (comparação)</li>
+                    <li><strong>Salva um novo arquivo Excel</strong> formatado com cores e estilos</li>
+                    <li><strong>Insere os gráficos</strong> diretamente na planilha</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Leitura de arquivos Excel/CSV com <code>pd.read_excel()</code> ou <code>pd.read_csv()</code></li>
+                    <li>✅ Manipulação de DataFrames com Pandas</li>
+                    <li>✅ Agrupamento de dados com <code>groupby()</code></li>
+                    <li>✅ Cálculos de soma e média com <code>.sum()</code> e <code>.mean()</code></li>
+                    <li>✅ Criação de gráficos com Matplotlib (pizza e barra)</li>
+                    <li>✅ Escrita em Excel com <code>pd.to_excel()</code> ou Openpyxl</li>
+                    <li>✅ Formatação básica de células (cores, fontes, bordas)</li>
+                    <li>✅ Uso de funções Python para organizar o código</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Criar interface web interativa para visualizar os gastos</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Dashboard mais avançado com gráficos interativos</li>
+                    <li>🌟 <strong>Envio por E-mail:</strong> Enviar relatório automaticamente por e-mail usando <code>smtplib</code></li>
+                    <li>🌟 <strong>Envio por Telegram:</strong> Enviar resumo dos gastos via bot do Telegram</li>
+                    <li>🌟 <strong>Alertas automáticos:</strong> Avisar quando gastos ultrapassarem limite mensal</li>
+                    <li>🌟 <strong>Comparação mensal:</strong> Comparar gastos entre meses diferentes</li>
+                    <li>🌟 <strong>Exportação em PDF:</strong> Gerar relatório em PDF usando ReportLab</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_controle_financeiro/
+├── controle_financeiro.py      # Script principal
+├── gastos_mes.csv              # Arquivo de entrada (exemplo)
+├── relatorio_financeiro.xlsx   # Arquivo de saída gerado
+└── README.md                    # Instruções do projeto</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📝 Exemplo de Dados de Entrada</h2>
+                <p>O arquivo CSV/Excel deve ter as seguintes colunas:</p>
+                <div class="code-example">Data,Descrição,Valor,Categoria
+2024-01-15,Supermercado,250.50,Mercado
+2024-01-16,Posto de Gasolina,180.00,Transporte
+2024-01-17,Conta de Luz,120.00,Contas
+2024-01-18,Cinema,45.00,Lazer
+...</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Comece lendo o arquivo e verificando os dados</li>
+                    <li>Use um dicionário para mapear descrições para categorias</li>
+                    <li>Agrupe por categoria e calcule os totais</li>
+                    <li>Crie os gráficos antes de salvar no Excel</li>
+                    <li>Use Openpyxl para inserir os gráficos na planilha</li>
+                </ul>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+

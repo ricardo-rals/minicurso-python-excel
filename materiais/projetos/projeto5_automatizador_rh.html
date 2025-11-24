@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 5: Automatizador de Planilhas de RH</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>👥 Projeto 5: Automatizador de Planilhas de RH</h1>
+                <p>Cálculos automáticos de RH, idade e férias</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um sistema que automatiza cálculos de RH: tempo de empresa, idade atual,
+                    previsão de férias e gera uma planilha limpa e organizada com todas as informações.
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Ler planilha</strong> com dados de funcionários</li>
+                    <li><strong>Converter datas</strong> com <code>pd.to_datetime()</code></li>
+                    <li><strong>Criar colunas calculadas</strong> baseadas em datas</li>
+                    <li><strong>Calcular diferenças de datas</strong> (tempo de empresa, idade)</li>
+                    <li><strong>Aplicar regras de negócio</strong> (ex: férias a cada 12 meses)</li>
+                    <li><strong>Formatar datas</strong> e valores para exibição</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Importa cadastro</strong> de funcionários (nome, CPF, data nascimento, data admissão)</li>
+                    <li><strong>Calcula tempo de empresa</strong> em anos, meses e dias</li>
+                    <li><strong>Calcula idade atual</strong> baseada na data de nascimento</li>
+                    <li><strong>Previsão de férias</strong> baseada na última data de férias</li>
+                    <li><strong>Identifica aniversariantes</strong> do mês</li>
+                    <li><strong>Gera planilha final</strong> limpa e formatada</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Leitura de arquivos Excel com Pandas</li>
+                    <li>✅ Conversão de datas com <code>pd.to_datetime()</code></li>
+                    <li>✅ Cálculo de diferenças de datas</li>
+                    <li>✅ Criação de colunas calculadas</li>
+                    <li>✅ Uso de <code>.dt</code> para extrair ano, mês, dia</li>
+                    <li>✅ Aplicação de condições com <code>.apply()</code> ou funções</li>
+                    <li>✅ Formatação de datas e valores</li>
+                    <li>✅ Escrita em Excel formatado</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Visualizar dados de RH</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Dashboard interativo de funcionários</li>
+                    <li>🌟 <strong>Envio por E-mail:</strong> Enviar lembretes de aniversário</li>
+                    <li>🌟 <strong>Envio por Telegram:</strong> Notificar sobre férias próximas</li>
+                    <li>🌟 <strong>Gráficos de demografia:</strong> Idade, tempo de empresa</li>
+                    <li>🌟 <strong>Relatório de turnover:</strong> Análise de rotatividade</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_automatizador_rh/
+├── automatizador_rh.py         # Script principal
+├── funcionarios.xlsx           # Arquivo de entrada
+├── relatorio_rh.xlsx           # Arquivo de saída
+└── README.md</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📝 Exemplo de Dados de Entrada</h2>
+                <p>O arquivo Excel deve ter colunas como:</p>
+                <div class="code-example">Nome,CPF,Data Nascimento,Data Admissão,Última Férias
+João Silva,123.456.789-00,1985-05-15,2020-01-10,2023-01-10
+Maria Santos,987.654.321-00,1990-08-20,2019-03-15,2023-03-15
+...</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Use <code>pd.to_datetime()</code> para converter strings em datas</li>
+                    <li>Calcule diferenças: <code>(data_atual - data_nascimento).days / 365.25</code></li>
+                    <li>Para tempo de empresa, use <code>.dt</code> para extrair componentes</li>
+                    <li>Crie uma função para calcular próxima data de férias</li>
+                    <li>Use formatação condicional para destacar aniversariantes</li>
+                </ul>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+

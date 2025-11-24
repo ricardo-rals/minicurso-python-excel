@@ -1,532 +1,1299 @@
         <div id="topico5" class="slides-container">
             <div class="slide active">
-                <h2><span class="emoji">📊</span>Tópico 5: Trabalhando com Arquivos Excel</h2>
-                <h3>Por que automatizar Excel com Python?</h3>
-                <ul>
-                    <li><strong>Velocidade:</strong> Processar milhares de linhas em segundos</li>
-                    <li><strong>Precisão:</strong> Eliminar erros humanos em tarefas repetitivas</li>
-                    <li><strong>Produtividade:</strong> Automatizar relatórios e análises</li>
-                    <li><strong>Escalabilidade:</strong> Trabalhar com múltiplos arquivos simultaneamente</li>
-                </ul>
-
-                <div class="exemplo-box">
-                    <strong>💡 Neste tópico você vai aprender:</strong>
+                <h2><span class="emoji">📋</span>Tópico 5: Listas</h2>
+                <h3>Introdução às Listas</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Listas são coleções ordenadas de elementos que podem ser modificadas.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>O que são listas?</h3>
                     <ul>
-                        <li>Criar e manipular planilhas Excel com <strong>Openpyxl</strong></li>
-                        <li>Analisar dados com <strong>Pandas</strong></li>
-                        <li>Filtrar, ordenar e transformar dados</li>
-                        <li>Aplicar formatação e estilos</li>
+                        <li><strong>Coleção ordenada:</strong> Elementos têm posição (índice)</li>
+                        <li><strong>Mutável:</strong> Podemos adicionar, remover e modificar elementos</li>
+                        <li><strong>Flexível:</strong> Podem conter diferentes tipos de dados</li>
+                        <li><strong>Dinâmica:</strong> Tamanho pode mudar durante a execução</li>
                     </ul>
-                </div>
 
-                <div class="destaque">
-                    <strong>📦 Bibliotecas necessárias:</strong>
-                    <div class="code-block" style="margin-top: 10px;">
-                        <code>pip install openpyxl pandas</code>
+                    <h3>Criando listas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Lista vazia
+lista_vazia = []
+print("Lista vazia:", lista_vazia)
+
+# Lista com elementos
+numeros = [1, 2, 3, 4, 5]
+nomes = ["Ana", "Bruno", "Carlos"]
+misturada = [1, "texto", 3.14, True]
+
+# Lista usando range
+lista_range = list(range(1, 6))
+
+print(f"Números: {numeros}")
+print(f"Nomes: {nomes}")
+print(f"Misturada: {misturada}")
+print(f"Range: {lista_range}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista vazia: []
+Números: [1, 2, 3, 4, 5]
+Nomes: ['Ana', 'Bruno', 'Carlos']
+Misturada: [1, 'texto', 3.14, True]
+Range: [1, 2, 3, 4, 5]</div>
                     </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">📚</span>Biblioteca Openpyxl</h2>
-                <h3>O que é Openpyxl?</h3>
+                <h2><span class="emoji">🔍</span>Acessando Elementos</h2>
+                
+                <div class="slide-content">
+                    <h3>Índices (começam em 0):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja", "uva"]
+
+# Acesso por índice positivo
+print(f"Primeira fruta: {frutas[0]}")  # maçã
+print(f"Segunda fruta: {frutas[1]}")   # banana
+print(f"Terceira fruta: {frutas[2]}")  # laranja
+
+# Acesso por índice negativo (do final)
+print(f"Última fruta: {frutas[-1]}")   # uva
+print(f"Penúltima fruta: {frutas[-2]}") # laranja
+
+# Modificar elemento
+frutas[0] = "morango"
+print(f"Lista modificada: {frutas}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeira fruta: maçã
+Segunda fruta: banana
+Terceira fruta: laranja
+Última fruta: uva
+Penúltima fruta: laranja
+Lista modificada: ['morango', 'banana', 'laranja', 'uva']</div>
+                    </div>
+
+                    <h3>Fatiamento (Slicing) - Sintaxe Completa:</h3>
+                    <p style="margin: 15px 0; font-size: 1.05em;">
+                        <strong>Sintaxe:</strong> <code>[start:end:step]</code>
+                    </p>
+                    <ul style="margin-bottom: 15px;">
+                        <li><strong>start:</strong> Índice inicial (inclusivo). Padrão: 0 ou início</li>
+                        <li><strong>end:</strong> Índice final (EXCLUSIVO - não é incluído). Padrão: fim da lista</li>
+                        <li><strong>step:</strong> Passo/incremento. Padrão: 1</li>
+                    </ul>
+                    
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Exemplos básicos
+print(f"Primeiros 3: {numeros[:3]}")        # start=0 (padrão), end=3 → [0, 1, 2]
+print(f"Últimos 3: {numeros[-3:]}")         # start=-3, end=fim (padrão) → [7, 8, 9]
+print(f"Do índice 2 ao 5: {numeros[2:6]}")  # start=2, end=6 → [2, 3, 4, 5] (6 não incluído!)
+
+# Com passo (step)
+print(f"Pulando de 2 em 2: {numeros[::2]}") # start=0, end=fim, step=2 → [0, 2, 4, 6, 8]
+print(f"De 2 a 8, passo 2: {numeros[2:9:2]}") # start=2, end=9, step=2 → [2, 4, 6, 8]
+
+# Invertido (step negativo)
+print(f"Invertido: {numeros[::-1]}")        # start=fim, end=0, step=-1 → [9, 8, 7, ..., 0]
+print(f"Pares invertidos: {numeros[::-2]}")  # step=-2 → [9, 7, 5, 3, 1]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeiros 3: [0, 1, 2]
+Últimos 3: [7, 8, 9]
+Do índice 2 ao 5: [2, 3, 4, 5]
+Pulando de 2 em 2: [0, 2, 4, 6, 8]
+De 2 a 8, passo 2: [2, 4, 6, 8]
+Invertido: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+Pares invertidos: [9, 7, 5, 3, 1]</div>
+                </div>
+
+                    <div class="destaque" style="margin-top: 15px;">
+                        <strong>💡 Lembre-se:</strong> O índice <code>end</code> NÃO é incluído! 
+                        <code>lista[2:5]</code> retorna elementos nos índices 2, 3 e 4 (não o 5).
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">➕</span>Métodos de Listas - Adicionar</h2>
+                
+                <div class="slide-content">
+                    <h3>append() - adiciona no final:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3]
+lista.append(4)
+print(f"Após append(4): {lista}")  # [1, 2, 3, 4]
+
+lista.append(5)
+print(f"Após append(5): {lista}")  # [1, 2, 3, 4, 5]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após append(4): [1, 2, 3, 4]
+Após append(5): [1, 2, 3, 4, 5]</div>
+                    </div>
+
+                    <h3>insert() - adiciona em posição específica:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 4, 5]
+lista.insert(2, 3)  # Insere 3 na posição 2
+print(f"Após insert(2, 3): {lista}")  # [1, 2, 3, 4, 5]
+
+lista.insert(0, 0)  # Insere 0 no início
+print(f"Após insert(0, 0): {lista}")  # [0, 1, 2, 3, 4, 5]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após insert(2, 3): [1, 2, 3, 4, 5]
+Após insert(0, 0): [0, 1, 2, 3, 4, 5]</div>
+                    </div>
+
+                    <h3>extend() - adiciona múltiplos elementos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista1 = [1, 2, 3]
+lista2 = [4, 5, 6]
+
+lista1.extend(lista2)
+print(f"Após extend: {lista1}")  # [1, 2, 3, 4, 5, 6]
+
+# Equivale a:
+# lista1 = lista1 + lista2</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após extend: [1, 2, 3, 4, 5, 6]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">➖</span>Métodos de Listas - Remover</h2>
+                
+                <div class="slide-content">
+                    <h3>remove() - remove primeira ocorrência:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3, 2, 4]
+lista.remove(2)  # Remove a primeira ocorrência de 2
+print(f"Após remove(2): {lista}")  # [1, 3, 2, 4]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após remove(2): [1, 3, 2, 4]</div>
+                    </div>
+
+                    <h3>pop() - remove e retorna elemento:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3, 4, 5]
+
+# pop() sem índice - remove o último
+elemento = lista.pop()
+print(f"Elemento removido: {elemento}")  # 5
+print(f"Lista após pop(): {lista}")      # [1, 2, 3, 4]
+
+# pop(índice) - remove elemento específico
+elemento = lista.pop(1)  # Remove índice 1
+print(f"Elemento removido: {elemento}")  # 2
+print(f"Lista após pop(1): {lista}")     # [1, 3, 4]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Elemento removido: 5
+Lista após pop(): [1, 2, 3, 4]
+Elemento removido: 2
+Lista após pop(1): [1, 3, 4]</div>
+                    </div>
+
+                    <h3>clear() - remove todos os elementos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3, 4, 5]
+lista.clear()
+print(f"Lista após clear(): {lista}")  # []</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista após clear(): []</div>
+                    </div>
+
+                    <h3>del - remove por índice ou exclui variável:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3, 4, 5]
+
+# del lista[indice] - remove elemento por índice (não retorna valor)
+del lista[1]  # Remove elemento no índice 1 (valor 2)
+print(f"Após del lista[1]: {lista}")  # [1, 3, 4, 5]
+
+# del lista[inicio:fim] - remove fatia
+del lista[1:3]  # Remove elementos dos índices 1 e 2
+print(f"Após del lista[1:3]: {lista}")  # [1, 5]
+
+# del lista - exclui a variável inteira
+del lista
+# print(lista)  # NameError: name 'lista' is not defined</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após del lista[1]: [1, 3, 4, 5]
+Após del lista[1:3]: [1, 5]</div>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 15px;">
+                        <strong>📌 Comparação: pop(), remove() e del</strong>
+                        <ul style="margin-top: 10px;">
+                            <li><code>pop(índice)</code> - Remove por índice e <strong>retorna</strong> o valor</li>
+                            <li><code>remove(valor)</code> - Remove por <strong>valor</strong> (primeira ocorrência)</li>
+                            <li><code>del lista[índice]</code> - Remove por índice e <strong>não retorna</strong> valor</li>
+                            <li><code>del lista</code> - <strong>Exclui</strong> a variável inteira</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>Outros Métodos Úteis</h2>
+                
+                <div class="slide-content">
+                    <h3>count() - conta ocorrências:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 2, 3, 2, 4]
+print(f"Quantidade de 2: {lista.count(2)}")  # 3
+print(f"Quantidade de 5: {lista.count(5)}")  # 0</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Quantidade de 2: 3
+Quantidade de 5: 0</div>
+                    </div>
+
+                    <h3>index() - encontra índice:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = ["a", "b", "c", "d"]
+print(f"Índice de 'c': {lista.index('c')}")  # 2
+
+# Se houver duplicatas, retorna o primeiro
+lista = ["a", "b", "c", "b", "d"]
+print(f"Índice de 'b': {lista.index('b')}")  # 1 (primeira ocorrência)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Índice de 'c': 2
+Índice de 'b': 1</div>
+                    </div>
+
+                    <h3>sort() - ordena a lista:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Ordenação crescente
+lista = [3, 1, 4, 1, 5, 9, 2]
+lista.sort()
+print(f"Lista ordenada: {lista}")  # [1, 1, 2, 3, 4, 5, 9]
+
+# Ordenação decrescente
+lista.sort(reverse=True)
+print(f"Lista decrescente: {lista}")  # [9, 5, 4, 3, 2, 1, 1]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista ordenada: [1, 1, 2, 3, 4, 5, 9]
+Lista decrescente: [9, 5, 4, 3, 2, 1, 1]</div>
+                    </div>
+
+                    <h3>reverse() - inverte a lista:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">lista = [1, 2, 3, 4, 5]
+lista.reverse()
+print(f"Lista invertida: {lista}")  # [5, 4, 3, 2, 1]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista invertida: [5, 4, 3, 2, 1]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔗</span>Operações com Listas</h2>
+                
+                <div class="slide-content">
+                    <h3>Concatenação (+) e Repetição (*):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Concatenação
+lista1 = [1, 2, 3]
+lista2 = [4, 5, 6]
+lista_combinada = lista1 + lista2
+print(f"Concatenação: {lista_combinada}")  # [1, 2, 3, 4, 5, 6]
+
+# Repetição
+lista_repetida = [1, 2] * 3
+print(f"Repetição: {lista_repetida}")  # [1, 2, 1, 2, 1, 2]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Concatenação: [1, 2, 3, 4, 5, 6]
+Repetição: [1, 2, 1, 2, 1, 2]</div>
+                    </div>
+
+                    <h3>Funções úteis:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">numeros = [3, 1, 4, 1, 5, 9, 2]
+
+# len() - tamanho da lista
+print(f"Tamanho: {len(numeros)}")  # 7
+
+# max() e min() - maior e menor valor
+print(f"Maior: {max(numeros)}")  # 9
+print(f"Menor: {min(numeros)}")  # 1
+
+# sum() - soma dos elementos
+print(f"Soma: {sum(numeros)}")   # 25
+
+# in - verificar se elemento existe
+print(f"5 está na lista: {5 in numeros}")  # True
+print(f"10 está na lista: {10 in numeros}")  # False</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Tamanho: 7
+Maior: 9
+Menor: 1
+Soma: 25
+5 está na lista: True
+10 está na lista: False</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Iterando sobre Listas</h2>
+                
+                <div class="slide-content">
+                    <h3>Usando for:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja"]
+
+print("Frutas disponíveis:")
+for fruta in frutas:
+    print(f"- {fruta}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Frutas disponíveis:
+- maçã
+- banana
+- laranja</div>
+                    </div>
+
+                    <h3>Usando enumerate() - índice + valor:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja"]
+
+print("Frutas com índice:")
+for i, fruta in enumerate(frutas):
+    print(f"{i}: {fruta}")
+
+# enumerate() retorna tuplas (índice, valor)
+for item in enumerate(frutas):
+    print(item)  # (0, 'maçã'), (1, 'banana'), (2, 'laranja')
+
+# Começar contagem de outro número
+for i, fruta in enumerate(frutas, start=1):
+    print(f"{i}. {fruta}")  # 1. maçã, 2. banana, 3. laranja</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Frutas com índice:
+0: maçã
+1: banana
+2: laranja
+(0, 'maçã')
+(1, 'banana')
+(2, 'laranja')
+1. maçã
+2. banana
+3. laranja</div>
+                    </div>
+
+                    <h3>Usando zip() - combinar listas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># zip() combina elementos de múltiplas listas
+nomes = ["Ana", "Bruno", "Carlos"]
+idades = [25, 30, 35]
+
+print("Combinação com zip():")
+for nome, idade in zip(nomes, idades):
+    print(f"{nome} tem {idade} anos")
+
+# zip() retorna tuplas
+pares = list(zip(nomes, idades))
+print(f"\nLista de tuplas: {pares}")  # [('Ana', 25), ('Bruno', 30), ...]
+
+# Múltiplas listas
+cidades = ["SP", "RJ", "MG"]
+for nome, idade, cidade in zip(nomes, idades, cidades):
+    print(f"{nome}, {idade} anos, de {cidade}")
+
+# Criar dicionário com zip()
+pessoa = dict(zip(["nome", "idade", "cidade"], ["João", 28, "SP"]))
+print(f"\nDicionário: {pessoa}")  # {'nome': 'João', 'idade': 28, ...}</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Combinação com zip():
+Ana tem 25 anos
+Bruno tem 30 anos
+Carlos tem 35 anos
+
+Lista de tuplas: [('Ana', 25), ('Bruno', 30), ('Carlos', 35)]
+Ana, 25 anos, de SP
+Bruno, 30 anos, de RJ
+Carlos, 35 anos, de MG
+
+Dicionário: {'nome': 'João', 'idade': 28, 'cidade': 'SP'}</div>
+                    </div>
+
+                    <h3>Usando range com len():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja"]
+
+for i in range(len(frutas)):
+    print(f"{i}: {frutas[i]}")
+
+# enumerate() é mais Pythonico que range(len())
+# Use enumerate() quando precisar do índice!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">0: maçã
+1: banana
+2: laranja</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📦</span>Tuplas (Tuples)</h2>
+                <h3>Coleções imutáveis</h3>
                 <p style="font-size: 1.1em; margin: 20px 0;">
-                    Openpyxl é uma biblioteca Python para ler e escrever arquivos Excel (formato .xlsx).
-                    Ela permite criar planilhas do zero e aplicar formatações como o Excel faz!
+                    Tuplas são como listas, mas <strong>não podem ser modificadas</strong> após a criação.
                 </p>
+                
+                <div class="slide-content">
+                    <h3>Diferença: Lista vs Tupla</h3>
+                    <table style="width: 100%; margin: 20px 0;">
+                        <tr>
+                            <th>Característica</th>
+                            <th>Lista</th>
+                            <th>Tupla</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Sintaxe</strong></td>
+                            <td><code>[1, 2, 3]</code></td>
+                            <td><code>(1, 2, 3)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mutável?</strong></td>
+                            <td>✅ Sim</td>
+                            <td>❌ Não</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Uso</strong></td>
+                            <td>Dados que mudam</td>
+                            <td>Dados fixos/constantes</td>
+                        </tr>
+                    </table>
 
-                <h3>Criando sua primeira planilha:</h3>
-                <div class="code-block">
-                    <code>from openpyxl import Workbook
+                    <h3>Criando tuplas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Tupla com parênteses
+coordenadas = (10, 20)
+cores = ("vermelho", "verde", "azul")
 
-# Criar uma nova planilha
-wb = Workbook()
-ws = wb.active
-ws.title = "Vendas"
+# Tupla sem parênteses (também funciona)
+ponto = 5, 10
+print(f"Ponto: {ponto}")  # (5, 10)
 
-# Escrever dados nas células
-ws['A1'] = "Produto"
-ws['B1'] = "Quantidade"
-ws['C1'] = "Preço"
+# Tupla vazia
+vazia = ()
 
-ws['A2'] = "Notebook"
-ws['B2'] = 5
-ws['C2'] = 2500.00
+# Tupla com um elemento (precisa vírgula!)
+um_item = (42,)  # Importante: vírgula!
+print(f"Tipo: {type(um_item)}")  # &lt;class 'tuple'&gt;
 
-# Salvar a planilha
-wb.save("vendas.xlsx")
-print("✅ Planilha criada com sucesso!")</code>
-                </div>
+# Acesso igual às listas
+print(f"Primeira cor: {cores[0]}")  # vermelho
+print(f"Última cor: {cores[-1]}")   # azul</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Ponto: (5, 10)
+Tipo: &lt;class 'tuple'&gt;
+Primeira cor: vermelho
+Última cor: azul</div>
+                    </div>
 
-                <div class="destaque">
-                    <strong>💡 Importante:</strong>
-                    Openpyxl trabalha com arquivos .xlsx (Excel 2010+). Para arquivos .xls antigos, use a biblioteca xlrd.
-                </div>
-            </div>
+                    <h3>Desempacotamento de tuplas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Atribuir valores de uma tupla a variáveis
+pessoa = ("João", 25, "São Paulo")
+nome, idade, cidade = pessoa
 
-            <div class="slide">
-                <h2><span class="emoji">🎨</span>Formatação com Openpyxl</h2>
-                <h3>Deixando suas planilhas profissionais:</h3>
+print(f"Nome: {nome}, Idade: {idade}, Cidade: {cidade}")
 
-                <div class="code-block">
-                    <code>from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Alignment
-
-wb = Workbook()
-ws = wb.active
-
-# Escrever cabeçalho
-ws['A1'] = "Produto"
-ws['B1'] = "Quantidade"
-ws['C1'] = "Preço Unitário"
-
-# Formatação do cabeçalho
-header_fill = PatternFill(
-    start_color="4472C4",
-    end_color="4472C4",
-    fill_type="solid"
-)
-header_font = Font(color="FFFFFF", bold=True, size=12)
-
-for cell in ws[1]:  # Linha 1 (cabeçalho)
-    cell.fill = header_fill
-    cell.font = header_font
-    cell.alignment = Alignment(horizontal="center")
-
-# Adicionar dados
-produtos = [
-    ["Notebook", 5, 2500.00],
-    ["Mouse", 20, 45.00],
-    ["Teclado", 15, 120.00]
-]
-
-for i, produto in enumerate(produtos, start=2):
-    ws[f'A{i}'] = produto[0]
-    ws[f'B{i}'] = produto[1]
-    ws[f'C{i}'] = produto[2]
-
-wb.save("vendas_formatada.xlsx")</code>
-                </div>
-            </div>
-
-            <div class="slide">
-                <h2><span class="emoji">📐</span>Fórmulas do Excel com Openpyxl</h2>
-                <h3>Inserindo fórmulas nas células:</h3>
-
-                <div class="code-block">
-                    <code>from openpyxl import Workbook
-
-wb = Workbook()
-ws = wb.active
-
-# Cabeçalhos
-ws['A1'] = "Produto"
-ws['B1'] = "Quantidade"
-ws['C1'] = "Preço Unit."
-ws['D1'] = "Total"
-
-# Dados
-ws['A2'] = "Notebook"
-ws['B2'] = 5
-ws['C2'] = 2500
-
-# FÓRMULA: Total = Quantidade × Preço
-ws['D2'] = "=B2*C2"  # Fórmula do Excel!
-
-# Mais produtos
-ws['A3'] = "Mouse"
-ws['B3'] = 20
-ws['C3'] = 45
-ws['D3'] = "=B3*C3"
-
-# Soma total de todas as vendas
-ws['D5'] = "TOTAL:"
-ws['E5'] = "=SUM(D2:D4)"
-
-wb.save("vendas_com_formulas.xlsx")</code>
+# Trocar valores facilmente
+a, b = 10, 20
+a, b = b, a  # Troca os valores!
+print(f"a={a}, b={b}")  # a=20, b=10</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Nome: João, Idade: 25, Cidade: São Paulo
+a=20, b=10</div>
                 </div>
 
                 <div class="exemplo-box">
-                    <strong>✨ Dica Pro:</strong>
-                    As fórmulas são calculadas automaticamente quando você abre o arquivo no Excel!
+                        <strong>💡 Quando usar tuplas?</strong>
+                        <ul>
+                            <li>Coordenadas (x, y)</li>
+                            <li>Retornar múltiplos valores de uma função</li>
+                            <li>Dados que não devem ser alterados</li>
+                            <li>Chaves de dicionários (só tuplas podem ser chaves!)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">📖</span>Lendo Planilhas Existentes</h2>
-                <h3>Abrindo e lendo dados:</h3>
-
-                <div class="code-block">
-                    <code>from openpyxl import load_workbook
-
-# Abrir planilha existente
-wb = load_workbook("vendas.xlsx")
-ws = wb.active
-
-# Ler uma célula específica
-print(ws['A1'].value)  # Produto
-
-# Ler uma linha inteira
-for cell in ws[2]:  # Linha 2
-    print(cell.value)
-
-# Iterar por todas as linhas
-for row in ws.iter_rows(min_row=1, max_row=10, values_only=True):
-    print(row)
-
-# Exemplo: Ler dados e processar
-print("\n📊 PRODUTOS:")
-for row in ws.iter_rows(min_row=2, values_only=True):
-    produto, qtd, preco = row[0], row[1], row[2]
-    total = qtd * preco
-    print(f"{produto}: {qtd} un. × R$ {preco:.2f} = R$ {total:.2f}")</code>
-                </div>
-
-                <div class="destaque">
-                    <strong>⚠️ Atenção:</strong>
-                    Use <code>values_only=True</code> para obter apenas os valores, sem objetos de célula.
-                </div>
-            </div>
-
-            <div class="slide">
-                <h2><span class="emoji">🐼</span>Biblioteca Pandas</h2>
-                <h3>O poder da análise de dados!</h3>
+                <h2><span class="emoji">🔄</span>Mutabilidade: Um Conceito Fundamental</h2>
+                <h3>Entendendo a diferença entre objetos mutáveis e imutáveis</h3>
                 <p style="font-size: 1.1em; margin: 20px 0;">
-                    Pandas é a biblioteca mais popular para análise de dados em Python.
-                    Ela trabalha com <strong>DataFrames</strong>, que são como tabelas Excel turbinadas!
+                    A <strong>mutabilidade</strong> determina se podemos ou não modificar um objeto após sua criação.
+                    Este conceito é crucial para entender como Python trata diferentes tipos de dados!
                 </p>
+                
+                <div class="slide-content">
+                    <h3>O que é Mutabilidade?</h3>
+                    <table style="width: 100%; font-size: 0.95em; margin: 20px 0;">
+                        <tr>
+                            <th>Característica</th>
+                            <th>Mutável</th>
+                            <th>Imutável</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Definição</strong></td>
+                            <td>Pode ser modificado após criação</td>
+                            <td>Não pode ser modificado após criação</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exemplos</strong></td>
+                            <td>Lista, Dicionário, Set</td>
+                            <td>Tupla, String, Int, Float</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operações permitidas</strong></td>
+                            <td>Adicionar, remover, modificar</td>
+                            <td>Apenas leitura, criar novo objeto</td>
+                        </tr>
+                    </table>
 
-                <h3>Lendo Excel com Pandas:</h3>
-                <div class="code-block">
-                    <code>import pandas as pd
+                    <h3>Exemplo prático: Lista (Mutável) vs Tupla (Imutável):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># LISTA (Mutável) ✅
+lista = [1, 2, 3]
+print(f"Lista original: {lista}")
 
-# Ler planilha Excel
-df = pd.read_excel("vendas.xlsx")
+lista.append(4)  # ✅ Pode adicionar
+lista[0] = 10    # ✅ Pode modificar
+lista.remove(2)  # ✅ Pode remover
 
-# Exibir os dados
-print(df)
+print(f"Lista modificada: {lista}")  # [10, 3, 4]
 
-# Saída:
-#     Produto  Quantidade  Preço
-# 0  Notebook           5  2500.0
-# 1     Mouse          20    45.0
-# 2   Teclado          15   120.0
+# TUPLA (Imutável) ❌
+tupla = (1, 2, 3)
+print(f"\nTupla original: {tupla}")
 
-# Informações básicas
-print(df.info())
-print(df.describe())  # Estatísticas descritivas</code>
-                </div>
+# tupla.append(4)  # ❌ ERRO! AttributeError
+# tupla[0] = 10    # ❌ ERRO! TypeError: 'tuple' object does not support item assignment
 
-                <div class="exemplo-box">
-                    <strong>💡 Vantagem do Pandas:</strong>
-                    Operações complexas em poucas linhas de código!
+# Para "modificar" tupla, precisa criar nova:
+tupla_nova = tupla + (4,)  # Cria nova tupla
+print(f"Tupla nova: {tupla_nova}")  # (1, 2, 3, 4)
+print(f"Tupla original: {tupla}")   # (1, 2, 3) - não mudou!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista original: [1, 2, 3]
+Lista modificada: [10, 3, 4]
+
+Tupla original: (1, 2, 3)
+Tupla nova: (1, 2, 3, 4)
+Tupla original: (1, 2, 3)</div>
+                    </div>
+
+                    <h3>Exemplo: String (Imutável):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># STRING (Imutável)
+texto = "Python"
+print(f"Texto original: {texto}")
+
+# texto[0] = "p"  # ❌ ERRO! Strings são imutáveis
+
+# Para modificar, precisa criar nova string:
+texto_novo = "p" + texto[1:]  # Cria nova string
+print(f"Texto novo: {texto_novo}")  # python
+print(f"Texto original: {texto}")   # Python - não mudou!
+
+# Métodos de string retornam NOVA string, não modificam:
+texto_maiusculo = texto.upper()  # Retorna nova string
+print(f"Texto maiúsculo: {texto_maiusculo}")  # PYTHON
+print(f"Texto original: {texto}")             # Python - não mudou!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Texto original: Python
+Texto novo: python
+Texto original: Python
+Texto maiúsculo: PYTHON
+Texto original: Python</div>
+                    </div>
+
+                    <h3>Por que a Mutabilidade importa?</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Problema comum: passar lista para função
+def adicionar_item(lista, item):
+    lista.append(item)  # Modifica a lista original!
+    return lista
+
+minha_lista = [1, 2, 3]
+print(f"Antes: {minha_lista}")  # [1, 2, 3]
+
+adicionar_item(minha_lista, 4)
+print(f"Depois: {minha_lista}")  # [1, 2, 3, 4] - MUDOU!
+
+# Com tupla (imutável), isso não acontece:
+minha_tupla = (1, 2, 3)
+print(f"\nAntes: {minha_tupla}")  # (1, 2, 3)
+
+# Não pode modificar, então sempre cria nova
+nova_tupla = minha_tupla + (4,)
+print(f"Nova tupla: {nova_tupla}")  # (1, 2, 3, 4)
+print(f"Original: {minha_tupla}")   # (1, 2, 3) - NÃO MUDOU!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Antes: [1, 2, 3]
+Depois: [1, 2, 3, 4]
+
+Antes: (1, 2, 3)
+Nova tupla: (1, 2, 3, 4)
+Original: (1, 2, 3)</div>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>📌 Resumo: Mutável vs Imutável</strong>
+                        <table style="width: 100%; font-size: 0.9em; margin-top: 10px;">
+                            <tr>
+                                <th>Mutável</th>
+                                <th>Imutável</th>
+                            </tr>
+                            <tr>
+                                <td>Lista <code>[]</code></td>
+                                <td>Tupla <code>()</code></td>
+                            </tr>
+                            <tr>
+                                <td>Dicionário <code>{}</code></td>
+                                <td>String <code>""</code></td>
+                            </tr>
+                            <tr>
+                                <td>Set <code>{}</code></td>
+                                <td>Int, Float, Bool</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pode modificar</strong></td>
+                                <td><strong>Cria novo objeto</strong></td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;">
+                            <strong>💡 Regra prática:</strong>
+                            Use <strong>mutáveis</strong> quando precisa mudar dados frequentemente.
+                            Use <strong>imutáveis</strong> quando precisa garantir que dados não mudem (chaves de dicionário, dados fixos).
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">🔍</span>Operações Básicas com Pandas</h2>
+                <h2><span class="emoji">🗂️</span>Dicionários (Dictionaries)</h2>
+                <h3>Estruturas chave-valor</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Dicionários armazenam dados em pares <strong>chave: valor</strong>. 
+                    São como listas, mas acessadas por chave ao invés de índice.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>O que são dicionários?</h3>
+                    <ul>
+                        <li><strong>Chave-valor:</strong> Cada elemento tem uma chave única e um valor</li>
+                        <li><strong>Mutável:</strong> Podemos adicionar, remover e modificar</li>
+                        <li><strong>Não ordenado:</strong> (até Python 3.6) - ordem não garantida</li>
+                        <li><strong>Rápido:</strong> Acesso por chave é muito eficiente</li>
+                    </ul>
 
-                <div class="code-block">
-                    <code>import pandas as pd
+                    <h3>Criando dicionários:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Dicionário vazio
+pessoa = {}
 
-df = pd.read_excel("vendas.xlsx")
-
-# 1. Adicionar nova coluna calculada
-df['Total'] = df['Quantidade'] * df['Preço']
-
-# 2. Filtrar dados
-produtos_caros = df[df['Preço'] > 100]
-print("Produtos acima de R$ 100:")
-print(produtos_caros)
-
-# 3. Ordenar dados
-df_ordenado = df.sort_values('Total', ascending=False)
-print("\nProdutos por total de vendas:")
-print(df_ordenado)
-
-# 4. Estatísticas
-print(f"\n📊 ESTATÍSTICAS:")
-print(f"Total geral: R$ {df['Total'].sum():.2f}")
-print(f"Média de preço: R$ {df['Preço'].mean():.2f}")
-print(f"Produto mais vendido: {df.loc[df['Quantidade'].idxmax(), 'Produto']}")
-
-# 5. Salvar resultado
-df.to_excel("vendas_analisadas.xlsx", index=False)
-print("\n✅ Análise salva!")</code>
-                </div>
-            </div>
-
-            <div class="slide">
-                <h2><span class="emoji">🎯</span>Filtragem Avançada com Pandas</h2>
-
-                <div class="code-block">
-                    <code>import pandas as pd
-
-df = pd.read_excel("vendas.xlsx")
-df['Total'] = df['Quantidade'] * df['Preço']
-
-# Filtros condicionais
-# 1. Filtro simples
-alta_quantidade = df[df['Quantidade'] > 10]
-
-# 2. Filtros múltiplos (AND)
-produtos_especiais = df[
-    (df['Quantidade'] > 10) &
-    (df['Preço'] > 100)
-]
-
-# 3. Filtros múltiplos (OR)
-produtos_destaque = df[
-    (df['Quantidade'] > 15) |
-    (df['Preço'] > 1000)
-]
-
-# 4. Filtrar por lista de valores
-produtos_selecionados = df[
-    df['Produto'].isin(['Notebook', 'Monitor'])
-]
-
-# 5. Filtrar valores nulos
-df_limpo = df[df['Preço'].notna()]
-
-# 6. Buscar por texto
-produtos_com_o = df[
-    df['Produto'].str.contains('o', case=False)
-]
-
-print("Produtos que contêm 'o':")
-print(produtos_com_o)</code>
-                </div>
-            </div>
-
-            <div class="slide">
-                <h2><span class="emoji">📊</span>Agrupamento e Agregação</h2>
-
-                <div class="code-block">
-                    <code>import pandas as pd
-
-# Exemplo com dados de vendas por região
-dados = {
-    'Região': ['Norte', 'Sul', 'Norte', 'Sul', 'Norte'],
-    'Produto': ['Mouse', 'Teclado', 'Monitor', 'Mouse', 'Teclado'],
-    'Vendas': [100, 150, 200, 120, 180],
-    'Quantidade': [10, 15, 5, 12, 18]
+# Dicionário com dados
+aluno = {
+    "nome": "Maria",
+    "idade": 20,
+    "curso": "Python"
 }
 
-df = pd.DataFrame(dados)
+# Usando dict()
+produto = dict(nome="Notebook", preco=2500, estoque=10)
 
-# 1. Agrupar por região
-vendas_por_regiao = df.groupby('Região')['Vendas'].sum()
-print("Vendas por região:")
-print(vendas_por_regiao)
+print(f"Aluno: {aluno}")
+print(f"Produto: {produto}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Aluno: {'nome': 'Maria', 'idade': 20, 'curso': 'Python'}
+Produto: {'nome': 'Notebook', 'preco': 2500, 'estoque': 10}</div>
+                    </div>
 
-# 2. Múltiplas agregações
-resumo = df.groupby('Região').agg({
-    'Vendas': ['sum', 'mean', 'count'],
-    'Quantidade': ['sum', 'mean']
-})
-print("\nResumo completo:")
-print(resumo)
+                    <h3>Acessando valores:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">aluno = {"nome": "Maria", "idade": 20, "curso": "Python"}
 
-# 3. Criar tabela dinâmica
-pivot = pd.pivot_table(
-    df,
-    values='Vendas',
-    index='Região',
-    columns='Produto',
-    aggfunc='sum',
-    fill_value=0
-)
-print("\nTabela Dinâmica:")
-print(pivot)</code>
+# Acesso por chave
+print(aluno["nome"])    # Maria
+print(aluno["idade"])   # 20
+
+# Usando .get() - mais seguro (não gera erro se chave não existir)
+print(aluno.get("nome"))        # Maria
+print(aluno.get("email", "N/A"))  # N/A (valor padrão se não existir)
+
+# Verificar se chave existe
+if "idade" in aluno:
+    print(f"Idade: {aluno['idade']}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maria
+20
+Maria
+N/A
+Idade: 20</div>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">🔄</span>Transformação de Dados</h2>
+                <h2><span class="emoji">✏️</span>Modificando Dicionários</h2>
+                
+                <div class="slide-content">
+                    <h3>Adicionar e modificar:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">aluno = {"nome": "Maria", "idade": 20}
 
-                <div class="code-block">
-                    <code>import pandas as pd
+# Adicionar nova chave
+aluno["curso"] = "Python"
+print(f"Após adicionar curso: {aluno}")
 
-df = pd.read_excel("vendas.xlsx")
+# Modificar valor existente
+aluno["idade"] = 21
+print(f"Após modificar idade: {aluno}")
 
-# 1. Aplicar função a uma coluna
-df['Preço_com_desconto'] = df['Preço'].apply(lambda x: x * 0.9)
+# Atualizar múltiplas chaves
+aluno.update({"cidade": "São Paulo", "email": "maria@email.com"})
+print(f"Após update: {aluno}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após adicionar curso: {'nome': 'Maria', 'idade': 20, 'curso': 'Python'}
+Após modificar idade: {'nome': 'Maria', 'idade': 21, 'curso': 'Python'}
+Após update: {'nome': 'Maria', 'idade': 21, 'curso': 'Python', 'cidade': 'São Paulo', 'email': 'maria@email.com'}</div>
+                    </div>
 
-# 2. Categorizar valores
-def categorizar_preco(preco):
-    if preco > 500:
-        return 'Premium'
-    elif preco > 100:
-        return 'Standard'
-    else:
-        return 'Básico'
+                    <h3>Remover elementos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">aluno = {"nome": "Maria", "idade": 20, "curso": "Python"}
 
-df['Categoria'] = df['Preço'].apply(categorizar_preco)
+# Remover com del
+del aluno["idade"]
+print(f"Após del: {aluno}")
 
-# 3. Criar colunas condicionais
-df['Status_Estoque'] = df['Quantidade'].apply(
-    lambda x: 'Baixo' if x < 10 else 'Médio' if x < 20 else 'Alto'
-)
+# Remover com pop() - retorna o valor
+curso = aluno.pop("curso")
+print(f"Curso removido: {curso}")
+print(f"Após pop: {aluno}")
 
-# 4. Renomear colunas
-df = df.rename(columns={
-    'Quantidade': 'Qtd',
-    'Preço': 'Valor_Unit'
-})
-
-# 5. Remover colunas
-df = df.drop(['Categoria'], axis=1)
-
-# 6. Ordenar colunas
-df = df[['Produto', 'Qtd', 'Valor_Unit', 'Status_Estoque']]
-
-print(df)</code>
+# Limpar tudo
+aluno.clear()
+print(f"Após clear: {aluno}")  # {}</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Após del: {'nome': 'Maria', 'curso': 'Python'}
+Curso removido: Python
+Após pop: {'nome': 'Maria'}
+Após clear: {}</div>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">💾</span>Salvando Dados em Excel</h2>
+                <h2><span class="emoji">🔍</span>Métodos Úteis de Dicionários</h2>
+                
+                <div class="slide-content">
+                    <h3>keys(), values(), items():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">aluno = {"nome": "Maria", "idade": 20, "curso": "Python"}
 
-                <div class="code-block">
-                    <code>import pandas as pd
+# Obter todas as chaves
+print(f"Chaves: {list(aluno.keys())}")    # ['nome', 'idade', 'curso']
 
-df = pd.read_excel("vendas.xlsx")
+# Obter todos os valores
+print(f"Valores: {list(aluno.values())}")  # ['Maria', 20, 'Python']
 
-# 1. Salvar DataFrame simples
-df.to_excel("saida.xlsx", index=False)
+# Obter pares chave-valor
+print(f"Items: {list(aluno.items())}")     # [('nome', 'Maria'), ('idade', 20), ...]
 
-# 2. Salvar múltiplas abas
-with pd.ExcelWriter("relatorio_completo.xlsx") as writer:
-    df.to_excel(writer, sheet_name="Vendas", index=False)
+# Iterar sobre o dicionário
+for chave, valor in aluno.items():
+    print(f"{chave}: {valor}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Chaves: ['nome', 'idade', 'curso']
+Valores: ['Maria', 20, 'Python']
+Items: [('nome', 'Maria'), ('idade', 20), ('curso', 'Python')]
+nome: Maria
+idade: 20
+curso: Python</div>
+                    </div>
 
-    # Criar resumo
-    resumo = df.groupby('Produto')['Quantidade'].sum()
-    resumo.to_excel(writer, sheet_name="Resumo")
+                    <h3>Outros métodos úteis:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">aluno = {"nome": "Maria", "idade": 20}
 
-    # Criar análise
-    df_analise = df[df['Quantidade'] > 10]
-    df_analise.to_excel(writer, sheet_name="Alta_Venda", index=False)
+# .get() com valor padrão
+email = aluno.get("email", "Não informado")
+print(f"Email: {email}")
 
-print("✅ Relatório com múltiplas abas criado!")
+# .copy() - copiar dicionário
+copia = aluno.copy()
+print(f"Cópia: {copia}")
 
-# 3. Salvar com formatação (usando openpyxl)
-from openpyxl import load_workbook
-from openpyxl.styles import Font
-
-df.to_excel("formatado.xlsx", index=False)
-
-# Abrir e formatar
-wb = load_workbook("formatado.xlsx")
-ws = wb.active
-
-# Formatar cabeçalho
-for cell in ws[1]:
-    cell.font = Font(bold=True, size=12)
-
-wb.save("formatado.xlsx")</code>
+# len() - número de pares
+print(f"Tamanho: {len(aluno)}")  # 2</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Email: Não informado
+Cópia: {'nome': 'Maria', 'idade': 20}
+Tamanho: 2</div>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">✏️</span>Exercício Prático - Excel com Python</h2>
+                <h2><span class="emoji">🔗</span>Dicionários Aninhados</h2>
+                
+                <div class="slide-content">
+                    <h3>Dicionários dentro de dicionários:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Estrutura de dados complexa
+empresa = {
+    "funcionario1": {
+        "nome": "João",
+        "idade": 30,
+        "cargo": "Desenvolvedor"
+    },
+    "funcionario2": {
+        "nome": "Maria",
+        "idade": 25,
+        "cargo": "Designer"
+    }
+}
+
+# Acessar valores aninhados
+print(empresa["funcionario1"]["nome"])  # João
+print(empresa["funcionario2"]["cargo"])  # Designer
+
+# Adicionar novo funcionário
+empresa["funcionario3"] = {
+    "nome": "Pedro",
+    "idade": 28,
+    "cargo": "Gerente"
+}
+
+# Iterar sobre funcionários
+for id_func, dados in empresa.items():
+    print(f"{id_func}: {dados['nome']} - {dados['cargo']}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">João
+Designer
+funcionario1: João - Desenvolvedor
+funcionario2: Maria - Designer
+funcionario3: Pedro - Gerente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔢</span>Sets (Conjuntos)</h2>
+                <h3>Coleções sem duplicatas</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Sets são coleções <strong>não ordenadas</strong> de elementos <strong>únicos</strong>.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Criando sets:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Set vazio
+numeros = set()
+
+# Set com elementos (usa chaves, mas sem dois pontos!)
+cores = {"vermelho", "verde", "azul", "vermelho"}  # Duplicata removida!
+print(f"Cores: {cores}")  # {'vermelho', 'verde', 'azul'}
+
+# Converter lista em set (remove duplicatas)
+lista = [1, 2, 2, 3, 3, 3, 4]
+unicos = set(lista)
+print(f"Únicos: {unicos}")  # {1, 2, 3, 4}</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Cores: {'vermelho', 'verde', 'azul'}
+Únicos: {1, 2, 3, 4}</div>
+                    </div>
+
+                    <h3>Operações com sets:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+# União (todos os elementos)
+print(f"União: {a | b}")  # {1, 2, 3, 4, 5, 6}
+print(f"União: {a.union(b)}")  # Mesmo resultado
+
+# Interseção (elementos comuns)
+print(f"Interseção: {a & b}")  # {3, 4}
+print(f"Interseção: {a.intersection(b)}")
+
+# Diferença (elementos em a mas não em b)
+print(f"Diferença: {a - b}")  # {1, 2}
+print(f"Diferença: {a.difference(b)}")
+
+# Adicionar/remover
+a.add(5)
+a.remove(1)
+print(f"Após modificar: {a}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">União: {1, 2, 3, 4, 5, 6}
+União: {1, 2, 3, 4, 5, 6}
+Interseção: {3, 4}
+Interseção: {3, 4}
+Diferença: {1, 2}
+Diferença: {1, 2}
+Após modificar: {2, 3, 4, 5}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚡</span>List Comprehensions</h2>
+                <h3>Sintaxe concisa para criar listas</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    List comprehensions são uma forma <strong>elegante e rápida</strong> de criar listas.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Sintaxe básica:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Forma tradicional (loop)
+quadrados = []
+for x in range(1, 6):
+    quadrados.append(x ** 2)
+print(f"Tradicional: {quadrados}")  # [1, 4, 9, 16, 25]
+
+# Com list comprehension (mais conciso!)
+quadrados = [x ** 2 for x in range(1, 6)]
+print(f"Comprehension: {quadrados}")  # [1, 4, 9, 16, 25]
+
+# Exemplo: números pares
+pares = [x for x in range(1, 11) if x % 2 == 0]
+print(f"Pares: {pares}")  # [2, 4, 6, 8, 10]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Tradicional: [1, 4, 9, 16, 25]
+Comprehension: [1, 4, 9, 16, 25]
+Pares: [2, 4, 6, 8, 10]</div>
+                    </div>
+
+                    <h3>Com condicionais:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Apenas números maiores que 5
+maiores = [x for x in range(1, 11) if x > 5]
+print(f"Maiores que 5: {maiores}")  # [6, 7, 8, 9, 10]
+
+# Transformar strings
+nomes = ["maria", "joão", "ana"]
+maiusculas = [nome.upper() for nome in nomes]
+print(f"Maiúsculas: {maiusculas}")  # ['MARIA', 'JOÃO', 'ANA']
+
+# Com condição no resultado
+precos = [100, 200, 50, 300, 150]
+com_desconto = [p * 0.9 if p > 100 else p for p in precos]
+print(f"Com desconto: {com_desconto}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maiores que 5: [6, 7, 8, 9, 10]
+Maiúsculas: ['MARIA', 'JOÃO', 'ANA']
+Com desconto: [100, 180.0, 50, 270.0, 135.0]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>Listas Aninhadas</h2>
+                <h3>Listas dentro de listas</h3>
+                
+                <div class="slide-content">
+                    <h3>Criando matrizes (2D):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Matriz 3x3
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Acessar elementos
+print(f"Elemento [0][0]: {matriz[0][0]}")  # 1 (primeira linha, primeira coluna)
+print(f"Elemento [1][2]: {matriz[1][2]}")  # 6 (segunda linha, terceira coluna)
+print(f"Primeira linha: {matriz[0]}")     # [1, 2, 3]
+
+# Iterar sobre matriz
+for linha in matriz:
+    print(linha)
+
+# Acessar elemento específico
+for i in range(len(matriz)):
+    for j in range(len(matriz[i])):
+        print(f"matriz[{i}][{j}] = {matriz[i][j]}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Elemento [0][0]: 1
+Elemento [1][2]: 6
+Primeira linha: [1, 2, 3]
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+matriz[0][0] = 1
+matriz[0][1] = 2
+matriz[0][2] = 3
+matriz[1][0] = 4
+matriz[1][1] = 5
+matriz[1][2] = 6
+matriz[2][0] = 7
+matriz[2][1] = 8
+matriz[2][2] = 9</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Cópia vs Referência</h2>
+                <h3>Entendendo como Python trata listas</h3>
+                
+                <div class="slide-content">
+                    <div class="destaque">
+                        <strong>⚠️ Problema comum:</strong>
+                        Atribuir uma lista a outra variável cria uma <strong>referência</strong>, não uma cópia!
+                    </div>
+
+                    <h3>Referência (problema):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ ERRADO - cria referência
+lista1 = [1, 2, 3]
+lista2 = lista1  # lista2 aponta para o mesmo objeto!
+
+lista2.append(4)
+print(f"lista1: {lista1}")  # [1, 2, 3, 4] - também mudou!
+print(f"lista2: {lista2}")  # [1, 2, 3, 4]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">lista1: [1, 2, 3, 4]
+lista2: [1, 2, 3, 4]</div>
+                    </div>
+
+                    <h3>Cópia (solução):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ CORRETO - cria cópia
+lista1 = [1, 2, 3]
+lista2 = lista1.copy()  # ou lista2 = lista1[:]
+
+lista2.append(4)
+print(f"lista1: {lista1}")  # [1, 2, 3] - não mudou!
+print(f"lista2: {lista2}")  # [1, 2, 3, 4]
+
+# Deep copy (para listas aninhadas)
+import copy
+lista_complexa = [[1, 2], [3, 4]]
+copia_profunda = copy.deepcopy(lista_complexa)
+copia_profunda[0].append(5)
+print(f"Original: {lista_complexa}")      # [[1, 2], [3, 4]]
+print(f"Cópia: {copia_profunda}")         # [[1, 2, 5], [3, 4]]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">lista1: [1, 2, 3]
+lista2: [1, 2, 3, 4]
+Original: [[1, 2], [3, 4]]
+Cópia: [[1, 2, 5], [3, 4]]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Comparação: Listas, Tuplas, Sets e Dicionários</h2>
+                <h3>Tabela comparativa completa</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Cada estrutura de dados tem características específicas. Escolha a mais adequada para seu problema!
+                </p>
+                
+                <table style="width: 100%; font-size: 0.88em; margin: 20px 0;">
+                    <tr>
+                        <th>Característica</th>
+                        <th>Lista</th>
+                        <th>Tupla</th>
+                        <th>Set</th>
+                        <th>Dicionário</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Sintaxe</strong></td>
+                        <td><code>[1, 2, 3]</code></td>
+                        <td><code>(1, 2, 3)</code></td>
+                        <td><code>{1, 2, 3}</code></td>
+                        <td><code>{'a': 1}</code></td>
+                    </tr>
+                    <tr style="background-color: #fff3cd;">
+                        <td><strong>🔑 Mutável?</strong></td>
+                        <td><strong>✅ Sim</strong></td>
+                        <td><strong>❌ Não</strong></td>
+                        <td><strong>✅ Sim</strong></td>
+                        <td><strong>✅ Sim</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ordenado?</strong></td>
+                        <td>✅ Sim</td>
+                        <td>✅ Sim</td>
+                        <td>❌ Não</td>
+                        <td>✅ Sim (3.7+)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duplicatas?</strong></td>
+                        <td>✅ Permite</td>
+                        <td>✅ Permite</td>
+                        <td>❌ Não</td>
+                        <td>Chaves: ❌, Valores: ✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acesso</strong></td>
+                        <td>Por índice</td>
+                        <td>Por índice</td>
+                        <td>Não indexado</td>
+                        <td>Por chave</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modificar elementos</strong></td>
+                        <td>✅ Sim</td>
+                        <td>❌ Não</td>
+                        <td>Add/Remove apenas</td>
+                        <td>✅ Sim (valores)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Uso comum</strong></td>
+                        <td>Sequências mutáveis, itens que mudam</td>
+                        <td>Dados fixos, coordenadas, retornos múltiplos</td>
+                        <td>Elementos únicos, remover duplicatas</td>
+                        <td>Mapeamentos chave-valor, dados estruturados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chave de dicionário?</strong></td>
+                        <td>❌ Não</td>
+                        <td>✅ Sim</td>
+                        <td>❌ Não (exceto frozenset)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance (busca)</strong></td>
+                        <td>O(n) - linear</td>
+                        <td>O(n) - linear</td>
+                        <td>O(1) - constante</td>
+                        <td>O(1) - constante</td>
+                    </tr>
+                </table>
 
                 <div class="exemplo-box">
-                    <strong>🎯 Desafio: Sistema de Gestão de Produtos</strong>
-                    <p>Crie um sistema que:</p>
-                    <ol>
-                        <li>Leia uma planilha de produtos</li>
-                        <li>Calcule o valor total de estoque</li>
-                        <li>Identifique produtos com estoque baixo (< 10)</li>
-                        <li>Aplique 10% de desconto em produtos acima de R$ 500</li>
-                        <li>Gere um relatório formatado com os resultados</li>
-                    </ol>
+                    <strong>💡 Quando usar cada um?</strong>
+                    <ul>
+                        <li><strong>Lista:</strong> Sequência de itens que pode mudar (compras, notas)</li>
+                        <li><strong>Tupla:</strong> Dados fixos (coordenadas, retorno de função)</li>
+                        <li><strong>Set:</strong> Remover duplicatas, verificar pertencimento rápido</li>
+                        <li><strong>Dicionário:</strong> Dados estruturados (pessoa, produto, configuração)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Listas</h2>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Lista de Compras</strong>
+                    <p>Crie uma lista vazia e adicione 5 itens usando append().</p>
                     <details>
                         <summary>Ver solução</summary>
-                        <div class="code-block" style="margin-top: 10px;">
-                            <code>import pandas as pd
-from openpyxl import load_workbook
-from openpyxl.styles import Font, PatternFill
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">compras = []
+compras.append("pão")
+compras.append("leite")
+compras.append("ovos")
+compras.append("açúcar")
+compras.append("café")
 
-# 1. Ler planilha
-df = pd.read_excel("produtos.xlsx")
-
-# 2. Calcular valor total
-df['Total_Estoque'] = df['Quantidade'] * df['Preço']
-
-# 3. Identificar estoque baixo
-df['Alerta'] = df['Quantidade'].apply(
-    lambda x: '⚠️ BAIXO' if x < 10 else '✅ OK'
-)
-
-# 4. Aplicar desconto
-df['Preço_Final'] = df['Preço'].apply(
-    lambda x: x * 0.9 if x > 500 else x
-)
-
-# 5. Gerar relatório
-df.to_excel("relatorio_produtos.xlsx", index=False)
-
-# Formatar
-wb = load_workbook("relatorio_produtos.xlsx")
-ws = wb.active
-
-for cell in ws[1]:
-    cell.font = Font(bold=True, color="FFFFFF")
-    cell.fill = PatternFill(start_color="4472C4",
-                           end_color="4472C4",
-                           fill_type="solid")
-
-wb.save("relatorio_produtos.xlsx")
-print("✅ Relatório gerado com sucesso!")</code>
+print("Lista de compras:", compras)</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Lista de compras: ['pão', 'leite', 'ovos', 'açúcar', 'café']</div>
+                            </div>
                         </div>
                     </details>
                 </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Média de Notas</strong>
+                    <p>Crie uma lista com 5 notas, calcule e mostre a média.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">notas = [8.5, 7.0, 9.2, 6.8, 8.0]
+media = sum(notas) / len(notas)
+print(f"Notas: {notas}")
+print(f"Média: {media:.2f}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Notas: [8.5, 7.0, 9.2, 6.8, 8.0]
+Média: 7.90</div>
+                </div>
             </div>
-
-            <div class="slide">
-                <h2><span class="emoji">🎓</span>Resumo - Tópico 5</h2>
-
-                <div class="destaque">
-                    <strong>📚 O que aprendemos:</strong>
-                    <ul style="margin-top: 10px;">
-                        <li>✅ Criar planilhas com <strong>Openpyxl</strong></li>
-                        <li>✅ Aplicar formatação e estilos profissionais</li>
-                        <li>✅ Inserir fórmulas do Excel</li>
-                        <li>✅ Ler e processar dados com <strong>Pandas</strong></li>
-                        <li>✅ Filtrar, ordenar e transformar dados</li>
-                        <li>✅ Agrupar e agregar informações</li>
-                        <li>✅ Salvar múltiplas abas e relatórios</li>
-                    </ul>
+                    </details>
                 </div>
 
                 <div class="exemplo-box">
-                    <strong>🚀 Próximo passo:</strong>
-                    No Tópico 6, vamos aprender a criar gráficos incríveis com Matplotlib
-                    para visualizar nossos dados do Excel!
+                    <strong>Exercício 3: Maior e Menor</strong>
+                    <p>Encontre o maior e menor número em uma lista.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">numeros = [3, 1, 4, 1, 5, 9, 2]
+print(f"Lista: {numeros}")
+print(f"Maior: {max(numeros)}")
+print(f"Menor: {min(numeros)}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Lista: [3, 1, 4, 1, 5, 9, 2]
+Maior: 9
+Menor: 1</div>
+                            </div>
                 </div>
-
-                <div class="code-block">
-                    <code># Exemplo completo resumido
-import pandas as pd
-
-# Ler
-df = pd.read_excel("dados.xlsx")
-
-# Analisar
-df['Total'] = df['Qtd'] * df['Preço']
-resumo = df.groupby('Categoria')['Total'].sum()
-
-# Salvar
-df.to_excel("resultado.xlsx", index=False)
-print("✅ Pronto!")</code>
+                    </details>
                 </div>
             </div>
 
             <div class="controles">
                 <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
                 <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador5">1 / 13</span>
+                <span class="contador-slides" id="contador5">1 / 18</span>
                 <button class="btn" onclick="proximoSlide()">Próximo →</button>
             </div>
         </div>

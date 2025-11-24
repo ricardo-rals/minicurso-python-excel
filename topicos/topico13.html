@@ -1,0 +1,298 @@
+<div id="topico13" class="slides-container">
+    <!-- SLIDE 1: Título do Projeto -->
+    <div class="slide active">
+        <h2><span class="emoji">🚀</span>Tópico 13: Projeto Prático - Relatório Analítico</h2>
+        <h3>Do zero a um relatório profissional com Python!</h3>
+        <p style="font-size: 1.1em; margin: 20px 0;">
+            Vamos aplicar tudo o que aprendemos para construir uma automação que resolve um problema de negócio real.
+        </p>
+
+        <div class="destaque">
+            <strong>🎯 Objetivo do projeto:</strong>
+            <p style="margin-top: 10px;">
+                Criar um script que lê uma planilha de vendas e gera automaticamente um relatório analítico completo em Excel.
+            </p>
+            <ol style="margin-top: 10px;">
+                <li>📖 <strong>Lê e prepara</strong> os dados de um arquivo <code>.xlsx</code>.</li>
+                <li>📊 <strong>Realiza análises</strong> automáticas de negócio (vendas por cidade, produto, etc.).</li>
+                <li>💾 <strong>Cria um arquivo Excel</strong> profissional com múltiplas abas.</li>
+                <li>📈 <strong>Adiciona um gráfico</strong> diretamente na planilha.</li>
+            </ol>
+        </div>
+
+        <div class="exemplo-box">
+            <strong>💼 Cenário:</strong>
+            <p>Você precisa analisar os dados de vendas e apresentar os resultados para a gerência de forma clara e rápida, todo mês.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Estrutura e Preparação -->
+    <div class="slide">
+        <h2><span class="emoji">🛠️</span>Preparação e Estrutura do Projeto</h2>
+        <h3>Antes de começar, vamos garantir que temos tudo pronto.</h3>
+        
+        <div class="code-block">
+            <code># 1. Instalar as bibliotecas necessárias
+pip install pandas openpyxl
+
+# 2. Estrutura do nosso script
+# ETAPA 1: Leitura e Preparação dos Dados
+#   - Carregar o arquivo .xlsx
+#   - Converter colunas e criar campos úteis (mês, preço unitário)
+
+# ETAPA 2: Análise de Negócio com Pandas
+#   - Usar groupby para agrupar e resumir dados
+#   - Calcular faturamento por cidade, produto, status e mês
+
+# ETAPA 3: Geração do Relatório Multi-abas
+#   - Usar o pd.ExcelWriter para salvar cada análise em uma aba
+
+# ETAPA 4: Adicionar um Gráfico (Bônus)
+#   - Usar openpyxl para inserir um gráfico no relatório final
+
+print("✅ Tudo pronto para começar a automação!")</code>
+        </div>
+         <div class="destaque">
+            <strong>💡 Dica:</strong> Organizar o código em etapas lógicas torna o desenvolvimento e a manutenção muito mais fáceis.
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Etapa 1 - Leitura e Preparação dos Dados -->
+    <div class="slide">
+        <h2><span class="emoji">📖</span>Etapa 1: Leitura e Preparação dos Dados</h2>
+        <h3>A base de uma boa análise é ter dados limpos e bem estruturados.</h3>
+
+        <div class="code-block">
+            <code>import pandas as pd
+
+# Define os nomes dos arquivos
+arquivo_entrada = 'dados_vendas.xlsx'
+arquivo_saida = 'relatorio_analitico_vendas.xlsx'
+
+print("--- ETAPA 1: Lendo e preparando os dados ---")
+df = pd.read_excel(arquivo_entrada)
+
+# Converter a coluna 'data' para o formato de data
+# Isso é ESSENCIAL para qualquer análise de tempo!
+df['data'] = pd.to_datetime(df['data'])
+
+# Calcular o preço unitário (valor / quantidade)
+df['preco_unitario'] = (df['valor'] / df['quantidade']).round(2)
+
+# Extrair o mês da venda para facilitar a agregação posterior
+df['mes'] = df['data'].dt.strftime('%Y-%m') # Formato: 2024-10
+
+print("✅ Dados lidos e preparados com sucesso!")
+print("Novas colunas criadas: 'preco_unitario', 'mes'")
+print("\nPrévia dos dados tratados:")
+print(df.head())</code>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Etapa 2 - Análise de Negócio -->
+    <div class="slide">
+        <h2><span class="emoji">🧠</span>Etapa 2: A Mágica do `groupby`</h2>
+        <h3>É aqui que transformamos dados brutos em inteligência de negócio.</h3>
+
+        <div class="code-block">
+            <code>print("\n--- ETAPA 2: Realizando análises de negócio ---")
+
+# 1. Análise: Faturamento por cidade
+vendas_por_cidade = df.groupby('cidade')['valor'].sum().sort_values(ascending=False).reset_index()
+
+# 2. Análise: Vendas por status (Concluída, Pendente, Cancelada)
+vendas_por_status = df.groupby('status')['valor'].sum().sort_values(ascending=False).reset_index()
+
+# 3. Análise: Performance dos produtos (por quantidade e faturamento)
+vendas_por_produto = df.groupby('produto').agg(
+quantidade_total=('quantidade', 'sum'),
+faturamento_total=('valor', 'sum')
+).sort_values(by='faturamento_total', ascending=False).reset_index()
+
+# 4. Análise: Faturamento mensal
+vendas_mensais = df.groupby('mes')['valor'].sum().reset_index()
+
+print("✅ Análises de negócio concluídas!")
+print("\nExemplo - Vendas por Cidade:")
+print(vendas_por_cidade)</code>
+        </div>
+    </div>
+    
+    <!-- SLIDE 5: Etapa 3 - Gerando o Relatório -->
+    <div class="slide">
+        <h2><span class="emoji">💾</span>Etapa 3: Gerando um Relatório Profissional</h2>
+        <h3>Vamos criar um arquivo Excel com uma aba para cada análise.</h3>
+
+        <div class="code-block">
+            <code>print("\n--- ETAPA 3: Gerando relatório Excel com múltiplas abas ---")
+
+# O ExcelWriter permite escrever em várias abas no mesmo arquivo
+with pd.ExcelWriter(arquivo_saida, engine='openpyxl') as writer:
+# Aba 1: Dados completos e tratados
+df.to_excel(writer, sheet_name='Dados Consolidados', index=False)
+
+# Aba 2: Análise por cidade
+vendas_por_cidade.to_excel(writer, sheet_name='Vendas por Cidade', index=False)
+
+# Aba 3: Análise de produtos
+vendas_por_produto.to_excel(writer, sheet_name='Performance dos Produtos', index=False)
+
+# Aba 4: Dashboard com resumos
+vendas_por_status.to_excel(writer, sheet_name='Dashboard Resumo', startrow=0, startcol=0, index=False)
+vendas_mensais.to_excel(writer, sheet_name='Dashboard Resumo', startrow=0, startcol=4, index=False)
+
+print(f"✅ Relatório '{arquivo_saida}' criado com 4 abas!")</code>
+        </div>
+         <div class="destaque">
+            <strong>💡 Por que usar <code>ExcelWriter</code>?</strong>
+            <p style="margin-top:5px;">Ele "mantém o arquivo Excel aberto" enquanto seu código roda, permitindo que você adicione várias planilhas (abas) uma após a outra.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Etapa 4 - Adicionando Gráfico -->
+    <div class="slide">
+        <h2><span class="emoji">📈</span>Etapa 4 (Bônus): Adicionando Gráfico ao Excel</h2>
+        <h3>Vamos além do Pandas e usamos o Openpyxl para manipular o arquivo.</h3>
+
+        <div class="code-block">
+            <code>from openpyxl import load_workbook
+from openpyxl.chart import BarChart, Reference
+
+print("\n--- ETAPA 4: Adicionando gráfico ao relatório ---")
+
+# Carrega o arquivo Excel que acabamos de salvar
+wb = load_workbook(arquivo_saida)
+# Seleciona a aba onde o gráfico será inserido
+ws = wb['Dashboard Resumo']
+
+# Cria um objeto de gráfico de barras
+chart = BarChart()
+chart.title = "Faturamento Mensal"
+
+# Define de onde virão os dados e as categorias do gráfico
+# (baseado na posição da tabela 'vendas_mensais' que salvamos)
+data = Reference(ws, min_col=6, min_row=1, max_row=ws.max_row, max_col=6)
+categories = Reference(ws, min_col=5, min_row=2, max_row=ws.max_row)
+
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(categories)
+
+# Adiciona o gráfico na célula H2 da planilha
+ws.add_chart(chart, "H2")
+
+# Salva o arquivo com o gráfico incluído
+wb.save(arquivo_saida)
+
+print("✅ Gráfico de faturamento mensal adicionado ao dashboard!")</code>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: Código Completo -->
+    <div class="slide">
+        <h2><span class="emoji">🔧</span>Código Completo do Projeto</h2>
+        <h3>Juntando todas as peças em um único script.</h3>
+
+        <div class="code-block" style="font-size: 0.8em; max-height: 450px; overflow-y: auto;">
+            <code># Importa as bibliotecas necessárias
+import pandas as pd
+from openpyxl import load_workbook
+from openpyxl.chart import BarChart, Reference
+
+# --- ETAPA 1: LEITURA E PREPARAÇÃO DOS DADOS ---
+arquivo_entrada = 'dados_vendas.xlsx'
+arquivo_saida = 'relatorio_analitico_vendas.xlsx'
+df = pd.read_excel(arquivo_entrada)
+df['data'] = pd.to_datetime(df['data'])
+df['preco_unitario'] = (df['valor'] / df['quantidade']).round(2)
+df['mes'] = df['data'].dt.strftime('%Y-%m')
+
+# --- ETAPA 2: ANÁLISE DE NEGÓCIO ---
+vendas_por_cidade = df.groupby('cidade')['valor'].sum().sort_values(ascending=False).reset_index()
+vendas_por_status = df.groupby('status')['valor'].sum().reset_index()
+vendas_por_produto = df.groupby('produto').agg(
+quantidade_total=('quantidade', 'sum'),
+faturamento_total=('valor', 'sum')
+).sort_values(by='faturamento_total', ascending=False).reset_index()
+vendas_mensais = df.groupby('mes')['valor'].sum().reset_index()
+
+# --- ETAPA 3: GERAÇÃO DO RELATÓRIO EM EXCEL ---
+with pd.ExcelWriter(arquivo_saida, engine='openpyxl') as writer:
+df.to_excel(writer, sheet_name='Dados Consolidados', index=False)
+vendas_por_cidade.to_excel(writer, sheet_name='Vendas por Cidade', index=False)
+vendas_por_produto.to_excel(writer, sheet_name='Performance dos Produtos', index=False)
+vendas_por_status.to_excel(writer, sheet_name='Dashboard Resumo', startrow=0, startcol=0, index=False)
+vendas_mensais.to_excel(writer, sheet_name='Dashboard Resumo', startrow=0, startcol=4, index=False)
+
+# --- ETAPA 4: ADICIONANDO GRÁFICO ---
+wb = load_workbook(arquivo_saida)
+ws = wb['Dashboard Resumo']
+chart = BarChart()
+chart.title = "Faturamento Mensal"
+data = Reference(ws, min_col=6, min_row=1, max_row=len(vendas_mensais)+1, max_col=6)
+categories = Reference(ws, min_col=5, min_row=2, max_row=len(vendas_mensais)+1)
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(categories)
+ws.add_chart(chart, "H2")
+wb.save(arquivo_saida)
+
+print(f"🚀 PROJETO CONCLUÍDO! O relatório '{arquivo_saida}' foi gerado com sucesso!")</code>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Resultado e Próximos Passos -->
+    <div class="slide">
+        <h2><span class="emoji">🏆</span>Resultado Final e Próximos Passos</h2>
+        <h3>O que você construiu e como ir além.</h3>
+
+        <div class="destaque">
+            <strong>🎉 Parabéns! Você criou um relatório automatizado que contém:</strong>
+            <ul style="margin-top: 10px;">
+                <li><strong>Aba 1: Dados Consolidados</strong> - Todos os dados originais, limpos e com as colunas novas.</li>
+                <li><strong>Aba 2: Vendas por Cidade</strong> - Um ranking das cidades com maior faturamento.</li>
+                <li><strong>Aba 3: Performance dos Produtos</strong> - Análise de quais produtos vendem mais e geram mais receita.</li>
+                <li><strong>Aba 4: Dashboard Resumo</strong> - Tabelas resumidas e um gráfico de faturamento mensal.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo-box">
+            <strong>🚀 Como melhorar ainda mais o projeto?</strong>
+            <ul style="margin-top: 10px;">
+                <li><strong>Adicionar mais gráficos:</strong> Crie um gráfico de pizza para o status das vendas ou um de barras para os produtos.</li>
+                <li><strong>Formatação Condicional:</strong> Use o `openpyxl` para pintar células de vermelho se o status for "Cancelada".</li>
+                <li><strong>Consolidar vários arquivos:</strong> Modifique o script para ler todos os arquivos de uma pasta (ex: `vendas_jan.xlsx`, `vendas_fev.xlsx`).</li>
+                <li><strong>Enviar por E-mail:</strong> Use a biblioteca `smtplib` do Python para enviar o relatório final por e-mail automaticamente.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Conclusão -->
+    <div class="slide">
+        <h2><span class="emoji">🎓</span>Conclusão do Projeto</h2>
+
+        <div class="destaque">
+            <strong>🚀 O que você aprendeu de mais importante:</strong>
+            <ul style="margin-top: 10px;">
+                <li>✅ Ler e manipular arquivos Excel com <strong>Pandas</strong>.</li>
+                <li>✅ Tratar e transformar dados (datas, cálculos de novas colunas).</li>
+                <li>✅ Realizar análises de negócio poderosas com <strong><code>.groupby()</code></strong> e <strong><code>.agg()</code></strong>.</li>
+                <li>✅ Criar relatórios profissionais com múltiplas abas usando <strong><code>pd.ExcelWriter</code></strong>.</li>
+                <li>✅ Integrar <strong>Pandas</strong> com <strong>Openpyxl</strong> para adicionar funcionalidades nativas do Excel, como gráficos.</li>
+            </ul>
+        </div>
+
+        <div class="exemplo-box" style="text-align: center; padding: 20px;">
+             <h2 style="color: #667eea; margin:0;">Você agora tem a base para automatizar qualquer tipo de relatório!</h2>
+             <p style="font-size: 1.2em; color: #667eea; margin-top: 20px;">
+                Continue praticando e explorando! 🐍
+            </p>
+        </div>
+    </div>
+
+    <!-- Controles de Navegação -->
+    <div class="controles">
+        <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+        <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador13">1 / 9</span>
+        <button class="btn" onclick="proximoSlide()">Próximo →</button>
+    </div>
+</div>

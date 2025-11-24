@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 6: Dashboard Automático de Vendas com Python</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📈 Projeto 6: Dashboard Automático de Vendas com Python</h1>
+                <p>Python como motor, Excel como visualização</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um dashboard completo de vendas que lê dados, realiza análises,
+                    gera gráficos e salva tudo em uma planilha Excel formatada e "bonita".
+                    Python faz o processamento, Excel exibe os resultados.
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Criar planilha formatada</strong> profissionalmente</li>
+                    <li><strong>Criar múltiplos gráficos</strong> (linha, barra, pizza)</li>
+                    <li><strong>Atualizar automaticamente</strong> quando dados mudarem</li>
+                    <li><strong>Organizar dashboard</strong> em múltiplas abas</li>
+                    <li><strong>Calcular métricas de negócio</strong> (ticket médio, conversão)</li>
+                    <li><strong>Inserir gráficos</strong> diretamente no Excel</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Lê banco de dados</strong> (Excel/CSV) com vendas</li>
+                    <li><strong>Gera resumo:</strong> total por vendedor, total por produto, ticket médio</li>
+                    <li><strong>Cria gráficos:</strong> linha (evolução temporal), barra (comparação), pizza (distribuição)</li>
+                    <li><strong>Salva Excel "bonito"</strong> com formatação profissional</li>
+                    <li><strong>Organiza em abas:</strong> Resumo, Por Vendedor, Por Produto, Gráficos</li>
+                    <li><strong>Atualiza automaticamente</strong> ao executar o script</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Leitura de dados com Pandas</li>
+                    <li>✅ Agrupamento e agregação com <code>groupby()</code></li>
+                    <li>✅ Cálculo de métricas: soma, média, contagem</li>
+                    <li>✅ Criação de gráficos com Matplotlib (linha, barra, pizza)</li>
+                    <li>✅ Salvamento em Excel com múltiplas abas</li>
+                    <li>✅ Formatação avançada com Openpyxl</li>
+                    <li>✅ Inserção de gráficos no Excel</li>
+                    <li>✅ Organização de código com funções</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Interface web interativa e moderna</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Dashboard profissional com callbacks</li>
+                    <li>🌟 <strong>Envio por E-mail:</strong> Enviar dashboard diariamente</li>
+                    <li>🌟 <strong>Envio por Telegram:</strong> Enviar resumo executivo</li>
+                    <li>🌟 <strong>Atualização automática:</strong> Agendar execução diária</li>
+                    <li>🌟 <strong>Comparação temporal:</strong> Comparar períodos diferentes</li>
+                    <li>🌟 <strong>Alertas automáticos:</strong> Notificar metas atingidas</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_dashboard_vendas/
+├── dashboard_vendas.py         # Script principal
+├── vendas.xlsx                 # Arquivo de entrada
+├── dashboard_vendas.xlsx        # Arquivo de saída
+└── README.md</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📝 Exemplo de Dados de Entrada</h2>
+                <p>O arquivo de vendas deve ter colunas como:</p>
+                <div class="code-example">Data,Vendedor,Produto,Quantidade,Valor Unitário,Total
+2024-01-15,João Silva,Notebook,1,3500.00,3500.00
+2024-01-16,Maria Santos,Mouse,5,50.00,250.00
+2024-01-17,João Silva,Teclado,2,150.00,300.00
+...</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Comece calculando todas as métricas necessárias</li>
+                    <li>Crie os gráficos e salve como imagens temporárias</li>
+                    <li>Use Openpyxl para inserir as imagens no Excel</li>
+                    <li>Formate cada aba de forma diferente</li>
+                    <li>Use cores e estilos consistentes</li>
+                    <li>Calcule ticket médio: total_vendas / quantidade_vendas</li>
+                </ul>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+

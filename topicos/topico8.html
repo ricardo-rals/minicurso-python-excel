@@ -1,0 +1,1092 @@
+        <div id="topico8" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📁</span>Tópico 8: Manipulação de Arquivos</h2>
+                <h3>Por que trabalhar com arquivos?</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Na prática, você frequentemente precisa ler dados de arquivos, processar informações
+                    e salvar resultados. Python torna isso simples e eficiente!
+                </p>
+
+                <ul>
+                    <li><strong>📄 Arquivos de texto (.txt):</strong> Logs, dados simples, configurações</li>
+                    <li><strong>📊 Arquivos CSV (.csv):</strong> Dados tabulares, planilhas simples</li>
+                    <li><strong>💾 Persistência:</strong> Salvar dados para usar depois</li>
+                    <li><strong>🔄 Integração:</strong> Trocar dados com outros programas</li>
+                </ul>
+
+                <div class="exemplo-box">
+                    <strong>💡 Neste tópico você vai aprender:</strong>
+                    <ul>
+                        <li>Ler arquivos de texto (.txt)</li>
+                        <li>Escrever em arquivos de texto</li>
+                        <li>Trabalhar com arquivos CSV</li>
+                        <li>Usar o módulo <code>csv</code> do Python</li>
+                        <li>Integrar CSV com Pandas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📖</span>Ler Arquivos de Texto</h2>
+                <h3>Usando open() e with statement</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O <code>with</code> statement garante que o arquivo seja fechado automaticamente,
+                    mesmo se ocorrer um erro. É a forma recomendada!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Ler arquivo completo com read():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Forma recomendada: usar 'with'
+with open('dados.txt', 'r', encoding='utf-8') as arquivo:
+    conteudo = arquivo.read()
+    print(conteudo)
+
+# O arquivo é fechado automaticamente ao sair do bloco 'with'</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Olá, mundo!
+Esta é a primeira linha.
+Esta é a segunda linha.</div>
+                    </div>
+
+                    <h3>Ler linha por linha com readline():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Ler apenas a primeira linha
+with open('dados.txt', 'r', encoding='utf-8') as arquivo:
+    primeira_linha = arquivo.readline()
+    print(f"Primeira linha: {primeira_linha.strip()}")  # strip() remove \n
+    
+    segunda_linha = arquivo.readline()
+    print(f"Segunda linha: {segunda_linha.strip()}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeira linha: Olá, mundo!
+Segunda linha: Esta é a primeira linha.</div>
+                    </div>
+
+                    <h3>Ler todas as linhas com readlines():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Ler todas as linhas em uma lista
+with open('dados.txt', 'r', encoding='utf-8') as arquivo:
+    linhas = arquivo.readlines()
+    print(f"Total de linhas: {len(linhas)}")
+    
+    for i, linha in enumerate(linhas, 1):
+        print(f"Linha {i}: {linha.strip()}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Total de linhas: 3
+Linha 1: Olá, mundo!
+Linha 2: Esta é a primeira linha.
+Linha 3: Esta é a segunda linha.</div>
+                </div>
+
+                    <h3>Iterar diretamente sobre o arquivo (mais eficiente):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Iterar sobre o arquivo (recomendado para arquivos grandes)
+with open('dados.txt', 'r', encoding='utf-8') as arquivo:
+    for linha in arquivo:
+        print(f"Linha: {linha.strip()}")
+
+# Mais eficiente em memória do que readlines() para arquivos grandes!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Linha: Olá, mundo!
+Linha: Esta é a primeira linha.
+Linha: Esta é a segunda linha.</div>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>📌 Modos de abertura de arquivo:</strong>
+                        <ul>
+                            <li><code>'r'</code> - Ler (read) - padrão</li>
+                            <li><code>'w'</code> - Escrever (write) - sobrescreve se existir</li>
+                            <li><code>'a'</code> - Anexar (append) - adiciona ao final</li>
+                            <li><code>'x'</code> - Criar - falha se arquivo já existe</li>
+                            <li><code>encoding='utf-8'</code> - Especificar codificação (importante para caracteres especiais!)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Escrever em Arquivos de Texto</h2>
+                <h3>Criando e salvando dados em arquivos</h3>
+                
+                <div class="slide-content">
+                    <h3>Escrever em arquivo com write():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Escrever conteúdo em arquivo (modo 'w' sobrescreve)
+with open('saida.txt', 'w', encoding='utf-8') as arquivo:
+    arquivo.write("Primeira linha\n")
+    arquivo.write("Segunda linha\n")
+    arquivo.write("Terceira linha\n")
+
+print("✅ Arquivo criado com sucesso!")
+
+# Verificar conteúdo
+with open('saida.txt', 'r', encoding='utf-8') as arquivo:
+    print(arquivo.read())</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Arquivo criado com sucesso!
+Primeira linha
+Segunda linha
+Terceira linha</div>
+                    </div>
+
+                    <h3>Anexar ao arquivo (append):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Anexar ao final do arquivo (modo 'a')
+with open('saida.txt', 'a', encoding='utf-8') as arquivo:
+    arquivo.write("Quarta linha (anexada)\n")
+    arquivo.write("Quinta linha (anexada)\n")
+
+# Ler arquivo completo
+with open('saida.txt', 'r', encoding='utf-8') as arquivo:
+    print(arquivo.read())</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeira linha
+Segunda linha
+Terceira linha
+Quarta linha (anexada)
+Quinta linha (anexada)</div>
+                    </div>
+
+                    <h3>Escrever múltiplas linhas com writelines():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Escrever lista de linhas
+linhas = [
+    "Linha 1\n",
+    "Linha 2\n",
+    "Linha 3\n"
+]
+
+with open('saida2.txt', 'w', encoding='utf-8') as arquivo:
+    arquivo.writelines(linhas)
+
+# Usando join() para criar texto com quebras de linha
+texto = "\n".join(["A", "B", "C"])
+with open('saida3.txt', 'w', encoding='utf-8') as arquivo:
+    arquivo.write(texto)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>⚠️ Atenção:</strong>
+                        <ul>
+                            <li>Modo <code>'w'</code> <strong>sobrescreve</strong> o arquivo se ele já existe!</li>
+                            <li>Modo <code>'a'</code> <strong>adiciona</strong> ao final do arquivo</li>
+                            <li>Sempre use <code>encoding='utf-8'</code> para suportar caracteres especiais (acentos, etc.)</li>
+                            <li><code>\n</code> representa quebra de linha</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💡</span>Exemplo Prático: Processar Log</h2>
+                <h3>Ler e analisar arquivo de log</h3>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Exemplo: Contar linhas e palavras em arquivo de log
+arquivo_log = 'log.txt'
+
+with open(arquivo_log, 'r', encoding='utf-8') as arquivo:
+    linhas = arquivo.readlines()
+    total_linhas = len(linhas)
+    
+    total_palavras = 0
+    for linha in linhas:
+        palavras = linha.split()
+        total_palavras += len(palavras)
+
+print(f"📊 ESTATÍSTICAS DO LOG:")
+print(f"Total de linhas: {total_linhas}")
+print(f"Total de palavras: {total_palavras}")
+
+# Filtrar linhas que contêm "ERRO"
+print("\n⚠️ LINHAS COM ERRO:")
+with open(arquivo_log, 'r', encoding='utf-8') as arquivo:
+    for i, linha in enumerate(arquivo, 1):
+        if 'ERRO' in linha.upper():
+            print(f"Linha {i}: {linha.strip()}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">📊 ESTATÍSTICAS DO LOG:
+Total de linhas: 10
+Total de palavras: 45
+
+⚠️ LINHAS COM ERRO:
+Linha 5: ERRO: Arquivo não encontrado
+Linha 8: ERRO: Timeout na conexão</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Arquivos CSV - Introdução</h2>
+                <h3>Comma-Separated Values (Valores Separados por Vírgula)</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    CSV é um formato simples para dados tabulares. Cada linha é um registro,
+                    e os campos são separados por vírgulas (ou outros delimitadores).
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Exemplo de arquivo CSV:</h3>
+                    <div class="code-block">
+                        <code># dados.csv
+Nome,Idade,Cidade
+João,25,São Paulo
+Maria,30,Rio de Janeiro
+Pedro,28,Belo Horizonte</code>
+                    </div>
+
+                    <h3>Por que usar CSV?</h3>
+                    <ul>
+                        <li>Formato universal - funciona em Excel, Google Sheets, etc.</li>
+                        <li>Fácil de ler e escrever</li>
+                        <li>Leve e rápido para processar</li>
+                        <li>Ideal para dados tabulares simples</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📖</span>Ler CSV com Módulo csv</h2>
+                <h3>Usando csv.reader()</h3>
+                
+                <div class="slide-content">
+                    <h3>Ler CSV básico:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Ler CSV com csv.reader()
+with open('dados.csv', 'r', encoding='utf-8') as arquivo:
+    leitor = csv.reader(arquivo)
+    
+    # Pular cabeçalho (primeira linha)
+    cabecalho = next(leitor)
+    print(f"Cabeçalho: {cabecalho}")
+    
+    # Ler dados
+    print("\nDados:")
+    for linha in leitor:
+        print(linha)  # Cada linha é uma lista de strings</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Cabeçalho: ['Nome', 'Idade', 'Cidade']
+Dados:
+['João', '25', 'São Paulo']
+['Maria', '30', 'Rio de Janeiro']
+['Pedro', '28', 'Belo Horizonte']</div>
+            </div>
+
+                    <h3>Processar dados CSV:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Ler e processar dados
+pessoas = []
+with open('dados.csv', 'r', encoding='utf-8') as arquivo:
+    leitor = csv.reader(arquivo)
+    cabecalho = next(leitor)  # Pula cabeçalho
+    
+    for linha in leitor:
+        pessoa = {
+            'nome': linha[0],
+            'idade': int(linha[1]),  # Converter para int
+            'cidade': linha[2]
+        }
+        pessoas.append(pessoa)
+
+print("📋 LISTA DE PESSOAS:")
+for pessoa in pessoas:
+    print(f"{pessoa['nome']}, {pessoa['idade']} anos, de {pessoa['cidade']}")
+
+# Calcular média de idade
+idades = [p['idade'] for p in pessoas]
+media_idade = sum(idades) / len(idades)
+print(f"\nMédia de idade: {media_idade:.1f} anos")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">📋 LISTA DE PESSOAS:
+João, 25 anos, de São Paulo
+Maria, 30 anos, de Rio de Janeiro
+Pedro, 28 anos, de Belo Horizonte
+
+Média de idade: 27.7 anos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Ler CSV com csv.DictReader()</h2>
+                <h3>Mais conveniente: acesso por nome de coluna</h3>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# DictReader usa a primeira linha como chaves do dicionário
+with open('dados.csv', 'r', encoding='utf-8') as arquivo:
+    leitor = csv.DictReader(arquivo)
+    
+    print("📋 DADOS COM ACESSO POR NOME:")
+    for linha in leitor:
+        # Acesso por nome de coluna (mais legível!)
+        print(f"{linha['Nome']}, {linha['Idade']} anos, de {linha['Cidade']}")
+        # linha é um dicionário: {'Nome': 'João', 'Idade': '25', 'Cidade': 'São Paulo'}</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">📋 DADOS COM ACESSO POR NOME:
+João, 25 anos, de São Paulo
+Maria, 30 anos, de Rio de Janeiro
+Pedro, 28 anos, de Belo Horizonte</div>
+            </div>
+
+                    <h3>Exemplo prático completo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Processar dados de vendas CSV
+vendas_total = 0
+vendedores = []
+
+with open('vendas.csv', 'r', encoding='utf-8') as arquivo:
+    leitor = csv.DictReader(arquivo)
+    
+    for registro in leitor:
+        vendedor = registro['Vendedor']
+        valor = float(registro['Valor'])
+        
+        vendas_total += valor
+        vendedores.append({
+            'nome': vendedor,
+            'valor': valor
+        })
+
+print(f"💰 TOTAL DE VENDAS: R$ {vendas_total:.2f}")
+print(f"📊 VENDEDORES:")
+for v in vendedores:
+    print(f"  - {v['nome']}: R$ {v['valor']:.2f}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">💰 TOTAL DE VENDAS: R$ 1500.00
+📊 VENDEDORES:
+  - João: R$ 500.00
+  - Maria: R$ 700.00
+  - Pedro: R$ 300.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Escrever CSV com csv.writer()</h2>
+                <h3>Criando arquivos CSV</h3>
+                
+                <div class="slide-content">
+                    <h3>Escrever CSV básico:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Dados para escrever
+dados = [
+    ['Nome', 'Idade', 'Cidade'],  # Cabeçalho
+    ['João', 25, 'São Paulo'],
+    ['Maria', 30, 'Rio de Janeiro'],
+    ['Pedro', 28, 'Belo Horizonte']
+]
+
+# Escrever CSV
+with open('saida.csv', 'w', newline='', encoding='utf-8') as arquivo:
+    escritor = csv.writer(arquivo)
+    escritor.writerows(dados)
+
+print("✅ CSV criado com sucesso!")
+
+# newline='' é importante para evitar linhas vazias extras!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ CSV criado com sucesso!</div>
+                    </div>
+
+                    <h3>Escrever CSV com csv.DictWriter():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Dados como lista de dicionários
+pessoas = [
+    {'Nome': 'João', 'Idade': 25, 'Cidade': 'São Paulo'},
+    {'Nome': 'Maria', 'Idade': 30, 'Cidade': 'Rio de Janeiro'},
+    {'Nome': 'Pedro', 'Idade': 28, 'Cidade': 'Belo Horizonte'}
+]
+
+# Escrever CSV com DictWriter
+with open('saida2.csv', 'w', newline='', encoding='utf-8') as arquivo:
+    campos = ['Nome', 'Idade', 'Cidade']
+    escritor = csv.DictWriter(arquivo, fieldnames=campos)
+    
+    escritor.writeheader()  # Escreve cabeçalho
+    escritor.writerows(pessoas)  # Escreve todos os dados
+
+print("✅ CSV criado com DictWriter!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ CSV criado com DictWriter!</div>
+                    </div>
+
+                    <h3>Exemplo prático: Exportar dados para CSV:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import csv
+
+# Dados em memória
+produtos = [
+    {'Produto': 'Notebook', 'Preço': 2500.00, 'Estoque': 10},
+    {'Produto': 'Mouse', 'Preço': 50.00, 'Estoque': 50},
+    {'Produto': 'Teclado', 'Preço': 120.00, 'Estoque': 30}
+]
+
+# Exportar para CSV
+with open('produtos.csv', 'w', newline='', encoding='utf-8') as arquivo:
+    campos = ['Produto', 'Preço', 'Estoque']
+    escritor = csv.DictWriter(arquivo, fieldnames=campos)
+    
+    escritor.writeheader()
+    for produto in produtos:
+        escritor.writerow(produto)
+
+print("✅ Produtos exportados para produtos.csv!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Produtos exportados para produtos.csv!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🐼</span>CSV com Pandas</h2>
+                <h3>A forma mais fácil de trabalhar com CSV!</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Pandas torna o trabalho com CSV muito mais simples e poderoso!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Ler CSV com pd.read_csv():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import pandas as pd
+
+# Ler CSV em um DataFrame (muito fácil!)
+df = pd.read_csv('dados.csv', encoding='utf-8')
+
+print("📊 DADOS DO CSV:")
+print(df)
+
+# Acesso por coluna
+print(f"\nNomes: {df['Nome'].tolist()}")
+print(f"Média de idade: {df['Idade'].mean():.1f}")
+
+# Filtrar dados
+sp = df[df['Cidade'] == 'São Paulo']
+print(f"\nPessoas de SP:\n{sp}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">📊 DADOS DO CSV:
+   Nome  Idade          Cidade
+0  João     25     São Paulo
+1  Maria    30  Rio de Janeiro
+2  Pedro    28  Belo Horizonte
+
+Nomes: ['João', 'Maria', 'Pedro']
+Média de idade: 27.7
+
+Pessoas de SP:
+  Nome  Idade     Cidade
+0  João     25  São Paulo</div>
+                </div>
+
+                    <h3>Salvar DataFrame em CSV:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import pandas as pd
+
+# Criar DataFrame
+df = pd.DataFrame({
+    'Produto': ['Notebook', 'Mouse', 'Teclado'],
+    'Preço': [2500.00, 50.00, 120.00],
+    'Estoque': [10, 50, 30]
+})
+
+# Calcular total em estoque
+df['Total'] = df['Preço'] * df['Estoque']
+
+# Salvar em CSV
+df.to_csv('produtos_analisados.csv', index=False, encoding='utf-8')
+
+print("✅ CSV salvo com sucesso!")
+print(f"\nTotal em estoque: R$ {df['Total'].sum():.2f}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ CSV salvo com sucesso!
+
+Total em estoque: R$ 30100.00</div>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>💡 Vantagens do Pandas para CSV:</strong>
+                        <ul>
+                            <li><strong>Simplicidade:</strong> Uma linha para ler/escrever</li>
+                            <li><strong>Funcionalidades:</strong> Filtros, agrupamentos, cálculos</li>
+                            <li><strong>Performance:</strong> Otimizado para grandes volumes</li>
+                            <li><strong>Conversão:</strong> Fácil converter para Excel depois</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Converter CSV para Excel</h2>
+                <h3>Integrando CSV e Excel</h3>
+                
+                <div class="slide-content">
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import pandas as pd
+
+# Ler CSV
+df = pd.read_csv('dados.csv', encoding='utf-8')
+
+# Processar dados (exemplo: adicionar coluna calculada)
+df['Idade_em_2050'] = df['Idade'] + (2050 - 2025)
+
+# Salvar em Excel
+df.to_excel('dados.xlsx', index=False)
+
+print("✅ CSV convertido para Excel com sucesso!")
+print("\nDataFrame processado:")
+print(df)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ CSV convertido para Excel com sucesso!
+
+DataFrame processado:
+   Nome  Idade          Cidade  Idade_em_2050
+0  João     25     São Paulo              50
+1  Maria    30  Rio de Janeiro              55
+2  Pedro    28  Belo Horizonte              53</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📂</span>Trabalhando com Diretórios e Caminhos</h2>
+                <h3>Organizando arquivos e navegando pelo sistema</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O módulo <code>os</code> oferece funções para trabalhar com diretórios, verificar existência
+                    de arquivos e construir caminhos de forma segura.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Verificar existência de arquivos e diretórios:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Verificar se arquivo existe
+arquivo = "dados.txt"
+if os.path.exists(arquivo):
+    print(f"✅ Arquivo '{arquivo}' existe!")
+else:
+    print(f"❌ Arquivo '{arquivo}' não encontrado.")
+
+# Verificar se é arquivo ou diretório
+caminho = "pastas"
+if os.path.isfile(caminho):
+    print(f"{caminho} é um arquivo")
+elif os.path.isdir(caminho):
+    print(f"{caminho} é um diretório")
+else:
+    print(f"{caminho} não existe")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Arquivo 'dados.txt' existe!
+pastas é um diretório</div>
+                    </div>
+
+                    <h3>Construir caminhos de forma segura:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# ❌ RUIM - concatenar strings (não funciona bem em diferentes sistemas)
+caminho_ruim = "pasta" + "/" + "subpasta" + "/" + "arquivo.txt"
+
+# ✅ BOM - usar os.path.join() (funciona em Windows, Linux, Mac)
+pasta = "pasta"
+subpasta = "subpasta"
+arquivo = "arquivo.txt"
+caminho_bom = os.path.join(pasta, subpasta, arquivo)
+print(f"Caminho: {caminho_bom}")
+
+# Exemplo prático
+base_dir = "dados"
+ano = "2025"
+mes = "01"
+arquivo_vendas = os.path.join(base_dir, ano, mes, "vendas.csv")
+print(f"Arquivo de vendas: {arquivo_vendas}")
+
+# Outras funções úteis
+print(f"Nome do arquivo: {os.path.basename(caminho_bom)}")
+print(f"Diretório: {os.path.dirname(caminho_bom)}")
+print(f"Extensão: {os.path.splitext(arquivo)[1]}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Caminho: pasta/subpasta/arquivo.txt
+Arquivo de vendas: dados/2025/01/vendas.csv
+Nome do arquivo: arquivo.txt
+Diretório: pasta/subpasta
+Extensão: .txt</div>
+                    </div>
+
+                    <h3>Navegar e listar diretórios:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Obter diretório atual
+diretorio_atual = os.getcwd()
+print(f"Diretório atual: {diretorio_atual}")
+
+# Listar arquivos e pastas no diretório
+print("\n📁 Conteúdo do diretório atual:")
+for item in os.listdir('.'):
+    caminho_completo = os.path.join('.', item)
+    if os.path.isfile(caminho_completo):
+        tipo = "📄 ARQUIVO"
+    elif os.path.isdir(caminho_completo):
+        tipo = "📂 PASTA"
+    else:
+        tipo = "❓ OUTRO"
+    
+    tamanho = os.path.getsize(caminho_completo) if os.path.isfile(caminho_completo) else 0
+    print(f"{tipo}: {item} ({tamanho} bytes)")
+
+# Listar apenas arquivos .csv
+print("\n📊 Arquivos CSV:")
+for arquivo in os.listdir('.'):
+    if arquivo.endswith('.csv'):
+        print(f"  - {arquivo}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Diretório atual: C:\Users\ricar\Documents\minicurso-python-excel
+
+📁 Conteúdo do diretório atual:
+📄 ARQUIVO: dados.txt (1024 bytes)
+📂 PASTA: topicos
+📄 ARQUIVO: index.html (8192 bytes)
+📄 ARQUIVO: vendas.csv (512 bytes)
+
+📊 Arquivos CSV:
+  - vendas.csv</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🗂️</span>Criar e Manipular Diretórios</h2>
+                <h3>Organizando seus arquivos programaticamente</h3>
+                
+                <div class="slide-content">
+                    <h3>Criar diretórios:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Criar um diretório
+os.mkdir("nova_pasta")
+print("✅ Pasta criada!")
+
+# Criar diretórios aninhados (cria toda a estrutura)
+os.makedirs("pasta1/pasta2/pasta3", exist_ok=True)
+print("✅ Estrutura de pastas criada!")
+
+# exist_ok=True evita erro se a pasta já existir
+os.makedirs("nova_pasta", exist_ok=True)
+print("✅ Sem erro mesmo se pasta já existir")
+
+# Criar estrutura para organizar arquivos por data
+ano = "2025"
+mes = "01"
+os.makedirs(os.path.join("relatorios", ano, mes), exist_ok=True)
+print("✅ Estrutura criada: relatorios/2025/01/")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Pasta criada!
+✅ Estrutura de pastas criada!
+✅ Sem erro mesmo se pasta já existir
+✅ Estrutura criada: relatorios/2025/01/</div>
+                </div>
+
+                    <h3>Mover, copiar e remover arquivos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+import shutil  # Para operações de arquivos mais avançadas
+
+# Remover arquivo
+arquivo_temp = "temp.txt"
+if os.path.exists(arquivo_temp):
+    os.remove(arquivo_temp)
+    print(f"✅ Arquivo '{arquivo_temp}' removido!")
+
+# Renomear/mover arquivo
+if os.path.exists("antigo.txt"):
+    os.rename("antigo.txt", "novo.txt")
+    print("✅ Arquivo renomeado!")
+
+# Copiar arquivo
+if os.path.exists("original.csv"):
+    shutil.copy("original.csv", "backup.csv")
+    print("✅ Arquivo copiado!")
+
+# Remover diretório vazio
+if os.path.exists("pasta_vazia") and os.path.isdir("pasta_vazia"):
+    os.rmdir("pasta_vazia")
+    print("✅ Diretório vazio removido!")
+
+# Remover diretório e todo seu conteúdo
+if os.path.exists("pasta_com_conteudo"):
+    shutil.rmtree("pasta_com_conteudo")
+    print("✅ Diretório e conteúdo removidos!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Arquivo removido!
+✅ Arquivo renomeado!
+✅ Arquivo copiado!
+✅ Diretório vazio removido!
+✅ Diretório e conteúdo removidos!</div>
+            </div>
+
+                    <h3>Exemplo prático: Organizar arquivos por extensão:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+import shutil
+
+def organizar_arquivos(diretorio="."):
+    """Organiza arquivos em pastas por extensão."""
+    
+    # Criar pastas para cada tipo de arquivo
+    tipos = {
+        '.txt': 'Textos',
+        '.csv': 'Planilhas',
+        '.xlsx': 'Excel',
+        '.pdf': 'PDFs',
+        '.jpg': 'Imagens',
+        '.png': 'Imagens'
+    }
+    
+    # Criar pastas
+    for pasta in set(tipos.values()):
+        os.makedirs(pasta, exist_ok=True)
+    
+    # Mover arquivos
+    arquivos_movidos = 0
+    for arquivo in os.listdir(diretorio):
+        caminho_arquivo = os.path.join(diretorio, arquivo)
+        
+        # Pular se for pasta ou arquivo Python
+        if os.path.isdir(caminho_arquivo) or arquivo.endswith('.py'):
+            continue
+        
+        extensao = os.path.splitext(arquivo)[1].lower()
+        
+        if extensao in tipos:
+            pasta_destino = tipos[extensao]
+            destino = os.path.join(pasta_destino, arquivo)
+            shutil.move(caminho_arquivo, destino)
+            arquivos_movidos += 1
+            print(f"📦 Movido: {arquivo} → {pasta_destino}/")
+    
+    print(f"\n✅ {arquivos_movidos} arquivos organizados!")
+
+# Executar organização
+organizar_arquivos()</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">📦 Movido: dados.txt → Textos/
+📦 Movido: vendas.csv → Planilhas/
+📦 Movido: relatorio.xlsx → Excel/
+📦 Movido: imagem.jpg → Imagens/
+
+✅ 4 arquivos organizados!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>Manipulação de Arquivos JSON</h2>
+                <h3>Trabalhando com dados estruturados em JSON</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    JSON (JavaScript Object Notation) é um formato popular para armazenar e trocar dados.
+                    Python tem suporte nativo para JSON através do módulo <code>json</code>.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>O que é JSON?</h3>
+                    <ul>
+                        <li>Formato de texto simples e legível</li>
+                        <li>Estrutura similar a dicionários Python</li>
+                        <li>Usado em APIs, configurações, dados estruturados</li>
+                        <li>Fácil de ler e escrever em qualquer linguagem</li>
+                    </ul>
+
+                    <h3>Exemplo de arquivo JSON:</h3>
+                <div class="code-block">
+                        <code># dados.json
+{
+    "nome": "João Silva",
+    "idade": 30,
+    "cidade": "São Paulo",
+    "hobbies": ["leitura", "ciclismo", "programação"],
+    "ativo": true
+}</code>
+                    </div>
+
+                    <h3>Ler arquivo JSON:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# Ler arquivo JSON
+with open('dados.json', 'r', encoding='utf-8') as arquivo:
+    dados = json.load(arquivo)  # Converte JSON para dicionário Python
+
+print(f"Nome: {dados['nome']}")
+print(f"Idade: {dados['idade']}")
+print(f"Hobbies: {', '.join(dados['hobbies'])}")
+
+# Acessar dados aninhados
+print(f"Cidade: {dados['cidade']}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Nome: João Silva
+Idade: 30
+Hobbies: leitura, ciclismo, programação
+Cidade: São Paulo</div>
+                    </div>
+
+                    <h3>Escrever arquivo JSON:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# Dados em Python (dicionário)
+pessoa = {
+    "nome": "Maria Santos",
+    "idade": 25,
+    "cidade": "Rio de Janeiro",
+    "hobbies": ["cinema", "natação"],
+    "ativo": True,
+    "salario": 5000.50
+}
+
+# Escrever em arquivo JSON
+with open('pessoa.json', 'w', encoding='utf-8') as arquivo:
+    json.dump(pessoa, arquivo, indent=2, ensure_ascii=False)
+
+print("✅ Arquivo JSON criado!")
+
+# indent=2 deixa o JSON formatado (bonito)
+# ensure_ascii=False permite caracteres especiais (acentos)
+
+# Converter dicionário para string JSON
+json_string = json.dumps(pessoa, indent=2, ensure_ascii=False)
+print("\nJSON como string:")
+print(json_string)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Arquivo JSON criado!
+
+JSON como string:
+{
+  "nome": "Maria Santos",
+  "idade": 25,
+  "cidade": "Rio de Janeiro",
+  "hobbies": [
+    "cinema",
+    "natação"
+  ],
+  "ativo": true,
+  "salario": 5000.5
+}</div>
+                </div>
+
+                    <h3>Exemplo prático: Salvar e carregar configurações:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+import os
+
+def carregar_configuracao(arquivo="config.json"):
+    """Carrega configurações de um arquivo JSON."""
+    if os.path.exists(arquivo):
+        with open(arquivo, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    else:
+        # Configuração padrão
+        return {
+            "idioma": "pt-BR",
+            "tema": "claro",
+            "notificacoes": True
+        }
+
+def salvar_configuracao(config, arquivo="config.json"):
+    """Salva configurações em um arquivo JSON."""
+    with open(arquivo, 'w', encoding='utf-8') as f:
+        json.dump(config, f, indent=2, ensure_ascii=False)
+    print(f"✅ Configurações salvas em {arquivo}")
+
+# Usar configurações
+config = carregar_configuracao()
+print(f"Idioma atual: {config['idioma']}")
+print(f"Tema: {config['tema']}")
+
+# Modificar e salvar
+config['tema'] = 'escuro'
+config['idioma'] = 'en-US'
+salvar_configuracao(config)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Idioma atual: pt-BR
+Tema: claro
+✅ Configurações salvas em config.json</div>
+            </div>
+
+                    <h3>Exemplo prático: Trabalhar com lista de objetos JSON:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# Dados: lista de produtos
+produtos = [
+    {"id": 1, "nome": "Notebook", "preco": 2500.00, "estoque": 10},
+    {"id": 2, "nome": "Mouse", "preco": 50.00, "estoque": 50},
+    {"id": 3, "nome": "Teclado", "preco": 120.00, "estoque": 30}
+]
+
+# Salvar produtos em JSON
+with open('produtos.json', 'w', encoding='utf-8') as arquivo:
+    json.dump(produtos, arquivo, indent=2, ensure_ascii=False)
+
+print("✅ Produtos salvos em JSON!")
+
+# Ler e processar produtos
+with open('produtos.json', 'r', encoding='utf-8') as arquivo:
+    produtos_carregados = json.load(arquivo)
+
+print("\n📦 PRODUTOS CARREGADOS:")
+total_estoque = 0
+for produto in produtos_carregados:
+    print(f"  - {produto['nome']}: R$ {produto['preco']:.2f} (Estoque: {produto['estoque']})")
+    total_estoque += produto['preco'] * produto['estoque']
+
+print(f"\n💰 Valor total em estoque: R$ {total_estoque:.2f}")
+
+# Filtrar produtos caros
+produtos_caros = [p for p in produtos_carregados if p['preco'] > 100]
+print(f"\n💎 Produtos acima de R$ 100: {len(produtos_caros)}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Produtos salvos em JSON!
+
+📦 PRODUTOS CARREGADOS:
+  - Notebook: R$ 2500.00 (Estoque: 10)
+  - Mouse: R$ 50.00 (Estoque: 50)
+  - Teclado: R$ 120.00 (Estoque: 30)
+
+💰 Valor total em estoque: R$ 30100.00
+
+💎 Produtos acima de R$ 100: 2</div>
+                </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>💡 Dicas importantes sobre JSON:</strong>
+                        <ul>
+                            <li><code>json.load()</code> - lê de arquivo e converte para Python</li>
+                            <li><code>json.dump()</code> - escreve Python em arquivo JSON</li>
+                            <li><code>json.loads()</code> - converte string JSON para Python</li>
+                            <li><code>json.dumps()</code> - converte Python para string JSON</li>
+                            <li>Use <code>indent=2</code> para JSON formatado (legível)</li>
+                            <li>Use <code>ensure_ascii=False</code> para preservar acentos</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Manipulação de Arquivos</h2>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Ler e Processar Arquivo</strong>
+                    <p>Crie um arquivo texto com 5 nomes, um por linha. Leia o arquivo e mostre cada nome com número.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code"># Criar arquivo
+with open('nomes.txt', 'w', encoding='utf-8') as arquivo:
+    arquivo.write("Maria\nJoão\nAna\nPedro\nCarla\n")
+
+# Ler e mostrar
+with open('nomes.txt', 'r', encoding='utf-8') as arquivo:
+    for i, nome in enumerate(arquivo, 1):
+        print(f"{i}. {nome.strip()}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">1. Maria
+2. João
+3. Ana
+4. Pedro
+5. Carla</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Processar CSV de Vendas</strong>
+                    <p>Leia um CSV de vendas e calcule o total vendido por vendedor.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">import csv
+
+vendas_por_vendedor = {}
+
+with open('vendas.csv', 'r', encoding='utf-8') as arquivo:
+    leitor = csv.DictReader(arquivo)
+    for registro in leitor:
+        vendedor = registro['Vendedor']
+        valor = float(registro['Valor'])
+        
+        if vendedor not in vendas_por_vendedor:
+            vendas_por_vendedor[vendedor] = 0
+        vendas_por_vendedor[vendedor] += valor
+
+print("💰 VENDAS POR VENDEDOR:")
+for vendedor, total in vendas_por_vendedor.items():
+    print(f"{vendedor}: R$ {total:.2f}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">💰 VENDAS POR VENDEDOR:
+João: R$ 500.00
+Maria: R$ 700.00
+Pedro: R$ 300.00</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador8">1 / 15</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

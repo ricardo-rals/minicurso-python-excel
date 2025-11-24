@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 3: Condicionais e Repetições</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+    <div class="quiz-container">
+        <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>🔀 Quiz: Condicionais e Repetições</h1>
+                <p>Teste seus conhecimentos sobre if/else, for, while e loops!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual estrutura condicional executa quando a condição é FALSA?",
+                options: [
+                    "if",
+                    "elif",
+                    "else",
+                    "then"
+                ],
+                correct: 2,
+                explanation: "O <code>else</code> executa quando todas as condições anteriores (<code>if</code> e <code>elif</code>) são falsas."
+            },
+            {
+                question: "Qual é o resultado de: range(5)?",
+                options: [
+                    "[0, 1, 2, 3, 4]",
+                    "[1, 2, 3, 4, 5]",
+                    "[0, 1, 2, 3, 4, 5]",
+                    "Erro"
+                ],
+                correct: 0,
+                explanation: "<code>range(5)</code> gera números de 0 a 4 (5 números, começando em 0). Lembre-se: range começa em 0 e o último número não é incluído!"
+            },
+            {
+                question: "Quantas vezes o loop 'for i in range(3):' executa?",
+                options: [
+                    "2 vezes",
+                    "3 vezes",
+                    "4 vezes",
+                    "Infinitas vezes"
+                ],
+                correct: 1,
+                explanation: "<code>range(3)</code> gera [0, 1, 2], então o loop executa <strong>3 vezes</strong> (uma para cada valor)."
+            },
+            {
+                question: "O que faz o comando 'break' em um loop?",
+                options: [
+                    "Pula para a próxima iteração",
+                    "Sai completamente do loop",
+                    "Reinicia o loop",
+                    "Pausa o loop"
+                ],
+                correct: 1,
+                explanation: "O <code>break</code> <strong>sai completamente do loop</strong>, interrompendo a execução. Use <code>continue</code> para pular para a próxima iteração."
+            },
+            {
+                question: "Qual é a diferença entre 'for' e 'while'?",
+                options: [
+                    "Não há diferença",
+                    "for usa range, while usa condição",
+                    "for é mais rápido",
+                    "while só funciona com números"
+                ],
+                correct: 1,
+                explanation: "<code>for</code> itera sobre uma sequência (lista, range, etc), enquanto <code>while</code> repete enquanto uma condição for verdadeira."
+            },
+            {
+                question: "O que acontece se a condição do 'while' nunca se tornar False?",
+                options: [
+                    "O programa para automaticamente",
+                    "O loop executa infinitamente",
+                    "Gera um erro",
+                    "Pula para o próximo código"
+                ],
+                correct: 1,
+                explanation: "Se a condição do <code>while</code> nunca se tornar <code>False</code>, você terá um <strong>loop infinito</strong>. Use <code>break</code> ou ajuste a condição para evitar isso!"
+            },
+            {
+                question: "Qual é o resultado de: for i in range(1, 5, 2): print(i)",
+                options: [
+                    "1, 2, 3, 4",
+                    "1, 3",
+                    "2, 4",
+                    "1, 2, 3"
+                ],
+                correct: 1,
+                explanation: "<code>range(1, 5, 2)</code> começa em 1, vai até 5 (exclusivo), pulando de 2 em 2. Resultado: <strong>1, 3</strong>"
+            },
+            {
+                question: "Como verificar se um número é par usando if?",
+                options: [
+                    "if numero == par:",
+                    "if numero % 2 == 0:",
+                    "if numero / 2 == 0:",
+                    "if numero * 2 == 0:"
+                ],
+                correct: 1,
+                explanation: "Use o operador módulo (<code>%</code>): <code>if numero % 2 == 0:</code>. Se o resto da divisão por 2 for 0, o número é par."
+            },
+            {
+                question: "O que faz o comando 'continue' em um loop?",
+                options: [
+                    "Sai do loop",
+                    "Pula para a próxima iteração",
+                    "Reinicia o loop",
+                    "Pausa o programa"
+                ],
+                correct: 1,
+                explanation: "O <code>continue</code> <strong>pula para a próxima iteração</strong> do loop, ignorando o código restante na iteração atual."
+            },
+            {
+                question: "Qual estrutura permite múltiplas condições em sequência?",
+                options: [
+                    "if-else",
+                    "if-elif-else",
+                    "if-if-if",
+                    "else-else-else"
+                ],
+                correct: 1,
+                explanation: "Use <code>if-elif-else</code> para verificar múltiplas condições em sequência. O primeiro <code>if</code> ou <code>elif</code> verdadeiro executa, e o <code>else</code> é opcional."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina o conteúdo!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

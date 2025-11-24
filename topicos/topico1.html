@@ -16,6 +16,32 @@
             </div>
 
             <div class="slide">
+                <h2><span class="emoji">📜</span>História do Python</h2>
+                <h3>A Origem:</h3>
+                <ul style="font-size: 1.05em;">
+                    <li><strong>Criador:</strong> Guido van Rossum (Holanda)</li>
+                    <li><strong>Primeira versão:</strong> 1991</li>
+                    <li><strong>Nome:</strong> Inspirado no grupo de comédia "Monty Python"</li>
+                    <li><strong>Filosofia:</strong> Código legível e simples</li>
+                </ul>
+
+                <div class="destaque">
+                    <strong>🎯 The Zen of Python (Tim Peters):</strong>
+                    <p style="margin-top: 10px; font-style: italic;">
+                        "Beautiful is better than ugly."<br>
+                        "Explicit is better than implicit."<br>
+                        "Simple is better than complex."<br>
+                        "Readability counts."
+                    </p>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Curiosidade:</strong>
+                    Digite <code>import this</code> no Python para ver todos os princípios!
+                </div>
+            </div>
+
+            <div class="slide">
                 <h2><span class="emoji">🎯</span>Para que serve Python?</h2>
                 <h3>Áreas de Aplicação:</h3>
                 <ul>
@@ -30,6 +56,93 @@
                 <div class="exemplo-box">
                     <strong>✨ Nosso foco neste curso:</strong>
                     Automação de tarefas com Excel, análise de dados e geração de relatórios!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚡</span>Python vs Excel VBA</h2>
+                <h3>Por que Python em vez de VBA?</h3>
+
+                <table>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Python</th>
+                        <th>VBA</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Legibilidade</strong></td>
+                        <td>✅ Muito clara</td>
+                        <td>❌ Verbosa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bibliotecas</strong></td>
+                        <td>✅ 300.000+ pacotes</td>
+                        <td>❌ Limitadas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multiplataforma</strong></td>
+                        <td>✅ Windows, Mac, Linux</td>
+                        <td>❌ Só Windows</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comunidade</strong></td>
+                        <td>✅ Enorme e ativa</td>
+                        <td>⚠️ Pequena</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aprendizado</strong></td>
+                        <td>✅ Fácil e intuitivo</td>
+                        <td>⚠️ Mais difícil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carreira</strong></td>
+                        <td>✅ Alta demanda</td>
+                        <td>⚠️ Nicho específico</td>
+                    </tr>
+                </table>
+
+                <div class="destaque">
+                    <strong>💼 Caso real:</strong>
+                    Uma tarefa que leva 2 horas manualmente no Excel pode ser automatizada
+                    em 15 minutos com Python e executada em segundos!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🚀</span>Exemplo: Python vs Excel Manual</h2>
+                <h3>Cenário: Consolidar 50 planilhas de vendas</h3>
+
+                <div class="destaque">
+                    <strong>❌ Método Manual (Excel):</strong>
+                    <ol style="margin-top: 10px;">
+                        <li>Abrir cada uma das 50 planilhas</li>
+                        <li>Copiar os dados</li>
+                        <li>Colar em uma planilha mestre</li>
+                        <li>Formatar tudo manualmente</li>
+                        <li>Criar gráficos um por um</li>
+                    </ol>
+                    <p style="margin-top: 10px; color: #e74c3c;"><strong>Tempo: ~3 horas</strong> ⏱️</p>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>✅ Método Python (Automatizado):</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>import pandas as pd
+import glob
+
+# Ler todas as 50 planilhas de uma vez
+arquivos = glob.glob("vendas_*.xlsx")
+dfs = [pd.read_excel(f) for f in arquivos]
+
+# Consolidar em um único DataFrame
+df_consolidado = pd.concat(dfs, ignore_index=True)
+
+# Salvar resultado formatado
+df_consolidado.to_excel("vendas_consolidadas.xlsx")
+
+print("✅ 50 planilhas consolidadas!")</code>
+                    </div>
+                    <p style="margin-top: 10px; color: #2ecc71;"><strong>Tempo: ~10 segundos</strong> ⚡</p>
                 </div>
             </div>
 
@@ -119,6 +232,91 @@ pip install --upgrade nome_da_biblioteca</code>
                 <div class="destaque">
                     <strong>💡 Dica:</strong>
                     Sempre use um ambiente virtual (venv) para projetos maiores para manter as dependências organizadas!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🛠️</span>Configurando o VS Code</h2>
+                <h3>Preparando seu ambiente de desenvolvimento:</h3>
+
+                <ol style="font-size: 1.05em; line-height: 2;">
+                    <li><strong>Baixe o VS Code:</strong> code.visualstudio.com</li>
+                    <li><strong>Instale a extensão Python:</strong>
+                        <ul>
+                            <li>Abra o VS Code</li>
+                            <li>Clique em Extensions (Ctrl+Shift+X)</li>
+                            <li>Busque por "Python" (da Microsoft)</li>
+                            <li>Clique em "Install"</li>
+                        </ul>
+                    </li>
+                    <li><strong>Crie uma pasta para seus projetos:</strong> Ex: <code>C:\MeusProjetos\Python</code></li>
+                    <li><strong>Abra a pasta no VS Code:</strong> File → Open Folder</li>
+                </ol>
+
+                <div class="exemplo-box">
+                    <strong>🎨 Extensões recomendadas:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Python</strong> - Suporte completo para Python</li>
+                        <li><strong>Pylance</strong> - IntelliSense avançado</li>
+                        <li><strong>Python Indent</strong> - Indentação automática</li>
+                        <li><strong>autoDocstring</strong> - Gera documentação automaticamente</li>
+                    </ul>
+                </div>
+
+                <div class="destaque">
+                    <strong>⌨️ Atalhos úteis:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><code>Ctrl + `</code> - Abrir terminal integrado</li>
+                        <li><code>F5</code> - Executar com debugger</li>
+                        <li><code>Ctrl + /</code> - Comentar/descomentar linha</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📄</span>Criando Seu Primeiro Script</h2>
+                <h3>Salvando código em arquivo .py:</h3>
+
+                <ol style="font-size: 1.05em; line-height: 1.8;">
+                    <li><strong>No VS Code, crie um novo arquivo:</strong> File → New File</li>
+                    <li><strong>Salve como:</strong> <code>meu_primeiro_script.py</code></li>
+                    <li><strong>Digite o código:</strong>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <code># Meu primeiro script Python
+print("=" * 40)
+print("  BEM-VINDO AO PYTHON!")
+print("=" * 40)
+
+nome = input("\nDigite seu nome: ")
+print(f"\nOlá, {nome}!")
+print("Você acabou de criar seu primeiro script!")
+print("\n✅ Parabéns! 🎉")</code>
+                        </div>
+                    </li>
+                    <li><strong>Salve o arquivo:</strong> Ctrl + S</li>
+                    <li><strong>Execute:</strong>
+                        <ul>
+                            <li>Abra o terminal (Ctrl + `)</li>
+                            <li>Digite: <code>python meu_primeiro_script.py</code></li>
+                            <li>Pressione Enter</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="destaque">
+                    <strong>🎯 Resultado esperado:</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>========================================
+  BEM-VINDO AO PYTHON!
+========================================
+
+Digite seu nome: Maria
+
+Olá, Maria!
+Você acabou de criar seu primeiro script!
+
+✅ Parabéns! 🎉</code>
+                    </div>
                 </div>
             </div>
 
@@ -342,7 +540,7 @@ print("=" * 40)</div>
             <div class="controles">
                 <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
                 <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador1">1 / 9</span>
+                <span class="contador-slides" id="contador1">1 / 15</span>
                 <button class="btn" onclick="proximoSlide()">Próximo →</button>
             </div>
         </div>

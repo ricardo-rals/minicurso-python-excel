@@ -1,0 +1,937 @@
+<div id="topico9" class="slides-container">
+    <div class="slide active">
+                <h2><span class="emoji">📊</span>Tópico 9: Trabalhando com Arquivos Excel</h2>
+                <h3>Por que automatizar Excel com Python?</h3>
+                <ul>
+                    <li><strong>Velocidade:</strong> Processar milhares de linhas em segundos</li>
+                    <li><strong>Precisão:</strong> Eliminar erros humanos em tarefas repetitivas</li>
+                    <li><strong>Produtividade:</strong> Automatizar relatórios e análises</li>
+                    <li><strong>Escalabilidade:</strong> Trabalhar com múltiplos arquivos simultaneamente</li>
+                </ul>
+
+                <div class="exemplo-box">
+                    <strong>💡 Neste tópico você vai aprender:</strong>
+                    <ul>
+                        <li>Criar e manipular planilhas Excel com <strong>Openpyxl</strong></li>
+                        <li>Analisar dados com <strong>Pandas</strong></li>
+                        <li>Filtrar, ordenar e transformar dados</li>
+                        <li>Aplicar formatação e estilos</li>
+                    </ul>
+                </div>
+
+                <div class="destaque">
+                    <strong>📦 Bibliotecas necessárias:</strong>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <code>pip install openpyxl pandas</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Biblioteca Openpyxl</h2>
+                <h3>O que é Openpyxl?</h3>
+        <p style="font-size: 1.1em; margin: 20px 0;">
+                    Openpyxl é uma biblioteca Python para ler e escrever arquivos Excel (formato .xlsx).
+                    Ela permite criar planilhas do zero e aplicar formatações como o Excel faz!
+                </p>
+
+                <h3>Criando sua primeira planilha:</h3>
+                <div class="code-block">
+                    <code>from openpyxl import Workbook
+
+# Criar uma nova planilha
+wb = Workbook()
+ws = wb.active
+ws.title = "Vendas"
+
+# Escrever dados nas células
+ws['A1'] = "Produto"
+ws['B1'] = "Quantidade"
+ws['C1'] = "Preço"
+
+ws['A2'] = "Notebook"
+ws['B2'] = 5
+ws['C2'] = 2500.00
+
+# Salvar a planilha
+wb.save("vendas.xlsx")
+print("✅ Planilha criada com sucesso!")</code>
+                </div>
+
+        <div class="destaque">
+                    <strong>💡 Importante:</strong>
+                    Openpyxl trabalha com arquivos .xlsx (Excel 2010+). Para arquivos .xls antigos, use Pandas ou xlrd.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>Trabalhando com Arquivos .xls (Formato Antigo)</h2>
+                <h3>Lendo planilhas do Excel 97-2003</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Arquivos <code>.xls</code> são do formato antigo do Excel (97-2003). Eles não podem ser lidos
+                    diretamente com <code>openpyxl</code>, mas podem ser trabalhados com <strong>Pandas</strong> ou <strong>xlrd</strong>.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Diferenças entre .xls e .xlsx:</h3>
+                    <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                        <tr>
+                            <th>Formato</th>
+                            <th>Versão Excel</th>
+                            <th>Biblioteca Python</th>
+                            <th>Limitações</th>
+                        </tr>
+                        <tr>
+                            <td><code>.xls</code></td>
+                            <td>97-2003 (antigo)</td>
+                            <td>xlrd (ler), xlwt (escrever) ou Pandas</td>
+                            <td>Máximo 65.536 linhas, menos recursos</td>
+                        </tr>
+                        <tr>
+                            <td><code>.xlsx</code></td>
+                            <td>2007+ (moderno)</td>
+                            <td>openpyxl ou Pandas</td>
+                            <td>Milhões de linhas, mais recursos</td>
+                        </tr>
+                    </table>
+
+                    <h3>Ler arquivo .xls com Pandas (mais fácil):</h3>
+                    <div class="code-block">
+                        <code>import pandas as pd
+
+# Ler arquivo .xls (formato antigo)
+# Pandas detecta automaticamente o formato
+df = pd.read_excel("vendas_antigas.xls", engine='xlrd')
+
+print("📊 DADOS DO ARQUIVO .XLS:")
+print(df)
+
+# ⚠️ IMPORTANTE: Para ler .xls, você precisa instalar xlrd:
+# pip install xlrd
+
+# Se o arquivo tiver múltiplas abas
+df_aba1 = pd.read_excel("vendas_antigas.xls", sheet_name=0, engine='xlrd')
+df_aba2 = pd.read_excel("vendas_antigas.xls", sheet_name="Vendas", engine='xlrd')
+
+print("\nPrimeira aba:")
+print(df_aba1)</code>
+        </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>📦 Instalação necessária:</strong>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <code>pip install xlrd  # Para ler .xls
+pip install openpyxl  # Para ler .xlsx</code>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">🔄</span>Converter .xls para .xlsx</h2>
+                <h3>Modernizando planilhas antigas</h3>
+                
+                <div class="slide-content">
+                    <h3>Converter arquivo .xls para .xlsx:</h3>
+                    <div class="code-block">
+                        <code>import pandas as pd
+
+# Ler arquivo .xls antigo
+df = pd.read_excel("dados_antigos.xls", engine='xlrd')
+
+print(f"✅ Arquivo .xls lido: {len(df)} linhas")
+
+# Salvar como .xlsx (formato moderno)
+df.to_excel("dados_modernos.xlsx", index=False, engine='openpyxl')
+
+print("✅ Arquivo convertido para .xlsx!")
+
+# Converter todas as abas
+arquivo_antigo = "relatorio_antigo.xls"
+arquivo_novo = "relatorio_novo.xlsx"
+
+# Ler todas as abas
+abas_xls = pd.read_excel(arquivo_antigo, sheet_name=None, engine='xlrd')
+
+# Salvar todas as abas no novo formato
+with pd.ExcelWriter(arquivo_novo, engine='openpyxl') as writer:
+    for nome_aba, df_aba in abas_xls.items():
+        df_aba.to_excel(writer, sheet_name=nome_aba, index=False)
+
+print(f"✅ Convertido {len(abas_xls)} abas para .xlsx!")</code>
+                    </div>
+
+                    <h3>Exemplo prático: Processar múltiplos arquivos .xls:</h3>
+        <div class="code-block">
+                        <code>import pandas as pd
+import os
+
+def converter_xls_para_xlsx(pasta="arquivos_antigos"):
+    """Converte todos os arquivos .xls de uma pasta para .xlsx."""
+    
+    arquivos_convertidos = 0
+    
+    # Listar todos os arquivos .xls
+    for arquivo in os.listdir(pasta):
+        if arquivo.endswith('.xls'):
+            caminho_antigo = os.path.join(pasta, arquivo)
+            
+            # Ler arquivo .xls
+            try:
+                df = pd.read_excel(caminho_antigo, engine='xlrd')
+                
+                # Criar nome do novo arquivo
+                nome_novo = arquivo.replace('.xls', '.xlsx')
+                caminho_novo = os.path.join(pasta, nome_novo)
+                
+                # Salvar como .xlsx
+                df.to_excel(caminho_novo, index=False, engine='openpyxl')
+                
+                print(f"✅ Convertido: {arquivo} → {nome_novo}")
+                arquivos_convertidos += 1
+                
+            except Exception as e:
+                print(f"❌ Erro ao converter {arquivo}: {e}")
+    
+    print(f"\n✅ Total de arquivos convertidos: {arquivos_convertidos}")
+
+# Executar conversão
+converter_xls_para_xlsx()</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Ler .xls com xlrd (Biblioteca Dedicada)</h2>
+                <h3>Controle fino sobre arquivos antigos</h3>
+                
+                <div class="slide-content">
+                    <h3>Usando xlrd para ler .xls:</h3>
+                    <div class="code-block">
+                        <code>import xlrd
+
+# Abrir arquivo .xls
+workbook = xlrd.open_workbook("vendas_antigas.xls")
+
+# Listar abas
+print("📋 Abas disponíveis:")
+for i, sheet_name in enumerate(workbook.sheet_names()):
+    print(f"  {i}: {sheet_name}")
+
+# Selecionar primeira aba
+sheet = workbook.sheet_by_index(0)
+# ou: sheet = workbook.sheet_by_name("Vendas")
+
+print(f"\n📊 Dados da aba '{sheet.name}':")
+print(f"  Linhas: {sheet.nrows}")
+print(f"  Colunas: {sheet.ncols}")
+
+# Ler células específicas
+print(f"\nCélula A1: {sheet.cell_value(0, 0)}")
+print(f"Célula B2: {sheet.cell_value(1, 1)}")
+
+# Ler linha inteira
+linha_1 = sheet.row_values(0)
+print(f"\nPrimeira linha (cabeçalho): {linha_1}")
+
+# Ler todas as linhas
+print("\n📋 DADOS COMPLETOS:")
+for row_idx in range(sheet.nrows):
+    linha = sheet.row_values(row_idx)
+    print(f"Linha {row_idx}: {linha}")
+
+# Ler coluna inteira
+coluna_a = sheet.col_values(0)
+print(f"\nColuna A: {coluna_a}")</code>
+                    </div>
+
+                    <h3>Processar dados com xlrd:</h3>
+                    <div class="code-block">
+                        <code>import xlrd
+
+# Ler arquivo .xls
+workbook = xlrd.open_workbook("vendas_antigas.xls")
+sheet = workbook.sheet_by_index(0)
+
+# Processar dados
+vendas_total = 0
+produtos = []
+
+# Pular cabeçalho (linha 0)
+for row_idx in range(1, sheet.nrows):
+    produto = sheet.cell_value(row_idx, 0)
+    quantidade = sheet.cell_value(row_idx, 1)
+    preco = sheet.cell_value(row_idx, 2)
+    
+    # Verificar tipo de célula
+    tipo_quantidade = sheet.cell_type(row_idx, 1)
+    tipo_preco = sheet.cell_type(row_idx, 2)
+    
+    # xlrd.XL_CELL_NUMBER = 2, xlrd.XL_CELL_TEXT = 1
+    if tipo_quantidade == 2 and tipo_preco == 2:
+        total = quantidade * preco
+        vendas_total += total
+        
+        produtos.append({
+            'produto': produto,
+            'quantidade': quantidade,
+            'preco': preco,
+            'total': total
+        })
+
+print("💰 VENDAS PROCESSADAS:")
+for p in produtos:
+    print(f"  {p['produto']}: {p['quantidade']} × R$ {p['preco']:.2f} = R$ {p['total']:.2f}")
+
+print(f"\n💵 Total geral: R$ {vendas_total:.2f}")</code>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>⚠️ Nota importante sobre xlrd:</strong>
+                        <ul>
+                            <li>A versão 2.0+ do xlrd <strong>não suporta mais arquivos .xls</strong> (apenas .xlsx)</li>
+                            <li>Para ler .xls, use: <code>pip install xlrd==1.2.0</code></li>
+                            <li>Ou use Pandas com engine='xlrd' (versão antiga)</li>
+                            <li><strong>Recomendação:</strong> Converta arquivos .xls para .xlsx quando possível</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎨</span>Formatação com Openpyxl</h2>
+                <h3>Deixando suas planilhas profissionais:</h3>
+
+                <div class="code-block">
+                    <code>from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+wb = Workbook()
+ws = wb.active
+
+# Escrever cabeçalho
+ws['A1'] = "Produto"
+ws['B1'] = "Quantidade"
+ws['C1'] = "Preço Unitário"
+
+# Formatação do cabeçalho
+header_fill = PatternFill(
+    start_color="4472C4",
+    end_color="4472C4",
+    fill_type="solid"
+)
+header_font = Font(color="FFFFFF", bold=True, size=12)
+
+for cell in ws[1]:  # Linha 1 (cabeçalho)
+    cell.fill = header_fill
+    cell.font = header_font
+    cell.alignment = Alignment(horizontal="center")
+
+# Adicionar dados
+produtos = [
+    ["Notebook", 5, 2500.00],
+    ["Mouse", 20, 45.00],
+    ["Teclado", 15, 120.00]
+]
+
+for i, produto in enumerate(produtos, start=2):
+    ws[f'A{i}'] = produto[0]
+    ws[f'B{i}'] = produto[1]
+    ws[f'C{i}'] = produto[2]
+
+wb.save("vendas_formatada.xlsx")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📐</span>Fórmulas do Excel com Openpyxl</h2>
+                <h3>Inserindo fórmulas nas células:</h3>
+
+                <div class="code-block">
+                    <code>from openpyxl import Workbook
+
+wb = Workbook()
+ws = wb.active
+
+# Cabeçalhos
+ws['A1'] = "Produto"
+ws['B1'] = "Quantidade"
+ws['C1'] = "Preço Unit."
+ws['D1'] = "Total"
+
+# Dados
+ws['A2'] = "Notebook"
+ws['B2'] = 5
+ws['C2'] = 2500
+
+# FÓRMULA: Total = Quantidade × Preço
+ws['D2'] = "=B2*C2"  # Fórmula do Excel!
+
+# Mais produtos
+ws['A3'] = "Mouse"
+ws['B3'] = 20
+ws['C3'] = 45
+ws['D3'] = "=B3*C3"
+
+# Soma total de todas as vendas
+ws['D5'] = "TOTAL:"
+ws['E5'] = "=SUM(D2:D4)"
+
+wb.save("vendas_com_formulas.xlsx")</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>✨ Dica Pro:</strong>
+                    As fórmulas são calculadas automaticamente quando você abre o arquivo no Excel!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📖</span>Lendo Planilhas Existentes</h2>
+                <h3>Abrindo e lendo dados:</h3>
+
+                <div class="code-block">
+                    <code>from openpyxl import load_workbook
+
+# Abrir planilha existente
+wb = load_workbook("vendas.xlsx")
+ws = wb.active
+
+# Ler uma célula específica
+print(ws['A1'].value)  # Produto
+
+# Ler uma linha inteira
+for cell in ws[2]:  # Linha 2
+    print(cell.value)
+
+# Iterar por todas as linhas
+for row in ws.iter_rows(min_row=1, max_row=10, values_only=True):
+    print(row)
+
+# Exemplo: Ler dados e processar
+print("\n📊 PRODUTOS:")
+for row in ws.iter_rows(min_row=2, values_only=True):
+    produto, qtd, preco = row[0], row[1], row[2]
+    total = qtd * preco
+    print(f"{produto}: {qtd} un. × R$ {preco:.2f} = R$ {total:.2f}")</code>
+        </div>
+
+         <div class="destaque">
+                    <strong>⚠️ Atenção:</strong>
+                    Use <code>values_only=True</code> para obter apenas os valores, sem objetos de célula.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🐼</span>Biblioteca Pandas</h2>
+                <h3>O poder da análise de dados!</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Pandas é a biblioteca mais popular para análise de dados em Python.
+                    Ela trabalha com <strong>DataFrames</strong>, que são como tabelas Excel turbinadas!
+                </p>
+
+                <h3>Lendo Excel com Pandas:</h3>
+                <div class="code-block">
+                    <code>import pandas as pd
+
+# Ler planilha Excel
+df = pd.read_excel("vendas.xlsx")
+
+# Exibir os dados
+print(df)
+
+# Saída:
+#     Produto  Quantidade  Preço
+# 0  Notebook           5  2500.0
+# 1     Mouse          20    45.0
+# 2   Teclado          15   120.0
+
+# Informações básicas
+print(df.info())
+print(df.describe())  # Estatísticas descritivas</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Vantagem do Pandas:</strong>
+                    Operações complexas em poucas linhas de código!
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔍</span>Operações Básicas com Pandas</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+df = pd.read_excel("vendas.xlsx")
+
+# 1. Adicionar nova coluna calculada
+df['Total'] = df['Quantidade'] * df['Preço']
+
+# 2. Filtrar dados
+produtos_caros = df[df['Preço'] > 100]
+print("Produtos acima de R$ 100:")
+print(produtos_caros)
+
+# 3. Ordenar dados
+df_ordenado = df.sort_values('Total', ascending=False)
+print("\nProdutos por total de vendas:")
+print(df_ordenado)
+
+# 4. Estatísticas
+print(f"\n📊 ESTATÍSTICAS:")
+print(f"Total geral: R$ {df['Total'].sum():.2f}")
+print(f"Média de preço: R$ {df['Preço'].mean():.2f}")
+print(f"Produto mais vendido: {df.loc[df['Quantidade'].idxmax(), 'Produto']}")
+
+# 5. Salvar resultado
+df.to_excel("vendas_analisadas.xlsx", index=False)
+print("\n✅ Análise salva!")</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>Filtragem Avançada com Pandas</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+df = pd.read_excel("vendas.xlsx")
+df['Total'] = df['Quantidade'] * df['Preço']
+
+# Filtros condicionais
+# 1. Filtro simples
+alta_quantidade = df[df['Quantidade'] > 10]
+
+# 2. Filtros múltiplos (AND)
+produtos_especiais = df[
+    (df['Quantidade'] > 10) &
+    (df['Preço'] > 100)
+]
+
+# 3. Filtros múltiplos (OR)
+produtos_destaque = df[
+    (df['Quantidade'] > 15) |
+    (df['Preço'] > 1000)
+]
+
+# 4. Filtrar por lista de valores
+produtos_selecionados = df[
+    df['Produto'].isin(['Notebook', 'Monitor'])
+]
+
+# 5. Filtrar valores nulos
+df_limpo = df[df['Preço'].notna()]
+
+# 6. Buscar por texto
+produtos_com_o = df[
+    df['Produto'].str.contains('o', case=False)
+]
+
+print("Produtos que contêm 'o':")
+print(produtos_com_o)</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Agrupamento e Agregação</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+# Exemplo com dados de vendas por região
+dados = {
+    'Região': ['Norte', 'Sul', 'Norte', 'Sul', 'Norte'],
+    'Produto': ['Mouse', 'Teclado', 'Monitor', 'Mouse', 'Teclado'],
+    'Vendas': [100, 150, 200, 120, 180],
+    'Quantidade': [10, 15, 5, 12, 18]
+}
+
+df = pd.DataFrame(dados)
+
+# 1. Agrupar por região
+vendas_por_regiao = df.groupby('Região')['Vendas'].sum()
+print("Vendas por região:")
+print(vendas_por_regiao)
+
+# 2. Múltiplas agregações
+resumo = df.groupby('Região').agg({
+    'Vendas': ['sum', 'mean', 'count'],
+    'Quantidade': ['sum', 'mean']
+})
+print("\nResumo completo:")
+print(resumo)
+
+# 3. Criar tabela dinâmica
+pivot = pd.pivot_table(
+    df,
+    values='Vendas',
+    index='Região',
+    columns='Produto',
+    aggfunc='sum',
+    fill_value=0
+)
+print("\nTabela Dinâmica:")
+print(pivot)</code>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">🔄</span>Transformação de Dados</h2>
+
+        <div class="code-block">
+            <code>import pandas as pd
+
+df = pd.read_excel("vendas.xlsx")
+
+# 1. Aplicar função a uma coluna
+df['Preço_com_desconto'] = df['Preço'].apply(lambda x: x * 0.9)
+
+# 2. Categorizar valores
+def categorizar_preco(preco):
+    if preco > 500:
+        return 'Premium'
+    elif preco > 100:
+        return 'Standard'
+    else:
+        return 'Básico'
+
+df['Categoria'] = df['Preço'].apply(categorizar_preco)
+
+# 3. Criar colunas condicionais
+df['Status_Estoque'] = df['Quantidade'].apply(
+    lambda x: 'Baixo' if x < 10 else 'Médio' if x < 20 else 'Alto'
+)
+
+# 4. Renomear colunas
+df = df.rename(columns={
+    'Quantidade': 'Qtd',
+    'Preço': 'Valor_Unit'
+})
+
+# 5. Remover colunas
+df = df.drop(['Categoria'], axis=1)
+
+# 6. Ordenar colunas
+df = df[['Produto', 'Qtd', 'Valor_Unit', 'Status_Estoque']]
+
+print(df)</code>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">⚠️</span>Tratamento de Missing Data (NaN)</h2>
+                <h3>Lidando com valores faltantes em planilhas</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Valores faltantes (NaN - Not a Number) são muito comuns em planilhas Excel.
+                    É importante saber como identificá-los e tratá-los antes de fazer análises.
+                </p>
+
+        <div class="code-block">
+                    <code>import pandas as pd
+import numpy as np
+
+# Exemplo: DataFrame com valores faltantes
+dados = {
+    'Produto': ['Notebook', 'Mouse', 'Teclado', 'Monitor', 'WebCam'],
+    'Quantidade': [5, 20, None, 8, 12],  # None = NaN
+    'Preço': [2500.00, 45.00, 120.00, None, 150.00],
+    'Vendedor': ['João', None, 'Maria', 'Pedro', None]
+}
+
+df = pd.DataFrame(dados)
+print("DataFrame original:")
+print(df)
+
+# Verificar valores faltantes
+print("\n📊 Valores faltantes por coluna:")
+print(df.isna().sum())  # Conta NaN por coluna
+
+print("\nVerificar se há valores faltantes:")
+print(df.isna().any().any())  # True se houver algum NaN</code>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Importante:</strong>
+                    Valores faltantes podem aparecer como <code>None</code>, <code>NaN</code>, células vazias no Excel ou strings vazias.
+        </div>
+    </div>
+    
+    <div class="slide">
+                <h2><span class="emoji">🗑️</span>Remover Linhas com Missing Data</h2>
+
+        <div class="code-block">
+                    <code>import pandas as pd
+
+df = pd.read_excel("vendas_com_nan.xlsx")
+
+# 1. Remover linhas que têm QUALQUER valor faltante
+df_sem_nan = df.dropna()
+print("Linhas removidas (qualquer NaN):")
+print(df_sem_nan)
+
+# 2. Remover linhas onde TODAS as colunas são NaN
+df_sem_todos_nan = df.dropna(how='all')
+print("\nLinhas removidas (todas NaN):")
+print(df_sem_todos_nan)
+
+# 3. Remover linhas onde colunas específicas têm NaN
+df_limpo = df.dropna(subset=['Quantidade', 'Preço'])
+print("\nLinhas onde Quantidade ou Preço são NaN removidas:")
+print(df_limpo)
+
+# 4. Ver quantas linhas foram removidas
+linhas_originais = len(df)
+linhas_finais = len(df_sem_nan)
+print(f"\nLinhas removidas: {linhas_originais - linhas_finais}")</code>
+        </div>
+
+         <div class="destaque">
+                    <strong>⚠️ Cuidado:</strong>
+                    <code>dropna()</code> remove linhas permanentemente. Use com cuidado para não perder dados importantes!
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">🔧</span>Preencher Valores Faltantes</h2>
+
+        <div class="code-block">
+                    <code>import pandas as pd
+import numpy as np
+
+df = pd.read_excel("vendas.xlsx")
+
+# 1. Preencher com um valor fixo
+df_preenchido_zero = df.fillna(0)  # Preenche todos os NaN com 0
+print("Preenchido com zero:")
+print(df_preenchido_zero)
+
+# 2. Preencher por coluna com valores diferentes
+df_preenchido = df.fillna({
+    'Quantidade': 0,      # Quantidade faltante = 0
+    'Preço': df['Preço'].mean(),  # Preço faltante = média
+    'Vendedor': 'N/A'     # Vendedor faltante = 'N/A'
+})
+print("\nPreenchido com estratégias diferentes:")
+print(df_preenchido)
+
+# 3. Preencher com método forward fill (preenche com valor anterior)
+df_ffill = df.fillna(method='ffill')
+print("\nForward fill (valor anterior):")
+print(df_ffill)
+
+# 4. Preencher com método backward fill (preenche com próximo valor)
+df_bfill = df.fillna(method='bfill')
+print("\nBackward fill (próximo valor):")
+print(df_bfill)
+
+# 5. Preencher com média da coluna
+df['Preço'].fillna(df['Preço'].mean(), inplace=True)
+print("\nPreço preenchido com média:")
+print(df)</code>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>Quando Usar Cada Abordagem</h2>
+
+                <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                    <tr>
+                        <th>Método</th>
+                        <th>Quando Usar</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>dropna()</code></td>
+                        <td>Dados faltantes não são importantes ou há muitas linhas</td>
+                        <td>Logs, dados temporais</td>
+                    </tr>
+                    <tr>
+                        <td><code>fillna(0)</code></td>
+                        <td>Valor zero faz sentido</td>
+                        <td>Quantidade, estoque</td>
+                    </tr>
+                    <tr>
+                        <td><code>fillna(mean())</code></td>
+                        <td>Média representa bem o valor</td>
+                        <td>Preços, salários, idades</td>
+                    </tr>
+                    <tr>
+                        <td><code>fillna('N/A')</code></td>
+                        <td>Texto placeholder</td>
+                        <td>Nomes, categorias</td>
+                    </tr>
+                    <tr>
+                        <td><code>fillna(method='ffill')</code></td>
+                        <td>Dados sequenciais (temporal)</td>
+                        <td>Valores de ações, temperatura</td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+# Exemplo prático completo
+df = pd.read_excel("vendas.xlsx")
+
+# 1. Verificar situação inicial
+print(f"Valores faltantes: {df.isna().sum().sum()}")
+
+# 2. Estratégia: Preço = média, Quantidade = 0
+df['Preço'] = df['Preço'].fillna(df['Preço'].mean())
+df['Quantidade'] = df['Quantidade'].fillna(0)
+
+# 3. Remover linhas críticas onde não há produto
+df = df.dropna(subset=['Produto'])
+
+# 4. Verificar resultado
+print(f"\nValores faltantes restantes: {df.isna().sum().sum()}")
+print("\n✅ Dados limpos e prontos para análise!")</code>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">💾</span>Salvando Dados em Excel</h2>
+
+                <div class="code-block">
+                    <code>import pandas as pd
+
+df = pd.read_excel("vendas.xlsx")
+
+# 1. Salvar DataFrame simples
+df.to_excel("saida.xlsx", index=False)
+
+# 2. Salvar múltiplas abas
+with pd.ExcelWriter("relatorio_completo.xlsx") as writer:
+    df.to_excel(writer, sheet_name="Vendas", index=False)
+
+    # Criar resumo
+    resumo = df.groupby('Produto')['Quantidade'].sum()
+    resumo.to_excel(writer, sheet_name="Resumo")
+
+    # Criar análise
+    df_analise = df[df['Quantidade'] > 10]
+    df_analise.to_excel(writer, sheet_name="Alta_Venda", index=False)
+
+print("✅ Relatório com múltiplas abas criado!")
+
+# 3. Salvar com formatação (usando openpyxl)
+from openpyxl import load_workbook
+from openpyxl.styles import Font
+
+df.to_excel("formatado.xlsx", index=False)
+
+# Abrir e formatar
+wb = load_workbook("formatado.xlsx")
+ws = wb.active
+
+# Formatar cabeçalho
+for cell in ws[1]:
+    cell.font = Font(bold=True, size=12)
+
+wb.save("formatado.xlsx")</code>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercício Prático - Excel com Python</h2>
+
+        <div class="exemplo-box">
+                    <strong>🎯 Desafio: Sistema de Gestão de Produtos</strong>
+                    <p>Crie um sistema que:</p>
+                    <ol>
+                        <li>Leia uma planilha de produtos</li>
+                        <li>Calcule o valor total de estoque</li>
+                        <li>Identifique produtos com estoque baixo (< 10)</li>
+                        <li>Aplique 10% de desconto em produtos acima de R$ 500</li>
+                        <li>Gere um relatório formatado com os resultados</li>
+                    </ol>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <code>import pandas as pd
+from openpyxl import load_workbook
+from openpyxl.styles import Font, PatternFill
+
+# 1. Ler planilha
+df = pd.read_excel("produtos.xlsx")
+
+# 2. Calcular valor total
+df['Total_Estoque'] = df['Quantidade'] * df['Preço']
+
+# 3. Identificar estoque baixo
+df['Alerta'] = df['Quantidade'].apply(
+    lambda x: '⚠️ BAIXO' if x < 10 else '✅ OK'
+)
+
+# 4. Aplicar desconto
+df['Preço_Final'] = df['Preço'].apply(
+    lambda x: x * 0.9 if x > 500 else x
+)
+
+# 5. Gerar relatório
+df.to_excel("relatorio_produtos.xlsx", index=False)
+
+# Formatar
+wb = load_workbook("relatorio_produtos.xlsx")
+ws = wb.active
+
+for cell in ws[1]:
+    cell.font = Font(bold=True, color="FFFFFF")
+    cell.fill = PatternFill(start_color="4472C4",
+                           end_color="4472C4",
+                           fill_type="solid")
+
+wb.save("relatorio_produtos.xlsx")
+print("✅ Relatório gerado com sucesso!")</code>
+                        </div>
+                    </details>
+        </div>
+    </div>
+
+    <div class="slide">
+                <h2><span class="emoji">🎓</span>Resumo - Tópico 5</h2>
+
+        <div class="destaque">
+                    <strong>📚 O que aprendemos:</strong>
+            <ul style="margin-top: 10px;">
+                        <li>✅ Criar planilhas com <strong>Openpyxl</strong></li>
+                        <li>✅ Aplicar formatação e estilos profissionais</li>
+                        <li>✅ Inserir fórmulas do Excel</li>
+                        <li>✅ Ler e processar dados com <strong>Pandas</strong></li>
+                        <li>✅ Filtrar, ordenar e transformar dados</li>
+                        <li>✅ Agrupar e agregar informações</li>
+                        <li>✅ Salvar múltiplas abas e relatórios</li>
+            </ul>
+        </div>
+
+                <div class="exemplo-box">
+                    <strong>🚀 Próximo passo:</strong>
+                    No Tópico 6, vamos aprender a criar gráficos incríveis com Matplotlib
+                    para visualizar nossos dados do Excel!
+                </div>
+
+                <div class="code-block">
+                    <code># Exemplo completo resumido
+import pandas as pd
+
+# Ler
+df = pd.read_excel("dados.xlsx")
+
+# Analisar
+df['Total'] = df['Qtd'] * df['Preço']
+resumo = df.groupby('Categoria')['Total'].sum()
+
+# Salvar
+df.to_excel("resultado.xlsx", index=False)
+print("✅ Pronto!")</code>
+        </div>
+    </div>
+
+    <div class="controles">
+        <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+        <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador9">1 / 20</span>
+        <button class="btn" onclick="proximoSlide()">Próximo →</button>
+    </div>
+</div>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 7: Python para Excel</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+    <div class="quiz-container">
+        <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+            <h1>📊 Quiz: Python para Excel</h1>
+            <p>Teste seus conhecimentos sobre automação de Excel com Python!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual biblioteca é usada para ler/escrever arquivos Excel (.xlsx)?",
+                options: [
+                    "excel",
+                    "openpyxl",
+                    "xlsxwriter",
+                    "pyexcel"
+                ],
+                correct: 1,
+                explanation: "A biblioteca <code>openpyxl</code> é a mais popular para trabalhar com arquivos Excel (.xlsx) em Python. Instale com: <code>pip install openpyxl</code>"
+            },
+            {
+                question: "Como carregar um arquivo Excel existente com openpyxl?",
+                options: [
+                    "openpyxl.open('arquivo.xlsx')",
+                    "openpyxl.load_workbook('arquivo.xlsx')",
+                    "openpyxl.read('arquivo.xlsx')",
+                    "openpyxl.Workbook('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>openpyxl.load_workbook('arquivo.xlsx')</code> para carregar arquivo existente. Para criar novo, use <code>Workbook()</code>."
+            },
+            {
+                question: "Como acessar a célula A1 em uma planilha (sheet)?",
+                options: [
+                    "sheet.cell(1, 1)",
+                    "sheet['A1']",
+                    "Ambas as opções anteriores",
+                    "sheet.get('A1')"
+                ],
+                correct: 2,
+                explanation: "Duas formas válidas: <code>sheet['A1']</code> (notação de referência) ou <code>sheet.cell(row=1, column=1)</code> (método cell). Ambas acessam a mesma célula!"
+            },
+            {
+                question: "Como ler o valor da célula B2?",
+                options: [
+                    "sheet['B2'].text",
+                    "sheet['B2'].value",
+                    "sheet.read('B2')",
+                    "sheet.get_value('B2')"
+                ],
+                correct: 1,
+                explanation: "Use <code>sheet['B2'].value</code> para ler o valor da célula. A propriedade <code>.value</code> retorna o conteúdo."
+            },
+            {
+                question: "Como escrever 'Python' na célula C3?",
+                options: [
+                    "sheet['C3'] = 'Python'",
+                    "sheet.write('C3', 'Python')",
+                    "sheet.set_value('C3', 'Python')",
+                    "sheet.insert('C3', 'Python')"
+                ],
+                correct: 0,
+                explanation: "Simples assim: <code>sheet['C3'] = 'Python'</code>. Atribua diretamente o valor à célula usando a notação de colchetes."
+            },
+            {
+                question: "Como salvar as alterações no arquivo Excel?",
+                options: [
+                    "workbook.write('arquivo.xlsx')",
+                    "workbook.save('arquivo.xlsx')",
+                    "workbook.export('arquivo.xlsx')",
+                    "workbook.commit('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>workbook.save('arquivo.xlsx')</code> para salvar todas as alterações feitas no arquivo Excel."
+            },
+            {
+                question: "Qual biblioteca do Python é ideal para análise de dados em Excel?",
+                options: [
+                    "openpyxl",
+                    "pandas",
+                    "xlrd",
+                    "xlwt"
+                ],
+                correct: 1,
+                explanation: "<strong>Pandas</strong> é excelente para análise de dados! Use <code>pd.read_excel()</code> para carregar dados e <code>to_excel()</code> para salvar. Oferece DataFrames poderosos!"
+            },
+            {
+                question: "Como criar uma nova planilha (sheet) no workbook?",
+                options: [
+                    "workbook.add_sheet('Nome')",
+                    "workbook.create_sheet('Nome')",
+                    "workbook.new_sheet('Nome')",
+                    "workbook.insert_sheet('Nome')"
+                ],
+                correct: 1,
+                explanation: "Use <code>workbook.create_sheet('Nome')</code> para criar nova planilha. Pode especificar a posição com o parâmetro <code>index</code>."
+            },
+            {
+                question: "Como ler um arquivo Excel completo com pandas?",
+                options: [
+                    "pd.open_excel('arquivo.xlsx')",
+                    "pd.read_excel('arquivo.xlsx')",
+                    "pd.load_excel('arquivo.xlsx')",
+                    "pd.import_excel('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>pd.read_excel('arquivo.xlsx')</code> para carregar Excel em um DataFrame. Retorna tabela completa pronta para análise!"
+            },
+            {
+                question: "Como iterar sobre todas as linhas de uma planilha?",
+                options: [
+                    "for row in sheet.rows:",
+                    "for row in sheet.iterate():",
+                    "for row in sheet.iter_rows():",
+                    "Ambas A e C estão corretas"
+                ],
+                correct: 3,
+                explanation: "Duas formas válidas: <code>sheet.rows</code> (propriedade) ou <code>sheet.iter_rows()</code> (método com mais opções de parâmetros)."
+            },
+            {
+                question: "Como obter o número máximo de linhas com dados?",
+                options: [
+                    "sheet.max_row",
+                    "sheet.count_rows()",
+                    "len(sheet)",
+                    "sheet.total_rows"
+                ],
+                correct: 0,
+                explanation: "Use <code>sheet.max_row</code> para obter a linha máxima com dados. Também existe <code>sheet.max_column</code> para colunas."
+            },
+            {
+                question: "Qual vantagem de usar Python com Excel?",
+                options: [
+                    "Processar milhares de planilhas automaticamente",
+                    "Realizar cálculos complexos mais rápido",
+                    "Integrar com outras fontes de dados",
+                    "Todas as alternativas anteriores"
+                ],
+                correct: 3,
+                explanation: "Python + Excel = Superpoder! 🚀 Automatiza tarefas repetitivas, processa grandes volumes, realiza análises avançadas e integra com APIs, bancos de dados e outras ferramentas!"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina Python para Excel!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

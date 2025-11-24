@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 7: Python para Excel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .quiz-header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            background: #f0f0f0;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e8eaf6;
+            border-color: #667eea;
+            font-weight: bold;
+        }
+
+        .option.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .explanation {
+            display: none;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .explanation h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .explanation code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-prev {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #d0d0d0;
+        }
+
+        .results {
+            display: none;
+            text-align: center;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            font-size: 3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .score-text {
+            font-size: 0.3em;
+            margin-top: 10px;
+        }
+
+        .feedback {
+            font-size: 1.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>📊 Quiz: Python para Excel</h1>
+            <p>Teste seus conhecimentos sobre automação de Excel com Python!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual biblioteca é usada para ler/escrever arquivos Excel (.xlsx)?",
+                options: [
+                    "excel",
+                    "openpyxl",
+                    "xlsxwriter",
+                    "pyexcel"
+                ],
+                correct: 1,
+                explanation: "A biblioteca <code>openpyxl</code> é a mais popular para trabalhar com arquivos Excel (.xlsx) em Python. Instale com: <code>pip install openpyxl</code>"
+            },
+            {
+                question: "Como carregar um arquivo Excel existente com openpyxl?",
+                options: [
+                    "openpyxl.open('arquivo.xlsx')",
+                    "openpyxl.load_workbook('arquivo.xlsx')",
+                    "openpyxl.read('arquivo.xlsx')",
+                    "openpyxl.Workbook('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>openpyxl.load_workbook('arquivo.xlsx')</code> para carregar arquivo existente. Para criar novo, use <code>Workbook()</code>."
+            },
+            {
+                question: "Como acessar a célula A1 em uma planilha (sheet)?",
+                options: [
+                    "sheet.cell(1, 1)",
+                    "sheet['A1']",
+                    "Ambas as opções anteriores",
+                    "sheet.get('A1')"
+                ],
+                correct: 2,
+                explanation: "Duas formas válidas: <code>sheet['A1']</code> (notação de referência) ou <code>sheet.cell(row=1, column=1)</code> (método cell). Ambas acessam a mesma célula!"
+            },
+            {
+                question: "Como ler o valor da célula B2?",
+                options: [
+                    "sheet['B2'].text",
+                    "sheet['B2'].value",
+                    "sheet.read('B2')",
+                    "sheet.get_value('B2')"
+                ],
+                correct: 1,
+                explanation: "Use <code>sheet['B2'].value</code> para ler o valor da célula. A propriedade <code>.value</code> retorna o conteúdo."
+            },
+            {
+                question: "Como escrever 'Python' na célula C3?",
+                options: [
+                    "sheet['C3'] = 'Python'",
+                    "sheet.write('C3', 'Python')",
+                    "sheet.set_value('C3', 'Python')",
+                    "sheet.insert('C3', 'Python')"
+                ],
+                correct: 0,
+                explanation: "Simples assim: <code>sheet['C3'] = 'Python'</code>. Atribua diretamente o valor à célula usando a notação de colchetes."
+            },
+            {
+                question: "Como salvar as alterações no arquivo Excel?",
+                options: [
+                    "workbook.write('arquivo.xlsx')",
+                    "workbook.save('arquivo.xlsx')",
+                    "workbook.export('arquivo.xlsx')",
+                    "workbook.commit('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>workbook.save('arquivo.xlsx')</code> para salvar todas as alterações feitas no arquivo Excel."
+            },
+            {
+                question: "Qual biblioteca do Python é ideal para análise de dados em Excel?",
+                options: [
+                    "openpyxl",
+                    "pandas",
+                    "xlrd",
+                    "xlwt"
+                ],
+                correct: 1,
+                explanation: "<strong>Pandas</strong> é excelente para análise de dados! Use <code>pd.read_excel()</code> para carregar dados e <code>to_excel()</code> para salvar. Oferece DataFrames poderosos!"
+            },
+            {
+                question: "Como criar uma nova planilha (sheet) no workbook?",
+                options: [
+                    "workbook.add_sheet('Nome')",
+                    "workbook.create_sheet('Nome')",
+                    "workbook.new_sheet('Nome')",
+                    "workbook.insert_sheet('Nome')"
+                ],
+                correct: 1,
+                explanation: "Use <code>workbook.create_sheet('Nome')</code> para criar nova planilha. Pode especificar a posição com o parâmetro <code>index</code>."
+            },
+            {
+                question: "Como ler um arquivo Excel completo com pandas?",
+                options: [
+                    "pd.open_excel('arquivo.xlsx')",
+                    "pd.read_excel('arquivo.xlsx')",
+                    "pd.load_excel('arquivo.xlsx')",
+                    "pd.import_excel('arquivo.xlsx')"
+                ],
+                correct: 1,
+                explanation: "Use <code>pd.read_excel('arquivo.xlsx')</code> para carregar Excel em um DataFrame. Retorna tabela completa pronta para análise!"
+            },
+            {
+                question: "Como iterar sobre todas as linhas de uma planilha?",
+                options: [
+                    "for row in sheet.rows:",
+                    "for row in sheet.iterate():",
+                    "for row in sheet.iter_rows():",
+                    "Ambas A e C estão corretas"
+                ],
+                correct: 3,
+                explanation: "Duas formas válidas: <code>sheet.rows</code> (propriedade) ou <code>sheet.iter_rows()</code> (método com mais opções de parâmetros)."
+            },
+            {
+                question: "Como obter o número máximo de linhas com dados?",
+                options: [
+                    "sheet.max_row",
+                    "sheet.count_rows()",
+                    "len(sheet)",
+                    "sheet.total_rows"
+                ],
+                correct: 0,
+                explanation: "Use <code>sheet.max_row</code> para obter a linha máxima com dados. Também existe <code>sheet.max_column</code> para colunas."
+            },
+            {
+                question: "Qual vantagem de usar Python com Excel?",
+                options: [
+                    "Processar milhares de planilhas automaticamente",
+                    "Realizar cálculos complexos mais rápido",
+                    "Integrar com outras fontes de dados",
+                    "Todas as alternativas anteriores"
+                ],
+                correct: 3,
+                explanation: "Python + Excel = Superpoder! 🚀 Automatiza tarefas repetitivas, processa grandes volumes, realiza análises avançadas e integra com APIs, bancos de dados e outras ferramentas!"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina Python para Excel!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 3: Automação de Presença e Frequência</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📋 Projeto 3: Automação de Presença e Frequência</h1>
+                <p>Controle automático de presença escolar</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um sistema que lê listas de presença, conta faltas automaticamente,
+                    calcula percentual de frequência e gera um relatório individual por aluno.
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Limpar dados</strong> e padronizar formatos</li>
+                    <li><strong>Criar contadores automáticos</strong> com <code>value_counts()</code></li>
+                    <li><strong>Calcular percentuais</strong> e frequência</li>
+                    <li><strong>Filtrar dados</strong> por condições (ex: alunos com mais de X faltas)</li>
+                    <li><strong>Gerar relatório por aluno</strong> com resumo individual</li>
+                    <li><strong>Aplicar formatação condicional</strong> (destacar alunos com baixa frequência)</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Importa arquivo</strong> com datas e nomes de alunos</li>
+                    <li><strong>Identifica presenças e faltas</strong> automaticamente</li>
+                    <li><strong>Conta faltas por aluno</strong> ao longo do período</li>
+                    <li><strong>Calcula percentual de presença</strong> para cada aluno</li>
+                    <li><strong>Gera planilha final</strong> com resumo por aluno</li>
+                    <li><strong>Destaca alunos</strong> com frequência abaixo de 75%</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Leitura de arquivos Excel com Pandas</li>
+                    <li>✅ Limpeza de dados: remover duplicatas, espaços extras</li>
+                    <li>✅ Contagem de valores com <code>value_counts()</code></li>
+                    <li>✅ Agrupamento com <code>groupby()</code> por aluno</li>
+                    <li>✅ Cálculos de percentuais e proporções</li>
+                    <li>✅ Filtragem de dados com condições booleanas</li>
+                    <li>✅ Formatação condicional com Openpyxl</li>
+                    <li>✅ Criação de colunas calculadas</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Visualizar frequência por turma</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Dashboard interativo de frequência</li>
+                    <li>🌟 <strong>Envio por E-mail:</strong> Enviar relatório para pais/responsáveis</li>
+                    <li>🌟 <strong>Envio por Telegram:</strong> Notificar alunos com baixa frequência</li>
+                    <li>🌟 <strong>Gráficos de frequência:</strong> Visualizar padrões de presença</li>
+                    <li>🌟 <strong>Previsão de reprovação:</strong> Alertar alunos em risco</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_presenca_frequencia/
+├── controle_presenca.py        # Script principal
+├── lista_presenca.xlsx         # Arquivo de entrada
+├── relatorio_frequencia.xlsx   # Arquivo de saída
+└── README.md</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Padronize os valores de presença (P, F, etc.)</li>
+                    <li>Use groupby para contar faltas por aluno</li>
+                    <li>Calcule o percentual: (total_aulas - faltas) / total_aulas * 100</li>
+                    <li>Use formatação condicional para destacar alunos em risco</li>
+                    <li>Crie uma função para gerar o relatório individual</li>
+                </ul>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+

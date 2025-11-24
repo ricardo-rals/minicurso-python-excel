@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 6: Funções em Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .quiz-header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            background: #f0f0f0;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e8eaf6;
+            border-color: #667eea;
+            font-weight: bold;
+        }
+
+        .option.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .explanation {
+            display: none;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .explanation h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .explanation code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-prev {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #d0d0d0;
+        }
+
+        .results {
+            display: none;
+            text-align: center;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            font-size: 3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .score-text {
+            font-size: 0.3em;
+            margin-top: 10px;
+        }
+
+        .feedback {
+            font-size: 1.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>⚙️ Quiz: Funções em Python</h1>
+            <p>Teste seus conhecimentos sobre funções e programação modular!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Como definir uma função em Python?",
+                options: [
+                    "function somar():",
+                    "def somar():",
+                    "func somar():",
+                    "void somar():"
+                ],
+                correct: 1,
+                explanation: "Use a palavra-chave <code>def</code> seguida do nome da função e parênteses: <code>def nome_funcao():</code>"
+            },
+            {
+                question: "O que faz o comando 'return' em uma função?",
+                options: [
+                    "Imprime o resultado na tela",
+                    "Encerra o programa",
+                    "Retorna um valor ao chamador",
+                    "Define uma variável"
+                ],
+                correct: 2,
+                explanation: "O <code>return</code> <strong>devolve um valor</strong> para quem chamou a função. Exemplo: <code>return resultado</code>"
+            },
+            {
+                question: "Qual a diferença entre parâmetros e argumentos?",
+                options: [
+                    "Não há diferença",
+                    "Parâmetros são na definição, argumentos na chamada",
+                    "Argumentos são na definição, parâmetros na chamada",
+                    "Parâmetros são obrigatórios, argumentos opcionais"
+                ],
+                correct: 1,
+                explanation: "<strong>Parâmetros</strong> são variáveis na definição da função. <strong>Argumentos</strong> são os valores passados ao chamar. Exemplo: <code>def func(x):</code> (x é parâmetro) → <code>func(5)</code> (5 é argumento)"
+            },
+            {
+                question: "Como criar um parâmetro com valor padrão?",
+                options: [
+                    "def saudar(nome='Mundo'):",
+                    "def saudar(nome:='Mundo'):",
+                    "def saudar(nome default 'Mundo'):",
+                    "def saudar(nome == 'Mundo'):"
+                ],
+                correct: 0,
+                explanation: "Use o operador <code>=</code> na definição: <code>def funcao(param='valor_padrao'):</code>. Se não passar argumento, usa o padrão."
+            },
+            {
+                question: "O que acontece se uma função não tem 'return'?",
+                options: [
+                    "Erro de sintaxe",
+                    "Retorna 0",
+                    "Retorna None",
+                    "Não executa"
+                ],
+                correct: 2,
+                explanation: "Funções sem <code>return</code> retornam <code>None</code> automaticamente. É o valor padrão do Python."
+            },
+            {
+                question: "O que é uma função lambda?",
+                options: [
+                    "Uma função sem nome (anônima)",
+                    "Uma função que não retorna nada",
+                    "Uma função com múltiplos returns",
+                    "Uma função recursiva"
+                ],
+                correct: 0,
+                explanation: "Lambda é uma <strong>função anônima</strong> de uma linha. Sintaxe: <code>lambda x: x * 2</code>. Útil para operações simples!"
+            },
+            {
+                question: "Qual resultado de: dobro = lambda x: x * 2; dobro(5)?",
+                options: [
+                    "5",
+                    "10",
+                    "25",
+                    "Erro"
+                ],
+                correct: 1,
+                explanation: "A lambda multiplica <code>x</code> por 2. Com <code>x=5</code>, retorna <code>5 * 2 = 10</code>."
+            },
+            {
+                question: "O que são *args em uma função?",
+                options: [
+                    "Argumentos obrigatórios",
+                    "Argumentos nomeados variáveis",
+                    "Argumentos posicionais variáveis (tupla)",
+                    "Argumentos padrão"
+                ],
+                correct: 2,
+                explanation: "<code>*args</code> permite passar <strong>número variável</strong> de argumentos posicionais. Eles são recebidos como <strong>tupla</strong>. Exemplo: <code>def soma(*args): return sum(args)</code>"
+            },
+            {
+                question: "O que são **kwargs em uma função?",
+                options: [
+                    "Palavras-chave reservadas",
+                    "Argumentos nomeados variáveis (dicionário)",
+                    "Argumentos posicionais",
+                    "Comentários da função"
+                ],
+                correct: 1,
+                explanation: "<code>**kwargs</code> permite passar <strong>número variável</strong> de argumentos nomeados. Recebidos como <strong>dicionário</strong>. Exemplo: <code>def info(**kwargs): print(kwargs)</code>"
+            },
+            {
+                question: "O que é escopo de variável?",
+                options: [
+                    "O tipo de dado da variável",
+                    "O tamanho da variável",
+                    "A região do código onde a variável é visível",
+                    "O nome da variável"
+                ],
+                correct: 2,
+                explanation: "<strong>Escopo</strong> define onde uma variável pode ser acessada. Variáveis locais existem apenas dentro da função. Variáveis globais existem em todo o código."
+            },
+            {
+                question: "Como acessar variável global dentro de função?",
+                options: [
+                    "Usar a palavra-chave 'global'",
+                    "Usar '$' antes do nome",
+                    "Usar 'extern'",
+                    "Não é possível"
+                ],
+                correct: 0,
+                explanation: "Use <code>global nome_variavel</code> dentro da função para modificar variável global. Exemplo:<br><code>global contador<br>contador += 1</code>"
+            },
+            {
+                question: "O que é uma docstring?",
+                options: [
+                    "Um tipo de string",
+                    "Documentação da função com triple quotes",
+                    "Uma função que retorna string",
+                    "Um comentário de linha"
+                ],
+                correct: 1,
+                explanation: "<strong>Docstring</strong> documenta a função usando <code>\"\"\"texto\"\"\"</code> logo após <code>def</code>. Acessível via <code>help(funcao)</code> ou <code>funcao.__doc__</code>"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina funções!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

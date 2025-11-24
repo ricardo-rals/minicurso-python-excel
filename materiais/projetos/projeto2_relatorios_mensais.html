@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 2: Gerador Automático de Relatórios Mensais</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📊 Projeto 2: Gerador Automático de Relatórios Mensais</h1>
+                <p>Consolide múltiplas planilhas em um relatório profissional</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um sistema que lê várias planilhas de vendas de diferentes dias/meses,
+                    consolida todos os dados, realiza análises e gera um relatório Excel completo
+                    com múltiplas abas e gráficos.
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Unir vários arquivos Excel</strong> usando <code>pd.concat()</code></li>
+                    <li><strong>Criar tabelas dinâmicas</strong> via Python com <code>groupby()</code></li>
+                    <li><strong>Agrupar por múltiplas dimensões</strong> (vendedor, produto, data)</li>
+                    <li><strong>Exportar relatório multi-abas</strong> com <code>ExcelWriter</code></li>
+                    <li><strong>Organizar dados</strong> em diferentes visualizações</li>
+                    <li><strong>Criar resumos executivos</strong> com totais e médias</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Faz merge</strong> de vários arquivos de vendas de vários dias/meses</li>
+                    <li><strong>Agrupa por vendedor</strong> e calcula total de vendas</li>
+                    <li><strong>Agrupa por produto</strong> e identifica mais vendidos</li>
+                    <li><strong>Calcula métricas:</strong> total geral, média por vendedor, ticket médio</li>
+                    <li><strong>Exporta relatório</strong> com múltiplas abas (Resumo, Por Vendedor, Por Produto)</li>
+                    <li><strong>Adiciona gráficos</strong> de barras e pizza no relatório</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Leitura de múltiplos arquivos Excel com <code>pd.read_excel()</code></li>
+                    <li>✅ Concatenar DataFrames com <code>pd.concat()</code></li>
+                    <li>✅ Agrupamento com <code>groupby()</code> por múltiplas colunas</li>
+                    <li>✅ Cálculos agregados: <code>.sum()</code>, <code>.mean()</code>, <code>.count()</code></li>
+                    <li>✅ Criação de múltiplas abas com <code>ExcelWriter</code></li>
+                    <li>✅ Ordenação de dados com <code>.sort_values()</code></li>
+                    <li>✅ Criação de gráficos com Matplotlib</li>
+                    <li>✅ Formatação de planilhas com Openpyxl</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Interface web para visualizar relatórios</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Dashboard interativo com filtros</li>
+                    <li>🌟 <strong>Envio por E-mail:</strong> Enviar relatório mensal automaticamente</li>
+                    <li>🌟 <strong>Envio por Telegram:</strong> Enviar resumo executivo via bot</li>
+                    <li>🌟 <strong>Comparação mensal:</strong> Comparar vendas entre meses</li>
+                    <li>🌟 <strong>Detecção de tendências:</strong> Identificar produtos em alta/baixa</li>
+                    <li>🌟 <strong>Exportação em PDF:</strong> Gerar PDF do relatório</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_relatorios_mensais/
+├── gerador_relatorios.py       # Script principal
+├── vendas/
+│   ├── vendas_01_01_2024.xlsx
+│   ├── vendas_02_01_2024.xlsx
+│   └── vendas_03_01_2024.xlsx
+├── relatorio_consolidado.xlsx  # Arquivo de saída
+└── README.md</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Use um loop para ler todos os arquivos de uma pasta</li>
+                    <li>Adicione uma coluna com a data de cada arquivo</li>
+                    <li>Crie uma função para cada tipo de análise</li>
+                    <li>Use ExcelWriter para criar múltiplas abas</li>
+                    <li>Formate cada aba de forma diferente</li>
+                </ul>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+

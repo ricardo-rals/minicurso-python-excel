@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 4: Strings e Entrada de Dados</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>🔤 Quiz: Strings e Entrada de Dados</h1>
+                <p>Teste seus conhecimentos sobre manipulação de strings e input()!</p>
+            </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "O que retorna a função input() em Python?",
+                options: [
+                    "Um número inteiro",
+                    "Sempre uma string (texto)",
+                    "Um número decimal",
+                    "Um booleano"
+                ],
+                correct: 1,
+                explanation: "O <code>input()</code> <strong>sempre retorna uma string</strong>, mesmo que o usuário digite números. Para converter, use <code>int()</code> ou <code>float()</code>."
+            },
+            {
+                question: "Como converter a string '25' para um número inteiro?",
+                options: [
+                    "int('25')",
+                    "str(25)",
+                    "float('25')",
+                    "number('25')"
+                ],
+                correct: 0,
+                explanation: "Use <code>int('25')</code> para converter string para inteiro. Resultado: <code>25</code> (número, não texto)."
+            },
+            {
+                question: "Qual método converte uma string para MAIÚSCULAS?",
+                options: [
+                    "upper()",
+                    "lower()",
+                    "capitalize()",
+                    "title()"
+                ],
+                correct: 0,
+                explanation: "O método <code>upper()</code> converte toda a string para maiúsculas. Exemplo: <code>'python'.upper()</code> retorna <code>'PYTHON'</code>."
+            },
+            {
+                question: "O que faz o método split() em uma string?",
+                options: [
+                    "Junta strings",
+                    "Divide a string em uma lista",
+                    "Remove espaços",
+                    "Substitui texto"
+                ],
+                correct: 1,
+                explanation: "O <code>split()</code> divide uma string em uma lista. Exemplo: <code>'a b c'.split()</code> retorna <code>['a', 'b', 'c']</code>."
+            },
+            {
+                question: "Qual é o resultado de: 'Python'[0:2]?",
+                options: [
+                    "'Py'",
+                    "'Pyt'",
+                    "'P'",
+                    "'thon'"
+                ],
+                correct: 0,
+                explanation: "O fatiamento <code>[0:2]</code> pega do índice 0 até 2 (exclusivo). Resultado: <code>'Py'</code> (índices 0 e 1)."
+            },
+            {
+                question: "Como verificar se uma string contém um texto específico?",
+                options: [
+                    "string.contains('texto')",
+                    "'texto' in string",
+                    "string.find('texto')",
+                    "string.has('texto')"
+                ],
+                correct: 1,
+                explanation: "Use o operador <code>in</code>: <code>'texto' in string</code>. Retorna <code>True</code> se encontrar, <code>False</code> caso contrário."
+            },
+            {
+                question: "O que faz o método replace()?",
+                options: [
+                    "Remove caracteres",
+                    "Substitui texto na string",
+                    "Inverte a string",
+                    "Divide a string"
+                ],
+                correct: 1,
+                explanation: "O <code>replace()</code> substitui ocorrências de texto. Exemplo: <code>'Python'.replace('P', 'J')</code> retorna <code>'Jython'</code>."
+            },
+            {
+                question: "Qual é o resultado de: f'Olá, {nome}' se nome = 'Maria'?",
+                options: [
+                    "'Olá, {nome}'",
+                    "'Olá, Maria'",
+                    "Erro",
+                    "'Olá, nome'"
+                ],
+                correct: 1,
+                explanation: "F-strings substituem variáveis entre chaves. <code>f'Olá, {nome}'</code> com <code>nome = 'Maria'</code> resulta em <code>'Olá, Maria'</code>."
+            },
+            {
+                question: "Como remover espaços no início e fim de uma string?",
+                options: [
+                    "trim()",
+                    "strip()",
+                    "remove()",
+                    "clean()"
+                ],
+                correct: 1,
+                explanation: "Use <code>strip()</code> para remover espaços dos dois lados. <code>lstrip()</code> remove da esquerda, <code>rstrip()</code> da direita."
+            },
+            {
+                question: "O que acontece se você tentar: int(input('Digite um número: ')) e o usuário digitar 'abc'?",
+                options: [
+                    "Retorna 0",
+                    "Retorna None",
+                    "Gera um erro ValueError",
+                    "Converte para string"
+                ],
+                correct: 2,
+                explanation: "Tentar converter texto não numérico com <code>int()</code> gera um <strong>ValueError</strong>. Use <code>try-except</code> para tratar isso."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            // Restaurar resposta se existir
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            // Remover seleção anterior
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            // Marcar opção selecionada
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                // Verificar resposta
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                // Mostrar explicação
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            // Habilitar botão próximo
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina o conteúdo!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        // Iniciar quiz
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

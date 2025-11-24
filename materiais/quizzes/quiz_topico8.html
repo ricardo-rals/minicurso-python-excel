@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 8: Gráficos com Matplotlib</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📈 Quiz: Gráficos com Matplotlib</h1>
+                <p>Teste seus conhecimentos sobre visualização de dados!</p>
+            </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual biblioteca usamos para criar gráficos em Python?",
+                options: [
+                    "numpy",
+                    "matplotlib",
+                    "pandas",
+                    "seaborn"
+                ],
+                correct: 1,
+                explanation: "A biblioteca <code>matplotlib</code> é a mais popular para criar gráficos em Python. Instale com: <code>pip install matplotlib</code>"
+            },
+            {
+                question: "Como importar matplotlib corretamente?",
+                options: [
+                    "import matplotlib",
+                    "import matplotlib.pyplot as plt",
+                    "from matplotlib import *",
+                    "import plt from matplotlib"
+                ],
+                correct: 1,
+                explanation: "O padrão é: <code>import matplotlib.pyplot as plt</code>. Isso permite usar <code>plt.plot()</code>, <code>plt.bar()</code>, etc."
+            },
+            {
+                question: "Qual função cria um gráfico de barras?",
+                options: [
+                    "plt.line()",
+                    "plt.bar()",
+                    "plt.pie()",
+                    "plt.scatter()"
+                ],
+                correct: 1,
+                explanation: "Use <code>plt.bar(x, y)</code> para criar gráfico de barras. Exemplo: <code>plt.bar(['A', 'B'], [10, 20])</code>"
+            },
+            {
+                question: "Qual função cria um gráfico de linha?",
+                options: [
+                    "plt.bar()",
+                    "plt.plot()",
+                    "plt.pie()",
+                    "plt.line()"
+                ],
+                correct: 1,
+                explanation: "Use <code>plt.plot(x, y)</code> para criar gráfico de linha. Exemplo: <code>plt.plot([1, 2, 3], [4, 5, 6])</code>"
+            },
+            {
+                question: "Como adicionar título ao gráfico?",
+                options: [
+                    "plt.title('Título')",
+                    "plt.label('Título')",
+                    "plt.heading('Título')",
+                    "plt.name('Título')"
+                ],
+                correct: 0,
+                explanation: "Use <code>plt.title('Título')</code> para adicionar título ao gráfico."
+            },
+            {
+                question: "Qual função exibe o gráfico na tela?",
+                options: [
+                    "plt.show()",
+                    "plt.display()",
+                    "plt.render()",
+                    "plt.print()"
+                ],
+                correct: 0,
+                explanation: "Use <code>plt.show()</code> para exibir o gráfico. Sempre chame no final do código!"
+            },
+            {
+                question: "Como criar um gráfico de pizza (pizza chart)?",
+                options: [
+                    "plt.pie()",
+                    "plt.circle()",
+                    "plt.round()",
+                    "plt.donut()"
+                ],
+                correct: 0,
+                explanation: "Use <code>plt.pie(valores, labels=rotulos)</code> para criar gráfico de pizza. Exemplo: <code>plt.pie([30, 40, 30], labels=['A', 'B', 'C'])</code>"
+            },
+            {
+                question: "Como salvar um gráfico em arquivo?",
+                options: [
+                    "plt.save('arquivo.png')",
+                    "plt.savefig('arquivo.png')",
+                    "plt.export('arquivo.png')",
+                    "plt.write('arquivo.png')"
+                ],
+                correct: 1,
+                explanation: "Use <code>plt.savefig('arquivo.png')</code> para salvar o gráfico. Pode salvar em PNG, PDF, SVG, etc."
+            },
+            {
+                question: "O que faz plt.xlabel() e plt.ylabel()?",
+                options: [
+                    "Define cores dos eixos",
+                    "Define rótulos dos eixos X e Y",
+                    "Define tamanho dos eixos",
+                    "Remove os eixos"
+                ],
+                correct: 1,
+                explanation: "<code>plt.xlabel('Texto')</code> e <code>plt.ylabel('Texto')</code> definem os rótulos dos eixos X e Y respectivamente."
+            },
+            {
+                question: "Qual função define o tamanho da figura do gráfico?",
+                options: [
+                    "plt.size(10, 6)",
+                    "plt.figure(figsize=(10, 6))",
+                    "plt.dimensions(10, 6)",
+                    "plt.scale(10, 6)"
+                ],
+                correct: 1,
+                explanation: "Use <code>plt.figure(figsize=(largura, altura))</code> para definir o tamanho. Exemplo: <code>plt.figure(figsize=(10, 6))</code> cria uma figura de 10x6 polegadas."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            // Restaurar resposta se existir
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            // Remover seleção anterior
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            // Marcar opção selecionada
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                // Verificar resposta
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                // Mostrar explicação
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            // Habilitar botão próximo
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina o conteúdo!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        // Iniciar quiz
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

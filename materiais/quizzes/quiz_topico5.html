@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 5: Listas em Python</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📋 Quiz: Listas em Python</h1>
+                <p>Teste seus conhecimentos sobre listas e estruturas de dados!</p>
+            </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Como criar uma lista vazia em Python?",
+                options: [
+                    "lista = []",
+                    "lista = ()",
+                    "lista = {}",
+                    "lista = list"
+                ],
+                correct: 0,
+                explanation: "Usa-se <code>[]</code> (colchetes vazios) para criar uma lista vazia. Parênteses <code>()</code> criam tuplas e chaves <code>{}</code> criam dicionários."
+            },
+            {
+                question: "Qual índice acessa o primeiro elemento de uma lista?",
+                options: [
+                    "1",
+                    "0",
+                    "-1",
+                    "first"
+                ],
+                correct: 1,
+                explanation: "Em Python, índices começam em <strong>0</strong>. Então <code>lista[0]</code> acessa o primeiro elemento."
+            },
+            {
+                question: "O que faz o método append()?",
+                options: [
+                    "Remove o último elemento",
+                    "Adiciona um elemento ao final da lista",
+                    "Ordena a lista",
+                    "Inverte a lista"
+                ],
+                correct: 1,
+                explanation: "O método <code>append()</code> adiciona um elemento ao <strong>final</strong> da lista. Exemplo: <code>lista.append(10)</code>"
+            },
+            {
+                question: "Como acessar o último elemento da lista frutas?",
+                options: [
+                    "frutas[last]",
+                    "frutas[-1]",
+                    "frutas[end]",
+                    "frutas.last()"
+                ],
+                correct: 1,
+                explanation: "Use <code>frutas[-1]</code> para acessar o último elemento. Índices negativos contam de trás para frente!"
+            },
+            {
+                question: "O que retorna len([1, 2, 3, 4, 5])?",
+                options: [
+                    "4",
+                    "5",
+                    "[1, 2, 3, 4, 5]",
+                    "15"
+                ],
+                correct: 1,
+                explanation: "A função <code>len()</code> retorna o número de elementos. A lista tem <strong>5</strong> elementos."
+            },
+            {
+                question: "Qual é o resultado de [1, 2] + [3, 4]?",
+                options: [
+                    "[1, 2, 3, 4]",
+                    "[4, 6]",
+                    "[10]",
+                    "Erro"
+                ],
+                correct: 0,
+                explanation: "O operador <code>+</code> concatena (junta) listas: <code>[1, 2, 3, 4]</code>"
+            },
+            {
+                question: "Como remover o primeiro elemento 'banana' da lista frutas?",
+                options: [
+                    "frutas.delete('banana')",
+                    "frutas.remove('banana')",
+                    "frutas.pop('banana')",
+                    "del frutas['banana']"
+                ],
+                correct: 1,
+                explanation: "Use <code>frutas.remove('banana')</code> para remover a primeira ocorrência de um valor específico."
+            },
+            {
+                question: "O que é list comprehension?",
+                options: [
+                    "Um tipo de lista",
+                    "Uma forma concisa de criar listas",
+                    "Um método de lista",
+                    "Uma biblioteca Python"
+                ],
+                correct: 1,
+                explanation: "List comprehension é uma forma <strong>concisa e elegante</strong> de criar listas. Exemplo: <code>[x*2 for x in range(5)]</code>"
+            },
+            {
+                question: "Qual o resultado de: [x**2 for x in range(3)]?",
+                options: [
+                    "[0, 1, 4]",
+                    "[1, 2, 3]",
+                    "[0, 1, 2]",
+                    "[1, 4, 9]"
+                ],
+                correct: 0,
+                explanation: "<code>range(3)</code> gera 0, 1, 2. Elevando ao quadrado: <code>0²=0, 1²=1, 2²=4</code> → <code>[0, 1, 4]</code>"
+            },
+            {
+                question: "Qual estrutura é IMUTÁVEL (não pode ser modificada)?",
+                options: [
+                    "Lista",
+                    "Tupla",
+                    "Set",
+                    "Dicionário"
+                ],
+                correct: 1,
+                explanation: "<strong>Tuplas</strong> são imutáveis! Uma vez criadas, não podem ser modificadas. Use <code>()</code> para criar tuplas."
+            },
+            {
+                question: "O que faz o método sort()?",
+                options: [
+                    "Retorna uma nova lista ordenada",
+                    "Ordena a lista original",
+                    "Conta os elementos",
+                    "Remove duplicatas"
+                ],
+                correct: 1,
+                explanation: "O método <code>sort()</code> ordena a <strong>lista original</strong> diretamente. Para criar nova lista ordenada, use <code>sorted()</code>."
+            },
+            {
+                question: "Como verificar se 'maçã' está na lista frutas?",
+                options: [
+                    "frutas.contains('maçã')",
+                    "frutas.has('maçã')",
+                    "'maçã' in frutas",
+                    "frutas.find('maçã')"
+                ],
+                correct: 2,
+                explanation: "Use o operador <code>in</code>: <code>'maçã' in frutas</code> retorna <code>True</code> ou <code>False</code>."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina listas!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

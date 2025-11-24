@@ -1,6 +1,6 @@
-        <div id="topico4" class="slides-container">
+        <div id="topico3" class="slides-container">
             <div class="slide active">
-                <h2><span class="emoji">🔀</span>Tópico 4: Condicionais e Repetições</h2>
+                <h2><span class="emoji">🔀</span>Tópico 3: Condicionais e Repetições</h2>
                 <h3>Estruturas Condicionais: if, elif, else</h3>
                 <p style="font-size: 1.1em; margin: 20px 0;">
                     Permitem que o programa tome decisões baseadas em condições.
@@ -447,133 +447,6 @@ Soma final: 15</div>
             </div>
 
             <div class="slide">
-                <h2><span class="emoji">🔁</span>Laços Aninhados (For dentro de For)</h2>
-                <h3>Loops dentro de loops</h3>
-                <p style="font-size: 1.1em; margin: 20px 0;">
-                    Um loop dentro de outro permite processar estruturas bidimensionais como <strong>matrizes</strong>,
-                    <strong>tabelas</strong> ou criar <strong>padrões complexos</strong>. Muito útil ao trabalhar com dados tabulares!
-                </p>
-                
-                <div class="slide-content">
-                    <h3>Exemplo básico: criar uma matriz:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code"># Criar matriz 3x3 preenchida com zeros
-matriz = []
-for i in range(3):  # Loop externo: linhas
-    linha = []
-    for j in range(3):  # Loop interno: colunas
-        linha.append(0)
-    matriz.append(linha)
-
-print("Matriz 3x3:")
-for linha in matriz:
-    print(linha)</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">Matriz 3x3:
-[0, 0, 0]
-[0, 0, 0]
-[0, 0, 0]</div>
-                    </div>
-
-                    <h3>Exemplo: criar tabela de multiplicação:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code"># Tabela de multiplicação 5x5
-print("Tabela de Multiplicação:")
-print("    ", end="")
-for j in range(1, 6):
-    print(f"{j:4}", end="")
-print()  # Nova linha
-
-for i in range(1, 6):  # Linhas
-    print(f"{i:4}", end="")
-    for j in range(1, 6):  # Colunas
-        print(f"{i*j:4}", end="")
-    print()  # Nova linha após cada linha</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">Tabela de Multiplicação:
-        1   2   3   4   5
-   1   1   2   3   4   5
-   2   2   4   6   8  10
-   3   3   6   9  12  15
-   4   4   8  12  16  20
-   5   5  10  15  20  25</div>
-                    </div>
-
-                    <h3>Exemplo: padrão de triângulo:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code"># Criar triângulo de asteriscos
-linhas = 5
-for i in range(1, linhas + 1):  # Loop externo: número de linhas
-    for j in range(i):  # Loop interno: número de asteriscos por linha
-        print("*", end="")
-    print()  # Nova linha após cada linha de asteriscos</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">*
-**
-***
-****
-*****</div>
-                    </div>
-
-                    <h3>Exemplo prático: processar dados tabulares (planilha):</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code"># Dados de vendas por mês e produto
-vendas = [
-    [100, 120, 115],  # Produto A: Jan, Fev, Mar
-    [80, 95, 110],    # Produto B: Jan, Fev, Mar
-    [60, 70, 85]      # Produto C: Jan, Fev, Mar
-]
-meses = ["Jan", "Fev", "Mar"]
-produtos = ["Produto A", "Produto B", "Produto C"]
-
-# Calcular total por produto (soma das colunas)
-print("Total de vendas por produto:")
-for i, produto in enumerate(produtos):  # Loop externo: produtos (linhas)
-    total = 0
-    for j in range(len(meses)):  # Loop interno: meses (colunas)
-        total += vendas[i][j]
-    print(f"{produto}: {total}")
-
-# Calcular total por mês (soma das linhas)
-print("\nTotal de vendas por mês:")
-for j, mes in enumerate(meses):  # Loop externo: meses (colunas)
-    total = 0
-    for i in range(len(produtos)):  # Loop interno: produtos (linhas)
-        total += vendas[i][j]
-    print(f"{mes}: {total}")</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">Total de vendas por produto:
-Produto A: 335
-Produto B: 285
-Produto C: 215
-
-Total de vendas por mês:
-Jan: 240
-Fev: 285
-Mar: 310</div>
-                    </div>
-
-                    <div class="destaque" style="margin-top: 20px;">
-                        <strong>💡 Quando usar laços aninhados?</strong>
-                        <ul>
-                            <li><strong>Matrizes e tabelas:</strong> Processar linhas e colunas</li>
-                            <li><strong>Dados tabulares:</strong> Planilhas Excel com múltiplas dimensões</li>
-                            <li><strong>Padrões visuais:</strong> Criar formas, triângulos, etc.</li>
-                            <li><strong>Comparações:</strong> Comparar cada elemento com todos os outros</li>
-                        </ul>
-                        <p style="margin-top: 10px;">
-                            <strong>⚠️ Atenção:</strong> Loops aninhados podem ser lentos com muitos dados. 
-                            Para planilhas grandes, use Pandas que é mais eficiente!
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide">
                 <h2><span class="emoji">🎮</span>While com Break e Continue</h2>
                 
                 <div class="slide-content">
@@ -759,8 +632,9 @@ print(f"{numero}! = {fatorial}")</div>
             <div class="controles">
                 <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
                 <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador4">1 / 12</span>
+                <span class="contador-slides" id="contador3">1 / 9</span>
                 <button class="btn" onclick="proximoSlide()">Próximo →</button>
             </div>
         </div>
+
 

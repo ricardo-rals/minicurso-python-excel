@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tópico 2: Variáveis, Tipos e Operadores</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/quizzes.css">
+</head>
+<body>
+    <div class="container">
+    <div class="quiz-container">
+        <div class="quiz-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>📝 Quiz: Variáveis, Tipos e Operadores</h1>
+                <p>Teste seus conhecimentos sobre tipos de dados, variáveis e operadores!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div id="quizContent"></div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Concluído!</h2>
+            <div class="score-circle">
+                <span id="scorePercent">0%</span>
+                <span class="score-text">Pontuação</span>
+            </div>
+            <p class="feedback" id="feedback"></p>
+            <p id="scoreDetails"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+            <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual é o tipo de dado do valor 42 em Python?",
+                options: [
+                    "string",
+                    "integer",
+                    "float",
+                    "boolean"
+                ],
+                correct: 1,
+                explanation: "O número <code>42</code> sem ponto decimal é do tipo <strong>int (integer)</strong>, que representa números inteiros."
+            },
+            {
+                question: "Como declarar uma variável com o valor 'Python' em Python?",
+                options: [
+                    "var linguagem = 'Python'",
+                    "linguagem = 'Python'",
+                    "String linguagem = 'Python'",
+                    "let linguagem = 'Python'"
+                ],
+                correct: 1,
+                explanation: "Em Python, basta escrever <code>linguagem = 'Python'</code>. Não precisa declarar o tipo!"
+            },
+            {
+                question: "Qual operador verifica se dois valores são iguais?",
+                options: [
+                    "=",
+                    "==",
+                    "===",
+                    "!="
+                ],
+                correct: 1,
+                explanation: "O operador <code>==</code> compara valores para igualdade. O <code>=</code> é usado para atribuição."
+            },
+            {
+                question: "Qual é o resultado de: 10 % 3 em Python?",
+                options: [
+                    "3",
+                    "1",
+                    "0",
+                    "3.33"
+                ],
+                correct: 1,
+                explanation: "O operador <code>%</code> (módulo) retorna o resto da divisão. 10 dividido por 3 é 3 com resto <strong>1</strong>."
+            },
+            {
+                question: "Como criar um comentário de uma linha em Python?",
+                options: [
+                    "// comentário",
+                    "<!-- comentário -->",
+                    "# comentário",
+                    "/* comentário */"
+                ],
+                correct: 2,
+                explanation: "Em Python, comentários de uma linha começam com <code>#</code>."
+            },
+            {
+                question: "Qual estrutura condicional executa quando a condição é FALSA?",
+                options: [
+                    "if",
+                    "else",
+                    "elif",
+                    "while"
+                ],
+                correct: 1,
+                explanation: "O bloco <code>else</code> é executado quando a condição do <code>if</code> é falsa."
+            },
+            {
+                question: "Qual é a saída de: print(type(3.14))?",
+                options: [
+                    "&lt;class 'int'&gt;",
+                    "&lt;class 'float'&gt;",
+                    "&lt;class 'str'&gt;",
+                    "&lt;class 'double'&gt;"
+                ],
+                correct: 1,
+                explanation: "O valor <code>3.14</code> tem ponto decimal, portanto é do tipo <strong>float</strong>."
+            },
+            {
+                question: "O que faz o comando: nome = input('Seu nome: ')?",
+                options: [
+                    "Imprime 'Seu nome:' na tela",
+                    "Captura entrada do usuário e armazena em 'nome'",
+                    "Define 'nome' como 'Seu nome:'",
+                    "Causa um erro"
+                ],
+                correct: 1,
+                explanation: "<code>input()</code> exibe a mensagem e captura o texto digitado pelo usuário, armazenando na variável <code>nome</code>."
+            },
+            {
+                question: "Qual loop é usado quando sabemos quantas vezes executar?",
+                options: [
+                    "while",
+                    "for",
+                    "do-while",
+                    "loop"
+                ],
+                correct: 1,
+                explanation: "O loop <code>for</code> é ideal quando sabemos o número de iterações. Exemplo: <code>for i in range(10)</code>"
+            },
+            {
+                question: "Qual a diferença entre '5' e 5 em Python?",
+                options: [
+                    "Não há diferença",
+                    "'5' é string, 5 é inteiro",
+                    "'5' é char, 5 é number",
+                    "Ambos são inteiros"
+                ],
+                correct: 1,
+                explanation: "<code>'5'</code> (com aspas) é uma <strong>string</strong> (texto), enquanto <code>5</code> (sem aspas) é um <strong>inteiro</strong> (número)."
+            },
+            {
+                question: "O que faz o operador 'and' em Python?",
+                options: [
+                    "Retorna True se pelo menos uma condição for True",
+                    "Retorna True se AMBAS condições forem True",
+                    "Retorna True se nenhuma condição for True",
+                    "Inverte o valor booleano"
+                ],
+                correct: 1,
+                explanation: "O operador <code>and</code> retorna <code>True</code> apenas quando <strong>TODAS</strong> as condições são verdadeiras."
+            },
+            {
+                question: "Qual função converte uma string em inteiro?",
+                options: [
+                    "str()",
+                    "float()",
+                    "int()",
+                    "number()"
+                ],
+                correct: 2,
+                explanation: "A função <code>int()</code> converte valores para inteiro. Exemplo: <code>int('42')</code> retorna <code>42</code>"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const q = questions[currentQuestion];
+
+            let html = `
+                <div class="question active">
+                    <div class="question-number">Questão ${currentQuestion + 1} de ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})" id="option${index}">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <h4>💡 Explicação:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima →'}
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            updateProgress();
+
+            // Restaurar resposta se existir
+            if (answers[currentQuestion] !== undefined) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, isRestore = false) {
+            const q = questions[currentQuestion];
+            answers[currentQuestion] = index;
+
+            // Remover seleção anterior
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.add('disabled');
+            });
+
+            // Marcar opção selecionada
+            const selectedOption = document.getElementById(`option${index}`);
+            selectedOption.classList.add('selected');
+
+            if (!isRestore) {
+                // Verificar resposta
+                if (index === q.correct) {
+                    selectedOption.classList.add('correct');
+                    if (!answers[currentQuestion]) score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    document.getElementById(`option${q.correct}`).classList.add('correct');
+                }
+
+                // Mostrar explicação
+                document.getElementById('explanation').classList.add('show');
+            }
+
+            // Habilitar botão próximo
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            const results = document.getElementById('results');
+            results.classList.add('show');
+
+            const percent = Math.round((score / questions.length) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+            document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
+
+            let feedback = '';
+            if (percent >= 90) feedback = '🌟 Excelente! Você domina os fundamentos!';
+            else if (percent >= 70) feedback = '👏 Muito bom! Continue praticando!';
+            else if (percent >= 50) feedback = '👍 Bom trabalho! Revise alguns conceitos.';
+            else feedback = '📚 Continue estudando! A prática leva à perfeição!';
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('results').classList.remove('show');
+            loadQuestion();
+        }
+
+        // Iniciar quiz
+        loadQuestion();
+    </script>
+
+    <script src="../../assets/js/navigation.js"></script>
+        </div>
+    </div>
+</body>
+</html>

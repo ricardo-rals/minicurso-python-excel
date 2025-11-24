@@ -1,0 +1,112 @@
+/* Estilos específicos para Projetos */
+
+.projeto-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+.projeto-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #667eea;
+}
+
+.projeto-header h1 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.projeto-header p {
+    color: #666;
+    font-size: 1.2em;
+}
+
+.projeto-section {
+    background: #f8f9fa;
+    border-left: 5px solid #667eea;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.projeto-section h2 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.projeto-section h3 {
+    color: #333;
+    font-size: 1.3em;
+    margin: 20px 0 10px 0;
+}
+
+.projeto-section ul, .projeto-section ol {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+.projeto-section li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.requisitos-box {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.requisitos-box h4 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.requisitos-box code {
+    background: #c8e6c9;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.bonus-box {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.bonus-box h4 {
+    color: #e65100;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.code-example {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+    white-space: pre;
+}
+

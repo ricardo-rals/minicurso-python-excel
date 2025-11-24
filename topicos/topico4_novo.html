@@ -1,6 +1,6 @@
-        <div id="topico3" class="slides-container">
+        <div id="topico4" class="slides-container">
             <div class="slide active">
-                <h2><span class="emoji">🔤</span>Tópico 3: Strings e Entrada de Dados</h2>
+                <h2><span class="emoji">🔤</span>Tópico 4: Strings e Entrada de Dados</h2>
                 <h3>Trabalhando com Strings</h3>
                 <p style="font-size: 1.1em; margin: 20px 0;">
                     Strings são sequências de caracteres usadas para representar texto.
@@ -133,69 +133,6 @@ print(f"'{texto.rstrip()}'")   # Remove da direita</div>
 'Python   '
 '   Python'</div>
                     </div>
-
-                    <h3>Verificações de tipo de caractere:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code">texto1 = "Python123"
-texto2 = "Python"
-texto3 = "12345"
-texto4 = "Python 123"
-
-# Verificar se é alfanumérico (letras e números, sem espaços)
-print(f"'{texto1}' é alfanumérico? {texto1.isalnum()}")  # True
-print(f"'{texto4}' é alfanumérico? {texto4.isalnum()}")  # False (tem espaço)
-
-# Verificar se é apenas letras
-print(f"'{texto2}' é apenas letras? {texto2.isalpha()}")  # True
-print(f"'{texto1}' é apenas letras? {texto1.isalpha()}")  # False (tem números)
-
-# Verificar se é apenas dígitos
-print(f"'{texto3}' é apenas dígitos? {texto3.isdigit()}")  # True
-print(f"'{texto1}' é apenas dígitos? {texto1.isdigit()}")  # False
-
-# Verificar se é apenas espaços
-espacos = "   "
-print(f"'{espacos}' é apenas espaços? {espacos.isspace()}")  # True</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">'Python123' é alfanumérico? True
-'Python 123' é alfanumérico? False
-'Python' é apenas letras? True
-'Python123' é apenas letras? False
-'12345' é apenas dígitos? True
-'Python123' é apenas dígitos? False
-'   ' é apenas espaços? True</div>
-                    </div>
-
-                    <h3>Formatação de espaçamento:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code">texto = "Python"
-
-# Centralizar texto
-print(f"|{texto.center(20)}|")      # |       Python       |
-print(f"|{texto.center(20, '-')}|") # |-------Python-------|
-
-# Alinhar à esquerda
-print(f"|{texto.ljust(20)}|")        # |Python              |
-print(f"|{texto.ljust(20, '.')}|")  # |Python..............|
-
-# Alinhar à direita
-print(f"|{texto.rjust(20)}|")        # |              Python|
-print(f"|{texto.rjust(20, '0')}|")  # |00000000000000Python|
-
-# Preencher com zeros à esquerda (útil para números)
-numero = "42"
-print(f"|{numero.zfill(5)}|")       # |00042|</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">|       Python       |
-|-------Python-------|
-|Python              |
-|Python..............|
-|              Python|
-|00000000000000Python|
-|00042|</div>
-                    </div>
                 </div>
             </div>
 
@@ -289,151 +226,14 @@ print(nova_frase)
 nova_frase = frase.replace("Python", "JavaScript", 1)
 print(nova_frase)
 
-# Remover caracteres (método tradicional - múltiplos replace)
+# Remover caracteres
 telefone = "(11) 98888-7777"
 telefone_limpo = telefone.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
-print(telefone_limpo)  # 11988887777</div>
+print(telefone_limpo)</div>
                         <div class="jupyter-output"></div>
                         <div class="jupyter-print">JavaScript é bom. JavaScript é fácil.
 JavaScript é bom. Python é fácil.
 11988887777</div>
-                    </div>
-
-                    <div class="destaque" style="margin-top: 20px;">
-                        <strong>💡 Dica Avançada - Expressões Regulares (Regex):</strong>
-                        <p style="margin-top: 10px;">
-                            Para operações mais complexas de busca e substituição, podemos usar 
-                            <strong>Expressões Regulares (regex)</strong> com o módulo <code>re</code>.
-                        </p>
-                    </div>
-
-                    <h3>Regex - Uma forma mais poderosa:</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code">import re
-
-# Exemplo 1: Remover caracteres não numéricos do telefone
-telefone = "(11) 98888-7777"
-telefone_limpo = re.sub(r'[^0-9]', '', telefone)  # Remove tudo que NÃO é dígito
-print(f"Telefone limpo: {telefone_limpo}")  # 11988887777
-
-# Exemplo 2: Extrair apenas números de um texto
-texto = "O preço é R$ 1.234,56 e o desconto é 10%"
-numeros = re.findall(r'\d+', texto)  # Encontra todos os números
-print(f"Números encontrados: {numeros}")  # ['1', '234', '56', '10']
-
-# Exemplo 3: Validar formato de email
-email = "usuario@exemplo.com"
-padrao = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-if re.match(padrao, email):
-    print("✅ Email válido!")
-else:
-    print("❌ Email inválido!")
-
-# Exemplo 4: Substituir múltiplos espaços por um único espaço
-texto = "Python    é    incrível"
-texto_limpo = re.sub(r'\s+', ' ', texto)  # \s+ = um ou mais espaços
-print(f"Texto limpo: '{texto_limpo}'")  # 'Python é incrível'
-
-# Exemplo 5: Extrair data no formato DD/MM/AAAA
-texto = "Nascido em 15/03/1990"
-data = re.search(r'\d{2}/\d{2}/\d{4}', texto)
-if data:
-    print(f"Data encontrada: {data.group()}")  # 15/03/1990</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">Telefone limpo: 11988887777
-Números encontrados: ['1', '234', '56', '10']
-✅ Email válido!
-Texto limpo: 'Python é incrível'
-Data encontrada: 15/03/1990</div>
-                    </div>
-
-                    <h3>Padrões Regex mais comuns:</h3>
-                    <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
-                        <tr>
-                            <th>Padrão</th>
-                            <th>Significado</th>
-                            <th>Exemplo</th>
-                        </tr>
-                        <tr>
-                            <td><code>\d</code></td>
-                            <td>Qualquer dígito (0-9)</td>
-                            <td><code>\d+</code> = um ou mais dígitos</td>
-                        </tr>
-                        <tr>
-                            <td><code>\w</code></td>
-                            <td>Letra, dígito ou underscore</td>
-                            <td><code>\w+</code> = palavra</td>
-                        </tr>
-                        <tr>
-                            <td><code>\s</code></td>
-                            <td>Espaço em branco</td>
-                            <td><code>\s+</code> = um ou mais espaços</td>
-                        </tr>
-                        <tr>
-                            <td><code>.</code></td>
-                            <td>Qualquer caractere (exceto nova linha)</td>
-                            <td><code>.</code> = qualquer char</td>
-                        </tr>
-                        <tr>
-                            <td><code>^</code></td>
-                            <td>Início da string</td>
-                            <td><code>^Python</code> = começa com Python</td>
-                        </tr>
-                        <tr>
-                            <td><code>$</code></td>
-                            <td>Fim da string</td>
-                            <td><code>Python$</code> = termina com Python</td>
-                        </tr>
-                        <tr>
-                            <td><code>[]</code></td>
-                            <td>Conjunto de caracteres</td>
-                            <td><code>[0-9]</code> = qualquer dígito</td>
-                        </tr>
-                        <tr>
-                            <td><code>[^]</code></td>
-                            <td>Negação (tudo exceto)</td>
-                            <td><code>[^0-9]</code> = tudo exceto dígitos</td>
-                        </tr>
-                        <tr>
-                            <td><code>+</code></td>
-                            <td>Um ou mais</td>
-                            <td><code>\d+</code> = um ou mais dígitos</td>
-                        </tr>
-                        <tr>
-                            <td><code>*</code></td>
-                            <td>Zero ou mais</td>
-                            <td><code>\d*</code> = zero ou mais dígitos</td>
-                        </tr>
-                        <tr>
-                            <td><code>?</code></td>
-                            <td>Zero ou um</td>
-                            <td><code>\d?</code> = zero ou um dígito</td>
-                        </tr>
-                    </table>
-
-                    <div class="exemplo-box">
-                        <strong>📚 Funções principais do módulo re:</strong>
-                        <ul style="margin-top: 10px;">
-                            <li><code>re.sub(padrao, substituicao, texto)</code> - Substituir</li>
-                            <li><code>re.findall(padrao, texto)</code> - Encontrar todas as ocorrências</li>
-                            <li><code>re.search(padrao, texto)</code> - Buscar primeira ocorrência</li>
-                            <li><code>re.match(padrao, texto)</code> - Verificar se começa com o padrão</li>
-                        </ul>
-                    </div>
-
-                    <div class="destaque">
-                        <strong>💡 Quando usar regex?</strong>
-                        <ul>
-                            <li>Validação de formatos (email, CPF, telefone)</li>
-                            <li>Extrair informações de textos</li>
-                            <li>Limpar dados (remover caracteres especiais)</li>
-                            <li>Buscar padrões complexos</li>
-                        </ul>
-                        <p style="margin-top: 10px;">
-                            <strong>Nota:</strong> Para tarefas simples, <code>replace()</code> é suficiente. 
-                            Use regex quando precisar de padrões mais complexos!
-                        </p>
                     </div>
 
                     <h3>Split - dividir string em lista:</h3>
@@ -878,8 +678,9 @@ Você tem 25 anos</div>
             <div class="controles">
                 <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
                 <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador3">1 / 12</span>
+                <span class="contador-slides" id="contador4">1 / 9</span>
                 <button class="btn" onclick="proximoSlide()">Próximo →</button>
             </div>
         </div>
+
 

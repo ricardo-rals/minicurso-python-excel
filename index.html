@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minicurso: Python para Excel</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/projetos.css">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                 </ul>
             </div>
 
-            <h2 style="color: #667eea; text-align: center; margin: 30px 0;">Selecione um Tópico:</h2>
+            <h2 class="section-title">📚 Selecione um Tópico:</h2>
 
             <div class="topicos-grid">
                 <div class="topico-card" data-topico="topico1">
@@ -35,33 +36,205 @@
                 </div>
 
                 <div class="topico-card" data-topico="topico2">
-                    <h3>2️⃣ Fundamentos</h3>
-                    <p>Variáveis, operadores e estruturas de controle</p>
+                    <h3>2️⃣ Variáveis, Tipos e Operadores</h3>
+                    <p>Tipos de dados, variáveis, operadores aritméticos e lógicos</p>
                 </div>
 
                 <div class="topico-card" data-topico="topico3">
-                    <h3>3️⃣ Listas</h3>
-                    <p>Criação, manipulação e iteração de listas</p>
+                    <h3>3️⃣ Strings e Entrada de Dados</h3>
+                    <p>Manipulação de strings, formatação e input()</p>
                 </div>
 
                 <div class="topico-card" data-topico="topico4">
-                    <h3>4️⃣ Funções</h3>
-                    <p>Definindo funções, parâmetros e retornos</p>
+                    <h3>4️⃣ Condicionais e Repetições</h3>
+                    <p>if/else, for, while, break e continue</p>
                 </div>
 
                 <div class="topico-card" data-topico="topico5">
-                    <h3>5️⃣ Excel com Python</h3>
-                    <p>Openpyxl e Pandas para manipular planilhas</p>
+                    <h3>5️⃣ Listas</h3>
+                    <p>Criação, manipulação e iteração de listas</p>
                 </div>
 
                 <div class="topico-card" data-topico="topico6">
-                    <h3>6️⃣ Gráficos</h3>
-                    <p>Matplotlib: barras, linha e pizza</p>
+                    <h3>6️⃣ Funções</h3>
+                    <p>Definindo funções, parâmetros e retornos</p>
                 </div>
 
                 <div class="topico-card" data-topico="topico7">
-                    <h3>7️⃣ Projeto Final</h3>
+                    <h3>7️⃣ Tratamento de Erros</h3>
+                    <p>try/except, tratamento de exceções</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico8">
+                    <h3>8️⃣ Manipulação de Arquivos</h3>
+                    <p>Trabalhando com arquivos TXT e CSV</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico9">
+                    <h3>9️⃣ Excel com Python</h3>
+                    <p>Openpyxl e Pandas para manipular planilhas</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico10">
+                    <h3>🔟 Gráficos</h3>
+                    <p>Matplotlib: barras, linha e pizza</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico11">
+                    <h3>1️⃣1️⃣ Módulos Úteis</h3>
+                    <p>datetime, JSON e os para automação</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico12">
+                    <h3>1️⃣2️⃣ Boas Práticas</h3>
+                    <p>PEP 8, documentação e debugging</p>
+                </div>
+
+                <div class="topico-card" data-topico="topico13">
+                    <h3>1️⃣3️⃣ Projeto Final</h3>
                     <p>Automação completa de análise de vendas</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">📝 Teste seus Conhecimentos - Quizzes:</h2>
+
+            <div class="quizzes-grid">
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico1.html'">
+                    <h3>1️⃣ Quiz: Introdução</h3>
+                    <p>Teste seus conhecimentos sobre Python básico</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico2.html'">
+                    <h3>2️⃣ Quiz: Variáveis e Operadores</h3>
+                    <p>Teste sobre tipos de dados e operadores</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico3.html'">
+                    <h3>3️⃣ Quiz: Strings e Entrada</h3>
+                    <p>Teste sobre manipulação de strings e input()</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico4.html'">
+                    <h3>4️⃣ Quiz: Condicionais e Repetições</h3>
+                    <p>Teste sobre if/else, for e while</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico5.html'">
+                    <h3>5️⃣ Quiz: Listas</h3>
+                    <p>Teste sobre listas e suas operações</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico6.html'">
+                    <h3>6️⃣ Quiz: Funções</h3>
+                    <p>Teste sobre definição e uso de funções</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico7.html'">
+                    <h3>7️⃣ Quiz: Tratamento de Erros</h3>
+                    <p>Teste sobre try/except</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico8.html'">
+                    <h3>8️⃣ Quiz: Manipulação de Arquivos</h3>
+                    <p>Teste sobre arquivos TXT e CSV</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico9.html'">
+                    <h3>9️⃣ Quiz: Excel com Python</h3>
+                    <p>Teste sobre openpyxl e pandas</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico10.html'">
+                    <h3>🔟 Quiz: Gráficos</h3>
+                    <p>Teste sobre matplotlib e visualização</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico11.html'">
+                    <h3>1️⃣1️⃣ Quiz: Módulos Úteis</h3>
+                    <p>Teste sobre datetime, JSON e os</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico12.html'">
+                    <h3>1️⃣2️⃣ Quiz: Boas Práticas</h3>
+                    <p>Teste sobre PEP 8 e debugging</p>
+                </div>
+
+                <div class="quiz-card" onclick="window.location.href='materiais/quizzes/quiz_topico13.html'">
+                    <h3>1️⃣3️⃣ Quiz: Projeto Final</h3>
+                    <p>Teste integrado sobre automação</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">✏️ Exercícios Práticos:</h2>
+
+            <div class="exercicios-grid">
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico2.html'">
+                    <h3>2️⃣ Exercícios: Variáveis e Operadores</h3>
+                    <p>10 exercícios práticos sobre tipos e operadores</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico3.html'">
+                    <h3>3️⃣ Exercícios: Condicionais e Repetições</h3>
+                    <p>10 exercícios sobre if/else, for e while</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico4.html'">
+                    <h3>4️⃣ Exercícios: Strings e Entrada</h3>
+                    <p>10 exercícios sobre manipulação de strings</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico5.html'">
+                    <h3>5️⃣ Exercícios: Listas</h3>
+                    <p>10 exercícios sobre listas e suas operações</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico6.html'">
+                    <h3>6️⃣ Exercícios: Funções</h3>
+                    <p>10 exercícios sobre definição de funções</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico7.html'">
+                    <h3>7️⃣ Exercícios: Excel com Python</h3>
+                    <p>10 exercícios sobre pandas e openpyxl</p>
+                </div>
+
+                <div class="exercicio-card" onclick="window.location.href='materiais/exercicios/exercicios_topico8.html'">
+                    <h3>8️⃣ Exercícios: Gráficos</h3>
+                    <p>10 exercícios sobre matplotlib</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">🚀 Projetos Práticos:</h2>
+
+            <div class="projetos-grid">
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto1_controle_financeiro.html'">
+                    <h3>💰 Projeto 1: Controle Financeiro</h3>
+                    <p>Automatização de planilha financeira com gráficos</p>
+                </div>
+
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto2_relatorios_mensais.html'">
+                    <h3>📊 Projeto 2: Relatórios Mensais</h3>
+                    <p>Consolidação e geração automática de relatórios</p>
+                </div>
+
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto3_presenca_frequencia.html'">
+                    <h3>📋 Projeto 3: Presença e Frequência</h3>
+                    <p>Automação de controle de presença escolar</p>
+                </div>
+
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto4_notas_fiscais.html'">
+                    <h3>🧾 Projeto 4: Notas Fiscais Fake</h3>
+                    <p>Geração de dados de teste com Faker</p>
+                </div>
+
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto5_automatizador_rh.html'">
+                    <h3>👥 Projeto 5: Automatizador de RH</h3>
+                    <p>Cálculos automáticos de RH e férias</p>
+                </div>
+
+                <div class="projeto-card" onclick="window.location.href='materiais/projetos/projeto6_dashboard_vendas.html'">
+                    <h3>📈 Projeto 6: Dashboard de Vendas</h3>
+                    <p>Dashboard completo de vendas em Excel</p>
                 </div>
             </div>
         </div>

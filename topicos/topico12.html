@@ -1,0 +1,674 @@
+        <div id="topico12" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">✨</span>Tópico 12: Boas Práticas e Debugging</h2>
+                <h3>Escrevendo código profissional</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Escrever código que funciona é importante, mas escrever código <strong>limpo, legível e manutenível</strong>
+                    é essencial para ser um bom programador!
+                </p>
+                
+                <ul>
+                    <li><strong>📋 PEP 8:</strong> Guia de estilo Python</li>
+                    <li><strong>📝 Documentação:</strong> Comentários e docstrings</li>
+                    <li><strong>🐛 Debugging:</strong> Encontrar e corrigir erros</li>
+                    <li><strong>⚡ Performance:</strong> Otimizações básicas</li>
+                </ul>
+
+                <div class="exemplo-box">
+                    <strong>💡 Neste tópico você vai aprender:</strong>
+                    <ul>
+                        <li>Seguir o guia PEP 8</li>
+                        <li>Escrever código limpo e legível</li>
+                        <li>Documentar seu código</li>
+                        <li>Debugar problemas comuns</li>
+                        <li>Otimizar código básico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📋</span>PEP 8 - Guia de Estilo Python</h2>
+                <h3>Padrões para código Python</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    PEP 8 é o guia oficial de estilo para código Python. Seguir essas convenções
+                    torna seu código mais legível e profissional!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Nomenclatura (nomes de variáveis e funções):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ CORRETO: snake_case para variáveis e funções
+nome_completo = "João Silva"
+def calcular_media():
+    pass
+
+# ❌ INCORRETO: camelCase (Java/JavaScript)
+# nomeCompleto = "João Silva"
+# def calcularMedia():
+#     pass
+
+# ✅ CORRETO: UPPER_CASE para constantes
+PI = 3.14159
+TAXA_JUROS = 0.10
+MAX_TENTATIVAS = 3
+
+# ✅ CORRETO: PascalCase para classes
+class Pessoa:
+    pass
+
+# ✅ CORRETO: Nomes descritivos
+total_vendas = 1000
+quantidade_produtos = 50
+
+# ❌ INCORRETO: Nomes genéricos ou abreviados
+# tv = 1000  # O que é tv?
+# qtd = 50   # Abreviação confusa</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+
+                    <h3>Indentação e espaçamento:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ CORRETO: 4 espaços para indentação
+def funcao():
+    if condicao:
+        print("Executado")
+        return True
+
+# ❌ INCORRETO: Tab ou menos espaços
+# def funcao():
+#  if condicao:
+#   print("Executado")
+
+# ✅ CORRETO: Espaço após vírgula
+lista = [1, 2, 3]
+funcao(argumento1, argumento2)
+
+# ✅ CORRETO: Espaço ao redor de operadores
+resultado = a + b
+if x > 0:
+    print("Positivo")
+
+# ❌ INCORRETO: Sem espaços
+# resultado=a+b
+# if x>0:</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Executado</div>
+                    </div>
+
+                    <h3>Linhas e quebras:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ CORRETO: Máximo 79 caracteres por linha
+nome_completo = (
+    "João Silva da Costa e Oliveira Santos"
+)
+
+# Se precisar quebrar linha
+if (condicao1 and 
+    condicao2 and
+    condicao3):
+    print("Todas condições verdadeiras")
+
+# ✅ CORRETO: Linha em branco entre funções
+def funcao1():
+    pass
+
+
+def funcao2():
+    pass</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Comentários e Documentação</h2>
+                <h3>Quando e como comentar código</h3>
+                
+                <div class="slide-content">
+                    <h3>Tipos de comentários:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ Comentário de linha (explica o quê e por quê)
+# Calcular média das notas
+media = sum(notas) / len(notas)
+
+# ❌ Comentário inútil (diz o óbvio)
+# media = sum(notas) / len(notas)  # Calcula média (óbvio!)
+
+# ✅ Comentário explicativo (explica o por quê)
+# Usar timedelta porque date + int não funciona
+data_futura = data_atual + timedelta(days=30)
+
+# ✅ Comentário de seção
+# ============================================
+# PROCESSAMENTO DE DADOS
+# ============================================
+
+# ✅ Docstring para função (recomendado!)
+def calcular_desconto(preco, percentual):
+    """Calcula desconto aplicado ao preço.
+    
+    Args:
+        preco: Preço original
+        percentual: Percentual de desconto (0 a 100)
+        
+    Returns:
+        Valor do desconto calculado
+    """
+    return preco * (percentual / 100)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+
+                    <h3>Quando comentar:</h3>
+                    <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                        <tr>
+                            <th>Situação</th>
+                            <th>Comentar?</th>
+                            <th>Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td>Código óbvio</td>
+                            <td>❌ Não</td>
+                            <td><code>soma = a + b</code></td>
+                        </tr>
+                        <tr>
+                            <td>Lógica complexa</td>
+                            <td>✅ Sim</td>
+                            <td>Algoritmo complicado</td>
+                        </tr>
+                        <tr>
+                            <td>Por que, não o quê</td>
+                            <td>✅ Sim</td>
+                            <td>Explicação de decisão</td>
+                        </tr>
+                        <tr>
+                            <td>Funções</td>
+                            <td>✅ Sim (docstring)</td>
+                            <td>Documentação completa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🐛</span>Debugging Básico</h2>
+                <h3>Encontrar e corrigir erros</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Todo programador comete erros. Aprender a debugar é uma habilidade essencial!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Usar print() para debug (mais simples):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Adicionar prints para ver o que está acontecendo
+def calcular_media(notas):
+    print(f"DEBUG: Notas recebidas: {notas}")  # Ver entrada
+    print(f"DEBUG: Tipo: {type(notas)}")        # Ver tipo
+    
+    soma = sum(notas)
+    print(f"DEBUG: Soma: {soma}")               # Ver soma
+    
+    quantidade = len(notas)
+    print(f"DEBUG: Quantidade: {quantidade}")   # Ver quantidade
+    
+    media = soma / quantidade
+    print(f"DEBUG: Média: {media}")             # Ver resultado
+    
+    return media
+
+notas = [8.5, 7.0, 9.2]
+media = calcular_media(notas)
+print(f"Média final: {media}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">DEBUG: Notas recebidas: [8.5, 7.0, 9.2]
+DEBUG: Tipo: &lt;class 'list'&gt;
+DEBUG: Soma: 24.7
+DEBUG: Quantidade: 3
+DEBUG: Média: 8.233333333333333
+Média final: 8.233333333333333</div>
+                    </div>
+
+                    <h3>Verificar tipos e valores:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Verificar tipo de variável
+valor = input("Digite um número: ")
+print(f"Tipo: {type(valor)}")        # Sempre será string!
+print(f"Valor: {valor}")
+
+# Converter para número
+try:
+    numero = int(valor)
+    print(f"Conversão bem-sucedida: {numero}")
+except ValueError:
+    print(f"Erro: '{valor}' não é um número válido!")
+
+# Verificar valores em lista
+lista = [1, 2, 3, None, 5]
+print(f"\nLista completa: {lista}")
+print(f"Tipo de cada elemento: {[type(x) for x in lista]}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Tipo: &lt;class 'str'&gt;
+Valor: 25
+Conversão bem-sucedida: 25
+
+Lista completa: [1, 2, 3, None, 5]
+Tipo de cada elemento: [&lt;class 'int'&gt;, &lt;class 'int'&gt;, &lt;class 'int'&gt;, &lt;class 'NoneType'&gt;, &lt;class 'int'&gt;]</div>
+                    </div>
+
+                    <h3>Dicas comuns de debugging:</h3>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Leia a mensagem de erro:</strong> Ela geralmente indica o problema</li>
+                        <li><strong>Verifique os tipos:</strong> Use <code>type()</code> para confirmar</li>
+                        <li><strong>Use prints estratégicos:</strong> Em pontos importantes do código</li>
+                        <li><strong>Execute passo a passo:</strong> Comente partes do código para isolar o problema</li>
+                        <li><strong>Verifique valores:</strong> Imprima variáveis antes e depois de operações</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚠️</span>Erros Comuns e Soluções</h2>
+                <h3>Problemas frequentes e como resolver</h3>
+                
+                <div class="slide-content">
+                    <h3>1. NameError: name 'x' is not defined</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ ERRO: Variável não definida
+# print(x)  # NameError!
+
+# ✅ SOLUÇÃO: Definir variável antes de usar
+x = 10
+print(x)  # Funciona!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">10</div>
+                    </div>
+
+                    <h3>2. TypeError: can't multiply sequence by non-int</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ ERRO: String não pode ser multiplicada por float
+# resultado = "10" * 2.5  # TypeError!
+
+# ✅ SOLUÇÃO: Converter tipo
+numero = float("10")
+resultado = numero * 2.5
+print(f"Resultado: {resultado}")  # 25.0
+
+# Ou verificar tipo antes
+valor = input("Digite número: ")
+if valor.isdigit():
+    resultado = int(valor) * 2
+    print(f"Resultado: {resultado}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Resultado: 25.0</div>
+                    </div>
+
+                    <h3>3. IndexError: list index out of range</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ ERRO: Índice fora do range
+# lista = [1, 2, 3]
+# print(lista[10])  # IndexError!
+
+# ✅ SOLUÇÃO: Verificar tamanho antes de acessar
+lista = [1, 2, 3]
+indice = 2
+
+if indice < len(lista):
+    print(f"Elemento: {lista[indice]}")
+else:
+    print(f"Erro: Índice {indice} fora do range!")
+
+# Ou usar try-except
+try:
+    elemento = lista[10]
+except IndexError:
+    print("Erro: Índice fora do range!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Elemento: 3
+Erro: Índice fora do range!</div>
+                    </div>
+
+                    <h3>4. ZeroDivisionError: division by zero</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ❌ ERRO: Divisão por zero
+# resultado = 10 / 0  # ZeroDivisionError!
+
+# ✅ SOLUÇÃO: Verificar antes de dividir
+a = 10
+b = 0
+
+if b != 0:
+    resultado = a / b
+    print(f"Resultado: {resultado}")
+else:
+    print("Erro: Divisão por zero não permitida!")
+
+# Ou usar try-except
+try:
+    resultado = a / b
+except ZeroDivisionError:
+    print("Erro: Divisão por zero!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Erro: Divisão por zero não permitida!
+Erro: Divisão por zero!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚡</span>Performance Básica</h2>
+                <h3>Quando e como otimizar</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Nem sempre é necessário otimizar, mas conhecer as diferenças ajuda a escolher
+                    a melhor abordagem para cada situação.
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Diferenças entre métodos de lista:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ append() - eficiente para adicionar um elemento
+lista = []
+lista.append(1)  # Rápido
+lista.append(2)  # Rápido
+
+# ✅ extend() - eficiente para adicionar múltiplos elementos
+lista.extend([3, 4, 5])  # Mais eficiente que múltiplos append()
+
+# ❌ + (concatenar) - cria nova lista (mais lento)
+# lista = lista + [3, 4, 5]  # Evite para grandes listas
+
+print(f"Lista: {lista}")  # [1, 2, 3, 4, 5]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Lista: [1, 2, 3, 4, 5]</div>
+                    </div>
+
+                    <h3>List Comprehension vs Loop:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># List Comprehension (mais rápido e Pythonico)
+numeros = range(1, 1001)
+quadrados_lc = [x ** 2 for x in numeros]  # Mais rápido!
+
+# Loop tradicional (mais lento)
+quadrados_loop = []
+for x in numeros:
+    quadrados_loop.append(x ** 2)  # Mais lento
+
+# Ambos produzem o mesmo resultado, mas LC é preferível!
+print(f"Primeiros 5 (LC): {quadrados_lc[:5]}")      # [1, 4, 9, 16, 25]
+print(f"Primeiros 5 (Loop): {quadrados_loop[:5]}")  # [1, 4, 9, 16, 25]</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Primeiros 5 (LC): [1, 4, 9, 16, 25]
+Primeiros 5 (Loop): [1, 4, 9, 16, 25]</div>
+                    </div>
+
+                    <h3>Quando otimizar:</h3>
+                    <div class="destaque" style="margin-top: 20px;">
+                        <strong>💡 Regra de ouro:</strong>
+                        <ul>
+                            <li><strong>Primeiro:</strong> Escreva código que funciona e é legível</li>
+                            <li><strong>Depois:</strong> Se for lento, meça e otimize apenas onde necessário</li>
+                            <li><strong>Evite:</strong> Otimização prematura (pode tornar código complicado)</li>
+                            <li><strong>Prefira:</strong> List comprehension sobre loops quando possível</li>
+                            <li><strong>Use:</strong> Pandas para dados grandes em vez de loops Python puro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📏</span>Convenções de Nomenclatura - Detalhes</h2>
+                <h3>Mais sobre nomes de variáveis e constantes</h3>
+                
+                <div class="slide-content">
+                    <h3>Nomes em português ou inglês?</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Seja consistente! Escolha um idioma e mantenha
+# ✅ BOM - tudo em português
+nome_usuario = "Maria"
+idade_usuario = 25
+cidade_usuario = "São Paulo"
+
+# ✅ BOM - tudo em inglês
+user_name = "Maria"
+user_age = 25
+user_city = "São Paulo"
+
+# ❌ EVITAR - misturar idiomas
+nome_user = "Maria"  # Confuso!
+age_usuario = 25     # Inconsistente!</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+
+                    <h3>Nomes compostos descritivos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ EXCELENTE - nomes claros e descritivos
+temperatura_maxima = 35
+temperatura_minima = 18
+temperatura_atual = 28
+
+saldo_conta_corrente = 1500.00
+limite_credito_disponivel = 500.00
+
+# ✅ Use nomes que fazem sentido no contexto
+nota_matematica = 8.5
+nota_portugues = 7.0
+media_final = (nota_matematica + nota_portugues) / 2</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✨</span>Código Limpo - Espaçamento e Formatação</h2>
+                
+                <div class="slide-content">
+                    <h3>Use espaços em branco para legibilidade:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - espaçamento adequado
+resultado = (10 + 5) * 2
+lista = [1, 2, 3, 4, 5]
+nome = "Python"
+
+# ❌ RUIM - sem espaços
+resultado=(10+5)*2
+lista=[1,2,3,4,5]
+nome="Python"
+
+# ✅ BOM - espaço após vírgulas
+print("Nome:", nome, "Idade:", 25)
+
+# ❌ RUIM - sem espaços
+print("Nome:",nome,"Idade:",25)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+
+                    <h3>Quebre linhas longas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - linha quebrada para legibilidade
+mensagem_boas_vindas = (
+    "Olá! Bem-vindo ao sistema de gerenciamento "
+    "de estoque. Digite suas credenciais para continuar."
+)
+
+# ✅ BOM - cálculos complexos em múltiplas linhas
+valor_total = (
+    preco_base +
+    taxa_servico +
+    imposto -
+    desconto
+)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔍</span>Estrutura do Código - Organização</h2>
+                
+                <div class="slide-content">
+                    <h3>Linhas em branco para organização:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - seções separadas por linhas em branco
+# Entrada de dados
+nome = input("Nome: ")
+idade = int(input("Idade: "))
+
+# Processamento
+ano_nascimento = 2025 - idade
+
+# Saída
+print(f"{nome} nasceu em {ano_nascimento}")
+
+# ❌ RUIM - tudo junto
+nome = input("Nome: ")
+idade = int(input("Idade: "))
+ano_nascimento = 2025 - idade
+print(f"{nome} nasceu em {ano_nascimento}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+
+                    <h3>Uma instrução por linha:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - uma instrução por linha
+x = 10
+y = 20
+z = 30
+
+# ❌ RUIM - múltiplas instruções em uma linha
+x = 10; y = 20; z = 30  # Evite usar ponto e vírgula</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">⚡</span>Dicas de Performance e Eficiência</h2>
+                
+                <div class="slide-content">
+                    <h3>Use operadores apropriados:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - use += para incrementar
+contador = 0
+contador += 1  # Mais claro e eficiente
+
+# ❌ RUIM - mais verboso
+contador = contador + 1
+
+# Outros operadores úteis
+x = 10
+x += 5   # x = x + 5
+x -= 3   # x = x - 3
+x *= 2   # x = x * 2
+x //= 4  # x = x // 4
+print(x)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">6</div>
+                    </div>
+
+                    <h3>Comparações encadeadas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># ✅ BOM - comparação encadeada (pythonic)
+idade = 25
+if 18 <= idade <= 65:
+    print("Adulto em idade ativa")
+
+# ❌ RUIM - mais verboso
+if idade >= 18 and idade <= 65:
+    print("Adulto em idade ativa")
+
+# Outro exemplo
+nota = 8.5
+if 0 <= nota <= 10:
+    print("Nota válida")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Adulto em idade ativa
+Nota válida</div>
+                    </div>
+
+                    <h3>Use f-strings para formatação:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">nome = "Maria"
+idade = 25
+cidade = "São Paulo"
+
+# ✅ EXCELENTE - f-strings (Python 3.6+)
+mensagem = f"{nome} tem {idade} anos e mora em {cidade}"
+print(mensagem)
+
+# ✅ BOM - format()
+mensagem = "{} tem {} anos e mora em {}".format(nome, idade, cidade)
+
+# ❌ RUIM - concatenação (mais lento)
+mensagem = nome + " tem " + str(idade) + " anos e mora em " + cidade
+
+# F-strings com expressões
+preco = 49.99
+print(f"Preço com desconto: R$ {preco * 0.9:.2f}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Maria tem 25 anos e mora em São Paulo
+Preço com desconto: R$ 44.99</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Resumo - Boas Práticas</h2>
+                
+                <div class="destaque">
+                    <strong>✅ Checklist de código limpo:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>✅ Usa nomes descritivos (snake_case)</li>
+                        <li>✅ Segue PEP 8 (indentação, espaçamento)</li>
+                        <li>✅ Tem docstrings nas funções</li>
+                        <li>✅ Comentários explicam o porquê, não o quê</li>
+                        <li>✅ Usa try-except para tratamento de erros</li>
+                        <li>✅ Código é legível sem comentários excessivos</li>
+                        <li>✅ Funções fazem uma coisa bem feita</li>
+                        <li>✅ Não repete código (DRY - Don't Repeat Yourself)</li>
+                    </ul>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>💡 Lembre-se:</strong>
+                    <p style="margin-top: 10px;">
+                        Código é lido muito mais vezes do que escrito. Escreva para o futuro você
+                        e seus colegas entenderem!
+                    </p>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador12">1 / 12</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

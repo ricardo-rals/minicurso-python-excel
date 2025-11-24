@@ -1,0 +1,652 @@
+        <div id="topico11" class="slides-container">
+            <div class="slide active">
+                <h2><span class="emoji">📦</span>Tópico 11: Módulos Úteis</h2>
+                <h3>Bibliotecas essenciais do Python</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Python vem com vários módulos úteis incluídos. Vamos aprender os mais importantes
+                    para automação e trabalho com dados!
+                </p>
+                
+                <ul>
+                    <li><strong>📅 datetime:</strong> Trabalhar com datas e horas</li>
+                    <li><strong>📄 json:</strong> Trabalhar com dados JSON (APIs, configurações)</li>
+                    <li><strong>📁 os:</strong> Manipular arquivos e diretórios</li>
+                </ul>
+
+                <div class="exemplo-box">
+                    <strong>💡 Neste tópico você vai aprender:</strong>
+                    <ul>
+                        <li>Usar datetime para datas e horas</li>
+                        <li>Formatar datas para Excel</li>
+                        <li>Trabalhar com JSON (ler e escrever)</li>
+                        <li>Manipular arquivos e pastas com os</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📅</span>Módulo datetime - Introdução</h2>
+                <h3>Trabalhando com datas e horas</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    O módulo <code>datetime</code> permite trabalhar com datas, horas e operações temporais.
+                    Essencial para análises de dados temporais e relatórios!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>Importar e criar datas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import datetime, date, time
+
+# Data e hora atual
+agora = datetime.now()
+print(f"Data e hora atual: {agora}")  # 2025-01-15 10:30:45.123456
+
+# Apenas data atual
+hoje = date.today()
+print(f"Data atual: {hoje}")  # 2025-01-15
+
+# Criar data específica
+data_especifica = date(2025, 1, 15)
+print(f"Data específica: {data_especifica}")  # 2025-01-15
+
+# Criar datetime específica
+dt = datetime(2025, 1, 15, 14, 30, 0)
+print(f"Datetime: {dt}")  # 2025-01-15 14:30:00</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Data e hora atual: 2025-01-15 10:30:45.123456
+Data atual: 2025-01-15
+Data específica: 2025-01-15
+Datetime: 2025-01-15 14:30:00</div>
+                    </div>
+
+                    <h3>Acessar componentes de data:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import datetime
+
+agora = datetime.now()
+
+print(f"Ano: {agora.year}")          # 2025
+print(f"Mês: {agora.month}")         # 1
+print(f"Dia: {agora.day}")           # 15
+print(f"Hora: {agora.hour}")         # 10
+print(f"Minuto: {agora.minute}")     # 30
+print(f"Segundo: {agora.second}")    # 45
+
+# Dia da semana (0=segunda, 6=domingo)
+print(f"Dia da semana: {agora.weekday()}")  # 0-6</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Ano: 2025
+Mês: 1
+Dia: 15
+Hora: 10
+Minuto: 30
+Segundo: 45
+Dia da semana: 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📝</span>Formatação de Datas</h2>
+                <h3>strftime() - formatar data como string</h3>
+                
+                <div class="slide-content">
+                    <h3>Formatação básica com strftime():</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import datetime
+
+agora = datetime.now()
+
+# Formatações comuns
+print(f"Data completa: {agora.strftime('%Y-%m-%d')}")        # 2025-01-15
+print(f"Data brasileira: {agora.strftime('%d/%m/%Y')}")      # 15/01/2025
+print(f"Data e hora: {agora.strftime('%d/%m/%Y %H:%M:%S')}") # 15/01/2025 10:30:45
+print(f"Mês por extenso: {agora.strftime('%B')}")            # January
+print(f"Dia da semana: {agora.strftime('%A')}")              # Wednesday
+
+# Formatos úteis para Excel
+print(f"Formato Excel: {agora.strftime('%Y-%m-%d %H:%M')}") # 2025-01-15 10:30</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Data completa: 2025-01-15
+Data brasileira: 15/01/2025
+Data e hora: 15/01/2025 10:30:45
+Mês por extenso: January
+Dia da semana: Wednesday
+Formato Excel: 2025-01-15 10:30</div>
+                    </div>
+
+                    <h3>Tabela de códigos de formatação:</h3>
+                    <table style="width: 100%; font-size: 0.9em; margin: 20px 0;">
+                        <tr>
+                            <th>Código</th>
+                            <th>Significado</th>
+                            <th>Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td><code>%Y</code></td>
+                            <td>Ano (4 dígitos)</td>
+                            <td>2025</td>
+                        </tr>
+                        <tr>
+                            <td><code>%m</code></td>
+                            <td>Mês (01-12)</td>
+                            <td>01</td>
+                        </tr>
+                        <tr>
+                            <td><code>%d</code></td>
+                            <td>Dia (01-31)</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td><code>%H</code></td>
+                            <td>Hora (00-23)</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td><code>%M</code></td>
+                            <td>Minuto (00-59)</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td><code>%B</code></td>
+                            <td>Mês por extenso</td>
+                            <td>January</td>
+                        </tr>
+                        <tr>
+                            <td><code>%A</code></td>
+                            <td>Dia da semana por extenso</td>
+                            <td>Wednesday</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔄</span>Conversão de String para Data</h2>
+                <h3>strptime() - parsear string em datetime</h3>
+                
+                <div class="slide-content">
+                    <h3>Converter string para datetime:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import datetime
+
+# Converter string em datetime
+data_str = "15/01/2025"
+data = datetime.strptime(data_str, "%d/%m/%Y")
+print(f"String: {data_str}")
+print(f"Datetime: {data}")
+
+# Formato diferente
+data_str2 = "2025-01-15 14:30:00"
+data2 = datetime.strptime(data_str2, "%Y-%m-%d %H:%M:%S")
+print(f"\nString: {data_str2}")
+print(f"Datetime: {data2}")
+
+# Útil ao ler dados do Excel que vêm como string
+data_excel = "2025-01-15"
+data_convertida = datetime.strptime(data_excel, "%Y-%m-%d")
+print(f"\nData do Excel convertida: {data_convertida}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">String: 15/01/2025
+Datetime: 2025-01-15 00:00:00
+
+String: 2025-01-15 14:30:00
+Datetime: 2025-01-15 14:30:00
+
+Data do Excel convertida: 2025-01-15 00:00:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">➕</span>Operações com Datas</h2>
+                <h3>Somar e subtrair datas</h3>
+                
+                <div class="slide-content">
+                    <h3>Usando timedelta:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import datetime, timedelta
+
+hoje = datetime.now()
+print(f"Hoje: {hoje.strftime('%d/%m/%Y')}")
+
+# Adicionar dias
+daqui_30_dias = hoje + timedelta(days=30)
+print(f"Daqui 30 dias: {daqui_30_dias.strftime('%d/%m/%Y')}")
+
+# Subtrair dias (passado)
+ha_7_dias = hoje - timedelta(days=7)
+print(f"Há 7 dias: {ha_7_dias.strftime('%d/%m/%Y')}")
+
+# Adicionar horas
+daqui_2_horas = hoje + timedelta(hours=2)
+print(f"Daqui 2 horas: {daqui_2_horas.strftime('%H:%M')}")
+
+# Diferença entre datas
+data1 = datetime(2025, 1, 1)
+data2 = datetime(2025, 1, 15)
+diferenca = data2 - data1
+print(f"\nDiferença: {diferenca.days} dias")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Hoje: 15/01/2025
+Daqui 30 dias: 14/02/2025
+Há 7 dias: 08/01/2025
+Daqui 2 horas: 12:30
+Diferença: 14 dias</div>
+                    </div>
+
+                    <h3>Exemplo prático: Calcular idade:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">from datetime import date
+
+# Calcular idade a partir da data de nascimento
+data_nascimento = date(1990, 5, 15)
+hoje = date.today()
+
+# Calcular idade
+idade = hoje.year - data_nascimento.year
+# Ajustar se aniversário ainda não chegou este ano
+if (hoje.month, hoje.day) < (data_nascimento.month, data_nascimento.day):
+    idade -= 1
+
+print(f"Data de nascimento: {data_nascimento.strftime('%d/%m/%Y')}")
+print(f"Idade: {idade} anos")
+
+# Usando diferença (mais preciso)
+diferenca = hoje - data_nascimento
+idade_exata = diferenca.days // 365.25  # Considera anos bissextos
+print(f"Idade exata: {int(idade_exata)} anos")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Data de nascimento: 15/05/1990
+Idade: 34 anos
+Idade exata: 34 anos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📄</span>Módulo json - Introdução</h2>
+                <h3>Trabalhando com dados JSON</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    JSON (JavaScript Object Notation) é um formato popular para trocar dados.
+                    Muito usado em APIs e arquivos de configuração!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>O que é JSON?</h3>
+                    <div class="code-block">
+                        <code>{
+  "nome": "João",
+  "idade": 25,
+  "cidade": "São Paulo",
+  "ativo": true,
+  "telefones": ["11999999999", "11888888888"]
+}</code>
+                    </div>
+
+                    <h3>Características do JSON:</h3>
+                    <ul>
+                        <li>Formato de texto simples e legível</li>
+                        <li>Usado em APIs web</li>
+                        <li>Fácil de converter para dicionário Python</li>
+                        <li>Ideal para configurações e dados estruturados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📖</span>Ler e Escrever JSON</h2>
+                <h3>json.load() e json.dump()</h3>
+                
+                <div class="slide-content">
+                    <h3>Ler JSON de arquivo (json.load()):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# Ler JSON de arquivo
+with open('config.json', 'r', encoding='utf-8') as arquivo:
+    dados = json.load(arquivo)  # Retorna dicionário Python
+
+print(f"Dados: {dados}")
+print(f"Tipo: {type(dados)}")  # &lt;class 'dict'&gt;
+
+# Acessar valores
+print(f"Nome: {dados['nome']}")
+print(f"Idade: {dados['idade']}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Dados: {'nome': 'João', 'idade': 25, 'cidade': 'São Paulo'}
+Tipo: &lt;class 'dict'&gt;
+Nome: João
+Idade: 25</div>
+                    </div>
+
+                    <h3>Escrever JSON em arquivo (json.dump()):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# Dados em dicionário Python
+dados = {
+    "nome": "Maria",
+    "idade": 30,
+    "cidade": "Rio de Janeiro",
+    "ativo": True,
+    "telefones": ["21999999999", "21888888888"]
+}
+
+# Escrever JSON em arquivo
+with open('saida.json', 'w', encoding='utf-8') as arquivo:
+    json.dump(dados, arquivo, indent=2, ensure_ascii=False)
+
+print("✅ JSON salvo com sucesso!")
+# indent=2 formata o JSON de forma legível
+# ensure_ascii=False preserva acentos e caracteres especiais</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ JSON salvo com sucesso!</div>
+                    </div>
+
+                    <h3>Converter string JSON (json.loads() e json.dumps()):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import json
+
+# String JSON para dicionário Python (loads = load string)
+json_str = '{"nome": "João", "idade": 25}'
+dados = json.loads(json_str)
+print(f"Dados: {dados}")  # {'nome': 'João', 'idade': 25}
+
+# Dicionário Python para string JSON (dumps = dump string)
+dados = {"nome": "Maria", "idade": 30}
+json_str = json.dumps(dados, indent=2, ensure_ascii=False)
+print(f"\nJSON string:\n{json_str}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Dados: {'nome': 'João', 'idade': 25}
+
+JSON string:
+{
+  "nome": "Maria",
+  "idade": 30
+}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📁</span>Módulo os - Manipular Arquivos e Pastas</h2>
+                <h3>Trabalhando com sistema de arquivos</h3>
+                
+                <div class="slide-content">
+                    <h3>Diretório atual e mudança de diretório:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Obter diretório atual
+diretorio_atual = os.getcwd()
+print(f"Diretório atual: {diretorio_atual}")
+
+# Mudar diretório
+os.chdir('C:/Users/Usuario/Documentos')
+print(f"Novo diretório: {os.getcwd()}")
+
+# Voltar para o diretório original
+os.chdir(diretorio_atual)
+print(f"Voltou para: {os.getcwd()}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Diretório atual: C:\Users\Usuario\projeto
+Novo diretório: C:\Users\Usuario\Documentos
+Voltou para: C:\Users\Usuario\projeto</div>
+                    </div>
+
+                    <h3>Listar arquivos e pastas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Listar conteúdo do diretório
+arquivos = os.listdir('.')
+print("Arquivos no diretório atual:")
+for arquivo in arquivos:
+    print(f"  - {arquivo}")
+
+# Filtrar apenas arquivos Python
+arquivos_py = [f for f in os.listdir('.') if f.endswith('.py')]
+print(f"\nArquivos Python: {arquivos_py}")
+
+# Filtrar apenas pastas
+pastas = [f for f in os.listdir('.') if os.path.isdir(f)]
+print(f"Pastas: {pastas}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Arquivos no diretório atual:
+  - script.py
+  - dados.csv
+  - relatorio.xlsx
+  - pasta1
+
+Arquivos Python: ['script.py']
+Pastas: ['pasta1']</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🔧</span>os.path - Verificar e Manipular Caminhos</h2>
+                <h3>Ferramentas úteis para caminhos de arquivo</h3>
+                
+                <div class="slide-content">
+                    <h3>Verificar existência e tipo:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+arquivo = 'dados.csv'
+
+# Verificar se arquivo existe
+if os.path.exists(arquivo):
+    print(f"✅ {arquivo} existe!")
+else:
+    print(f"❌ {arquivo} não encontrado")
+
+# Verificar se é arquivo
+if os.path.isfile(arquivo):
+    print(f"✅ {arquivo} é um arquivo")
+
+# Verificar se é diretório
+pasta = 'documentos'
+if os.path.isdir(pasta):
+    print(f"✅ {pasta} é um diretório")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ dados.csv existe!
+✅ dados.csv é um arquivo</div>
+                    </div>
+
+                    <h3>Juntar caminhos (os.path.join()):</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Juntar caminhos de forma segura (funciona em Windows, Mac, Linux)
+caminho = os.path.join('pasta', 'subpasta', 'arquivo.txt')
+print(f"Caminho: {caminho}")  # pasta/subpasta/arquivo.txt (ou pasta\subpasta\arquivo.txt no Windows)
+
+# Obter informações do caminho
+arquivo = 'documentos/relatorio.pdf'
+print(f"Nome do arquivo: {os.path.basename(arquivo)}")        # relatorio.pdf
+print(f"Diretório: {os.path.dirname(arquivo)}")                # documentos
+print(f"Extensão: {os.path.splitext(arquivo)[1]}")             # .pdf
+print(f"Sem extensão: {os.path.splitext(arquivo)[0]}")         # documentos/relatorio</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Caminho: pasta/subpasta/arquivo.txt
+Nome do arquivo: relatorio.pdf
+Diretório: documentos
+Extensão: .pdf
+Sem extensão: documentos/relatorio</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📂</span>Criar e Remover Arquivos/Pastas</h2>
+                <h3>Gerenciamento de arquivos</h3>
+                
+                <div class="slide-content">
+                    <h3>Criar e remover pastas:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+
+# Criar pasta (se não existir)
+if not os.path.exists('nova_pasta'):
+    os.mkdir('nova_pasta')
+    print("✅ Pasta criada!")
+
+# Criar estrutura de pastas
+os.makedirs('pasta1/pasta2/pasta3', exist_ok=True)
+print("✅ Estrutura de pastas criada!")
+
+# Remover arquivo
+if os.path.exists('arquivo_temporario.txt'):
+    os.remove('arquivo_temporario.txt')
+    print("✅ Arquivo removido!")
+
+# Remover pasta vazia
+if os.path.exists('pasta_vazia'):
+    os.rmdir('pasta_vazia')
+    print("✅ Pasta removida!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Pasta criada!
+✅ Estrutura de pastas criada!
+✅ Arquivo removido!
+✅ Pasta removida!</div>
+                    </div>
+
+                    <h3>Exemplo prático: Organizar arquivos:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">import os
+import shutil
+
+# Organizar arquivos por extensão
+arquivos = os.listdir('.')
+
+# Criar pastas por tipo
+tipos = {
+    '.pdf': 'PDFs',
+    '.xlsx': 'Excel',
+    '.csv': 'CSV',
+    '.txt': 'Textos'
+}
+
+for extensao, pasta in tipos.items():
+    if not os.path.exists(pasta):
+        os.mkdir(pasta)
+
+# Mover arquivos
+for arquivo in arquivos:
+    if os.path.isfile(arquivo):
+        extensao = os.path.splitext(arquivo)[1]
+        if extensao in tipos:
+            destino = os.path.join(tipos[extensao], arquivo)
+            shutil.move(arquivo, destino)
+            print(f"Movido: {arquivo} -> {destino}")
+
+print("\n✅ Arquivos organizados!")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Movido: relatorio.pdf -> PDFs/relatorio.pdf
+Movido: dados.xlsx -> Excel/dados.xlsx
+Movido: vendas.csv -> CSV/vendas.csv
+
+✅ Arquivos organizados!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">✏️</span>Exercícios - Módulos Úteis</h2>
+                
+                <div class="exemplo-box">
+                    <strong>Exercício 1: Calcular Dias até Aniversário</strong>
+                    <p>Peça a data de nascimento do usuário e calcule quantos dias faltam para o próximo aniversário.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">from datetime import date, timedelta
+
+dia = int(input("Dia de nascimento: "))
+mes = int(input("Mês de nascimento: "))
+ano_nasc = int(input("Ano de nascimento: "))
+
+hoje = date.today()
+aniversario = date(hoje.year, mes, dia)
+
+# Se aniversário já passou este ano, usar próximo ano
+if aniversario < hoje:
+    aniversario = date(hoje.year + 1, mes, dia)
+
+dias_restantes = (aniversario - hoje).days
+print(f"Faltam {dias_restantes} dias para seu aniversário!")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">Dia de nascimento: 15
+Mês de nascimento: 5
+Ano de nascimento: 1990
+Faltam 120 dias para seu aniversário!</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="exemplo-box">
+                    <strong>Exercício 2: Salvar Configurações em JSON</strong>
+                    <p>Crie um dicionário com configurações e salve em arquivo JSON.</p>
+                    <details>
+                        <summary>Ver solução</summary>
+                        <div class="slide-content" style="margin-top: 10px;">
+                            <div class="jupyter-cell">
+                                <div class="jupyter-input"></div>
+                                <div class="jupyter-code">import json
+
+config = {
+    "usuario": "admin",
+    "porta": 8080,
+    "debug": True,
+    "database": {
+        "host": "localhost",
+        "port": 5432
+    }
+}
+
+with open('config.json', 'w', encoding='utf-8') as arquivo:
+    json.dump(config, arquivo, indent=2, ensure_ascii=False)
+
+print("✅ Configuração salva!")
+
+# Ler de volta
+with open('config.json', 'r', encoding='utf-8') as arquivo:
+    config_lida = json.load(arquivo)
+
+print(f"Usuário: {config_lida['usuario']}")</div>
+                                <div class="jupyter-output"></div>
+                                <div class="jupyter-print">✅ Configuração salva!
+Usuário: admin</div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <button class="btn" onclick="slideAnterior()">← Anterior</button>
+                <span class="contador-slides" id="contador11">1 / 11</span>
+                <button class="btn" onclick="proximoSlide()">Próximo →</button>
+            </div>
+        </div>

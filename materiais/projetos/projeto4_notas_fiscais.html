@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 4: Criador de Notas Fiscais Fake para Testes</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/projetos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="projeto-container">
+            <div class="projeto-header">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()" style="margin-bottom: 15px;">← Voltar ao Menu</button>
+                <h1>🧾 Projeto 4: Criador de Notas Fiscais Fake para Testes</h1>
+                <p>Geração automática de dados de teste realistas</p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>🎯 Objetivo do Projeto</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Criar um gerador que produz automaticamente várias notas fiscais fake usando Python,
+                    biblioteca Faker e Excel. Ideal para testes de sistemas, BI e desenvolvimento.
+                </p>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📚 O que você vai aprender</h2>
+                <ul>
+                    <li><strong>Usar a biblioteca Faker</strong> para gerar dados realistas</li>
+                    <li><strong>Criar dados artificiais</strong> (nomes, CPFs, endereços, produtos)</li>
+                    <li><strong>Gerar tabelas grandes</strong> automaticamente</li>
+                    <li><strong>Preencher planilhas Excel</strong> com dados variados</li>
+                    <li><strong>Controlar aleatoriedade</strong> com seeds</li>
+                    <li><strong>Criar estruturas de dados</strong> complexas</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>⚙️ Funcionalidades</h2>
+                <ol>
+                    <li><strong>Gera produtos</strong> com nomes, preços e categorias aleatórias</li>
+                    <li><strong>Gera clientes</strong> com CPF, nome, endereço e telefone</li>
+                    <li><strong>Gera vendedores</strong> e distribui vendas entre eles</li>
+                    <li><strong>Cria notas fiscais</strong> com número, data, itens e totais</li>
+                    <li><strong>Preenche planilha Excel</strong> formatada como nota fiscal real</li>
+                    <li><strong>Gera múltiplas notas</strong> em lote (ex: 100, 500, 1000)</li>
+                </ol>
+            </div>
+
+            <div class="requisitos-box">
+                <h4>✅ Requisitos Obrigatórios (Conceitos do Curso)</h4>
+                <ul>
+                    <li>✅ Instalação e uso da biblioteca <code>faker</code></li>
+                    <li>✅ Criação de listas e dicionários com dados gerados</li>
+                    <li>✅ Uso de loops para gerar múltiplos registros</li>
+                    <li>✅ Criação de DataFrames com Pandas</li>
+                    <li>✅ Escrita em Excel com <code>pd.to_excel()</code></li>
+                    <li>✅ Formatação de células com Openpyxl</li>
+                    <li>✅ Uso de funções Python para organizar código</li>
+                    <li>✅ Manipulação de datas e valores monetários</li>
+                </ul>
+            </div>
+
+            <div class="bonus-box">
+                <h4>🌟 Bônus (Funcionalidades Extras)</h4>
+                <ul>
+                    <li>🌟 <strong>Dashboard com Streamlit:</strong> Interface para configurar geração</li>
+                    <li>🌟 <strong>Dashboard com Dash:</strong> Visualizar dados gerados</li>
+                    <li>🌟 <strong>Validação de dados:</strong> Garantir que CPFs/CNPJs são válidos</li>
+                    <li>🌟 <strong>Geração de PDFs:</strong> Criar notas fiscais em formato PDF</li>
+                    <li>🌟 <strong>API REST:</strong> Criar API para gerar notas sob demanda</li>
+                    <li>🌟 <strong>Banco de dados:</strong> Salvar notas em SQLite ou PostgreSQL</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📁 Estrutura de Arquivos</h2>
+                <div class="code-example">projeto_notas_fiscais/
+├── gerador_notas.py            # Script principal
+├── notas_fake.xlsx            # Arquivo gerado
+└── README.md</div>
+            </div>
+
+            <div class="projeto-section">
+                <h2>💡 Dicas de Implementação</h2>
+                <ul>
+                    <li>Instale Faker: <code>pip install faker</code></li>
+                    <li>Use <code>Faker('pt_BR')</code> para dados brasileiros</li>
+                    <li>Crie funções separadas para cada tipo de dado</li>
+                    <li>Use seeds para gerar dados reproduzíveis</li>
+                    <li>Valide que os cálculos estão corretos</li>
+                </ul>
+            </div>
+
+            <div class="projeto-section">
+                <h2>📝 Exemplo de Dados Gerados</h2>
+                <p>O arquivo Excel gerado deve conter colunas como:</p>
+                <div class="code-example">Número NF,Data,Cliente,CPF,Produto,Quantidade,Preço Unitário,Total
+000001,2024-01-15,João Silva,123.456.789-00,Notebook,1,3500.00,3500.00
+000002,2024-01-16,Maria Santos,987.654.321-00,Mouse,2,50.00,100.00
+...</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
+
+
