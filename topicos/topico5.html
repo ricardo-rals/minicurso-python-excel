@@ -371,32 +371,172 @@ for fruta in frutas:
                     </div>
 
                     <h3>Usando enumerate() - índice + valor:</h3>
+                    <p style="margin: 15px 0; font-size: 1.05em;">
+                        <strong>enumerate()</strong> é uma função que retorna tanto o <strong>índice</strong> quanto o <strong>valor</strong> de cada elemento durante a iteração. É a forma mais "Pythonica" de iterar sobre uma lista quando você precisa do índice!
+                    </p>
+                    
                     <div class="jupyter-cell">
                         <div class="jupyter-input"></div>
                         <div class="jupyter-code">frutas = ["maçã", "banana", "laranja"]
 
-print("Frutas com índice:")
-for i, fruta in enumerate(frutas):
-    print(f"{i}: {fruta}")
-
 # enumerate() retorna tuplas (índice, valor)
+print("Como enumerate() funciona:")
 for item in enumerate(frutas):
     print(item)  # (0, 'maçã'), (1, 'banana'), (2, 'laranja')
 
-# Começar contagem de outro número
+# Desempacotamento: separando índice e valor
+print("\nDesempacotando:")
+for indice, fruta in enumerate(frutas):
+    print(f"Índice {indice}: {fruta}")
+
+# Começar contagem de outro número (útil para numeração que começa em 1)
+print("\nComeçando em 1:")
 for i, fruta in enumerate(frutas, start=1):
     print(f"{i}. {fruta}")  # 1. maçã, 2. banana, 3. laranja</div>
                         <div class="jupyter-output"></div>
-                        <div class="jupyter-print">Frutas com índice:
-0: maçã
-1: banana
-2: laranja
+                        <div class="jupyter-print">Como enumerate() funciona:
 (0, 'maçã')
 (1, 'banana')
 (2, 'laranja')
+
+Desempacotando:
+Índice 0: maçã
+Índice 1: banana
+Índice 2: laranja
+
+Começando em 1:
 1. maçã
 2. banana
 3. laranja</div>
+                    </div>
+
+                    <h3>enumerate() vs range(len()) - Comparação Completa:</h3>
+                    <p style="margin: 15px 0; font-size: 1.05em;">
+                        Quando você precisa do índice durante a iteração, existem duas formas principais. Vamos compará-las:
+                    </p>
+                    
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja", "uva"]
+
+# ==========================================
+# MÉTODO 1: Usando range(len()) - Forma tradicional
+# ==========================================
+print("=== Usando range(len()) ===")
+for i in range(len(frutas)):
+    print(f"Índice {i}: {frutas[i]}")
+
+# ==========================================
+# MÉTODO 2: Usando enumerate() - Forma Pythonica (RECOMENDADO!)
+# ==========================================
+print("\n=== Usando enumerate() ===")
+for i, fruta in enumerate(frutas):
+    print(f"Índice {i}: {fruta}")
+
+# Ambos produzem o mesmo resultado, mas enumerate() é:
+# ✅ Mais legível e claro
+# ✅ Mais eficiente (não precisa calcular len())
+# ✅ Mais seguro (menos chance de erro de índice)
+# ✅ Mais "Pythonico" (estilo preferido pela comunidade)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">=== Usando range(len()) ===
+Índice 0: maçã
+Índice 1: banana
+Índice 2: laranja
+Índice 3: uva
+
+=== Usando enumerate() ===
+Índice 0: maçã
+Índice 1: banana
+Índice 2: laranja
+Índice 3: uva</div>
+                    </div>
+
+                    <div style="margin: 20px 0; padding: 15px; background-color: #e7f3ff; border-left: 4px solid #2196F3; border-radius: 4px;">
+                        <strong>📊 Comparação Detalhada:</strong>
+                        <table style="width: 100%; margin-top: 10px; font-size: 0.95em;">
+                            <tr>
+                                <th style="text-align: left; padding: 8px;">Aspecto</th>
+                                <th style="text-align: left; padding: 8px;"><code>range(len())</code></th>
+                                <th style="text-align: left; padding: 8px;"><code>enumerate()</code></th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;"><strong>Legibilidade</strong></td>
+                                <td style="padding: 8px;">❌ Menos clara</td>
+                                <td style="padding: 8px;">✅ Mais clara e direta</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;"><strong>Eficiência</strong></td>
+                                <td style="padding: 8px;">⚠️ Chama len() a cada iteração</td>
+                                <td style="padding: 8px;">✅ Mais eficiente</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;"><strong>Segurança</strong></td>
+                                <td style="padding: 8px;">⚠️ Risco de erro de índice</td>
+                                <td style="padding: 8px;">✅ Mais seguro</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;"><strong>Estilo Python</strong></td>
+                                <td style="padding: 8px;">⚠️ Mais "tradicional"</td>
+                                <td style="padding: 8px;">✅ Mais "Pythonico"</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;"><strong>Flexibilidade</strong></td>
+                                <td style="padding: 8px;">⚠️ Limitada</td>
+                                <td style="padding: 8px;">✅ Permite start personalizado</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>Exemplo Prático: Quando usar enumerate()?</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Cenário: Marcar elementos pares com índice
+numeros = [10, 15, 20, 25, 30]
+
+# ❌ Forma com range(len()) - mais verbosa
+print("Com range(len()):")
+for i in range(len(numeros)):
+    if numeros[i] % 2 == 0:
+        print(f"Posição {i}: {numeros[i]} é par")
+
+# ✅ Forma com enumerate() - mais limpa
+print("\nCom enumerate():")
+for i, num in enumerate(numeros):
+    if num % 2 == 0:
+        print(f"Posição {i}: {num} é par")
+
+# ✅ Exemplo: Modificar elementos com base no índice
+print("\nModificando com enumerate():")
+numeros_dobrados = []
+for i, num in enumerate(numeros):
+    if i % 2 == 0:  # Índice par
+        numeros_dobrados.append(num * 2)
+    else:
+        numeros_dobrados.append(num)
+print(f"Resultado: {numeros_dobrados}")</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">Com range(len()):
+Posição 0: 10 é par
+Posição 2: 20 é par
+Posição 4: 30 é par
+
+Com enumerate():
+Posição 0: 10 é par
+Posição 2: 20 é par
+Posição 4: 30 é par
+
+Modificando com enumerate():
+Resultado: [20, 15, 40, 25, 60]</div>
+                    </div>
+
+                    <div class="destaque" style="margin-top: 15px;">
+                        <strong>💡 Regra de Ouro:</strong>
+                        <ul style="margin-top: 10px;">
+                            <li><strong>Use <code>for item in lista</code></strong> quando você <strong>não precisa</strong> do índice</li>
+                            <li><strong>Use <code>enumerate(lista)</code></strong> quando você <strong>precisa</strong> do índice - é a forma recomendada!</li>
+                            <li><strong>Evite <code>range(len())</code></strong> - use apenas se tiver um motivo específico</li>
+                        </ul>
                     </div>
 
                     <h3>Usando zip() - combinar listas:</h3>
@@ -436,21 +576,6 @@ Carlos, 35 anos, de MG
 Dicionário: {'nome': 'João', 'idade': 28, 'cidade': 'SP'}</div>
                     </div>
 
-                    <h3>Usando range com len():</h3>
-                    <div class="jupyter-cell">
-                        <div class="jupyter-input"></div>
-                        <div class="jupyter-code">frutas = ["maçã", "banana", "laranja"]
-
-for i in range(len(frutas)):
-    print(f"{i}: {frutas[i]}")
-
-# enumerate() é mais Pythonico que range(len())
-# Use enumerate() quando precisar do índice!</div>
-                        <div class="jupyter-output"></div>
-                        <div class="jupyter-print">0: maçã
-1: banana
-2: laranja</div>
-                    </div>
                 </div>
             </div>
 

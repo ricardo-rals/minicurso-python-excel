@@ -174,7 +174,6 @@
         ];
 
         let currentQuestion = 0;
-        let score = 0;
         let answers = [];
 
         function loadQuestion() {
@@ -236,7 +235,6 @@
             if (!isRestore) {
                 if (index === q.correct) {
                     selectedOption.classList.add('correct');
-                    if (!answers[currentQuestion]) score++;
                 } else {
                     selectedOption.classList.add('incorrect');
                     document.getElementById(`option${q.correct}`).classList.add('correct');
@@ -274,6 +272,14 @@
             const results = document.getElementById('results');
             results.classList.add('show');
 
+            // Calcular score baseado em todas as respostas
+            let score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (answers[i] !== undefined && answers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+
             const percent = Math.round((score / questions.length) * 100);
             document.getElementById('scorePercent').textContent = percent + '%';
             document.getElementById('scoreDetails').textContent = `Você acertou ${score} de ${questions.length} questões`;
@@ -289,7 +295,6 @@
 
         function restartQuiz() {
             currentQuestion = 0;
-            score = 0;
             answers = [];
             document.getElementById('quizContent').style.display = 'block';
             document.getElementById('results').classList.remove('show');
