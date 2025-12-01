@@ -28,6 +28,280 @@
             </div>
 
             <div class="slide">
+                <h2><span class="emoji">📖</span>Dicionário de Funções e Parâmetros</h2>
+                <h3>Entendendo os conceitos principais</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Antes de começar, vamos entender o que significa cada função e parâmetro que você vai usar!
+                </p>
+                
+                <div class="slide-content">
+                    <h3>🔧 Openpyxl - Classes e Funções:</h3>
+                    
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>Workbook()</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Cria um novo arquivo Excel (workbook). É como criar uma nova planilha do zero.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>wb = Workbook()  # Cria um novo arquivo Excel vazio</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>load_workbook(arquivo)</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Abre um arquivo Excel existente para leitura ou edição.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>wb = load_workbook("vendas.xlsx")  # Abre arquivo existente</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>wb.active</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Retorna a aba (worksheet) ativa/atual do workbook. É a aba que está aberta no Excel.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>ws = wb.active  # Pega a aba ativa</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>ws.title</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Nome da aba (worksheet). É o nome que aparece na guia inferior do Excel.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>ws.title = "Vendas"  # Renomeia a aba</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>wb.save(arquivo)</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Salva o workbook em um arquivo. Sempre chame isso após fazer alterações!
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>wb.save("vendas.xlsx")  # Salva o arquivo</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">🐼</span>Dicionário - Pandas (pd.read_excel)</h2>
+                <h3>Parâmetros do pd.read_excel()</h3>
+                
+                <div class="slide-content">
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>pd.read_excel(arquivo, ...)</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Função principal para ler arquivos Excel e converter em DataFrame (tabela do Pandas).
+                        </p>
+                    </div>
+
+                    <h3>📋 Parâmetros principais:</h3>
+                    
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>arquivo</code> (obrigatório)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Caminho do arquivo Excel (.xlsx ou .xls) que você quer ler.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.read_excel("vendas.xlsx")</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>sheet_name</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Qual aba ler do arquivo. Pode ser:
+                            <ul style="margin: 5px 0 0 20px; font-size: 0.9em;">
+                                <li>Número (0, 1, 2...) - índice da aba (primeira = 0)</li>
+                                <li>String ("Vendas") - nome da aba</li>
+                                <li><code>None</code> - lê todas as abas (retorna dicionário)</li>
+                            </ul>
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.read_excel("vendas.xlsx", sheet_name=0)  # Primeira aba
+df = pd.read_excel("vendas.xlsx", sheet_name="Vendas")  # Aba chamada "Vendas"
+abas = pd.read_excel("vendas.xlsx", sheet_name=None)  # Todas as abas</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>engine</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Qual biblioteca usar para ler o arquivo:
+                            <ul style="margin: 5px 0 0 20px; font-size: 0.9em;">
+                                <li><code>'openpyxl'</code> - para arquivos .xlsx (padrão)</li>
+                                <li><code>'xlrd'</code> - para arquivos .xls antigos</li>
+                            </ul>
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.read_excel("vendas.xlsx", engine='openpyxl')  # .xlsx
+df = pd.read_excel("vendas.xls", engine='xlrd')  # .xls antigo</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>header</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Qual linha usar como cabeçalho (nomes das colunas):
+                            <ul style="margin: 5px 0 0 20px; font-size: 0.9em;">
+                                <li><code>0</code> (padrão) - primeira linha é cabeçalho</li>
+                                <li><code>None</code> - não há cabeçalho (cria nomes automáticos)</li>
+                                <li>Número - linha específica como cabeçalho</li>
+                            </ul>
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.read_excel("vendas.xlsx", header=0)  # Linha 1 = cabeçalho</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>index_col</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Qual coluna usar como índice (ID) do DataFrame. Geralmente <code>None</code> ou <code>0</code>.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.read_excel("vendas.xlsx", index_col=0)  # Primeira coluna = índice</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">💾</span>Dicionário - Pandas (pd.to_excel)</h2>
+                <h3>Parâmetros do pd.to_excel()</h3>
+                
+                <div class="slide-content">
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>df.to_excel(arquivo, ...)</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Salva um DataFrame em um arquivo Excel.
+                        </p>
+                    </div>
+
+                    <h3>📋 Parâmetros principais:</h3>
+                    
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>arquivo</code> (obrigatório)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Nome do arquivo onde salvar (.xlsx).
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df.to_excel("saida.xlsx")</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>sheet_name</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Nome da aba onde salvar. Padrão é "Sheet1".
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df.to_excel("saida.xlsx", sheet_name="Vendas")</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>index</code> (opcional, padrão: True)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Se <code>True</code>, salva o índice do DataFrame como primeira coluna.
+                            Geralmente use <code>index=False</code> para não salvar números de linha.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df.to_excel("saida.xlsx", index=False)  # Não salva números de linha</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>engine</code> (opcional)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Biblioteca para escrever. Use <code>'openpyxl'</code> para .xlsx.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df.to_excel("saida.xlsx", engine='openpyxl')</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><span class="emoji">📚</span>Dicionário - Outros Conceitos Importantes</h2>
+                <h3>Termos e objetos que você vai encontrar</h3>
+                
+                <div class="slide-content">
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>DataFrame (df)</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            É uma tabela do Pandas, como uma planilha Excel em Python. Tem linhas e colunas.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df = pd.DataFrame({'Nome': ['João', 'Maria'], 'Idade': [25, 30]})</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>pd.ExcelWriter()</code></strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Permite salvar múltiplas abas em um único arquivo Excel. Use com <code>with</code>.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>with pd.ExcelWriter("relatorio.xlsx") as writer:
+    df1.to_excel(writer, sheet_name="Aba1")
+    df2.to_excel(writer, sheet_name="Aba2")</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>ws.iter_rows()</code> (Openpyxl)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Itera sobre linhas da planilha. Útil para ler dados linha por linha.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>for row in ws.iter_rows(min_row=1, max_row=10, values_only=True):
+    print(row)  # values_only=True retorna apenas valores, não objetos</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>ws['A1']</code> (Openpyxl)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Acessa uma célula específica usando notação Excel (A1, B2, etc.).
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>ws['A1'] = "Produto"  # Escreve na célula A1
+valor = ws['A1'].value  # Lê o valor da célula A1</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>df.groupby()</code> (Pandas)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Agrupa dados por uma ou mais colunas, permitindo fazer cálculos por grupo.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>vendas_por_regiao = df.groupby('Região')['Vendas'].sum()</code>
+                        </div>
+                    </div>
+
+                    <div class="destaque" style="margin: 15px 0;">
+                        <strong><code>df.fillna()</code> (Pandas)</strong>
+                        <p style="margin: 5px 0; font-size: 0.95em;">
+                            Preenche valores faltantes (NaN) com um valor específico ou método.
+                        </p>
+                        <div class="code-block" style="margin-top: 5px; font-size: 0.85em;">
+                            <code>df.fillna(0)  # Preenche todos NaN com 0
+df.fillna(df['Preço'].mean())  # Preenche com média</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
                 <h2><span class="emoji">📚</span>Biblioteca Openpyxl</h2>
                 <h3>O que é Openpyxl?</h3>
         <p style="font-size: 1.1em; margin: 20px 0;">
@@ -931,7 +1205,7 @@ print("✅ Pronto!")</code>
     <div class="controles">
         <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
         <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador9">1 / 20</span>
+                <span class="contador-slides" id="contador9">1 / 24</span>
         <button class="btn" onclick="proximoSlide()">Próximo →</button>
     </div>
 </div>

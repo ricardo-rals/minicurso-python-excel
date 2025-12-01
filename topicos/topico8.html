@@ -27,6 +27,76 @@
             </div>
 
             <div class="slide">
+                <h2><span class="emoji">🔓</span>Modos de Acesso de Arquivo</h2>
+                <h3>Entendendo os parâmetros do open()</h3>
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    Quando você usa <code>open('arquivo.txt', 'r', encoding='utf-8')</code>, o segundo parâmetro
+                    define <strong>como</strong> você vai trabalhar com o arquivo. Vamos entender cada modo:
+                </p>
+                
+                <div class="slide-content">
+                    <div class="destaque" style="margin: 20px 0;">
+                        <strong>📌 Modos de Abertura de Arquivo:</strong>
+                        <ul style="margin-top: 15px;">
+                            <li><strong><code>'r'</code> - Read (Ler):</strong> Abre o arquivo apenas para leitura. 
+                                <span style="color: #d32f2f;">⚠️ Erro se o arquivo não existir!</span></li>
+                            <li><strong><code>'w'</code> - Write (Escrever):</strong> Abre para escrita. 
+                                <span style="color: #d32f2f;">⚠️ Sobrescreve o arquivo se ele já existir!</span></li>
+                            <li><strong><code>'a'</code> - Append (Anexar):</strong> Abre para escrita, mas adiciona ao final do arquivo. 
+                                Cria o arquivo se não existir.</li>
+                            <li><strong><code>'x'</code> - Exclusive (Exclusivo):</strong> Cria um novo arquivo. 
+                                <span style="color: #d32f2f;">⚠️ Erro se o arquivo já existir!</span></li>
+                            <li><strong><code>'r+'</code> - Read and Write:</strong> Abre para leitura e escrita simultaneamente.</li>
+                        </ul>
+                    </div>
+
+                    <h3>Exemplo prático:</h3>
+                    <div class="jupyter-cell">
+                        <div class="jupyter-input"></div>
+                        <div class="jupyter-code"># Modo 'r' - Ler (read)
+with open('dados.txt', 'r', encoding='utf-8') as arquivo:
+    conteudo = arquivo.read()
+    # arquivo.write("teste")  # ❌ ERRO! Modo 'r' não permite escrita
+
+# Modo 'w' - Escrever (write) - SOBRESCREVE se existir!
+with open('saida.txt', 'w', encoding='utf-8') as arquivo:
+    arquivo.write("Novo conteúdo")
+    # arquivo.read()  # ❌ ERRO! Modo 'w' não permite leitura
+
+# Modo 'a' - Anexar (append) - ADICIONA ao final
+with open('log.txt', 'a', encoding='utf-8') as arquivo:
+    arquivo.write("Nova linha no final\n")
+
+# Modo 'x' - Exclusive (exclusivo) - CRIA novo arquivo
+try:
+    with open('novo.txt', 'x', encoding='utf-8') as arquivo:
+        arquivo.write("Arquivo criado com sucesso!\n")
+    print("✅ Arquivo criado!")
+except FileExistsError:
+    print("❌ Arquivo já existe! Use 'w' para sobrescrever.")
+
+# Modo 'r+' - Read and Write (ler e escrever)
+with open('dados.txt', 'r+', encoding='utf-8') as arquivo:
+    conteudo = arquivo.read()  # Pode ler
+    arquivo.write("\nLinha adicionada no final")  # Pode escrever
+    # Cuidado: escreve a partir da posição atual do cursor!
+
+# encoding='utf-8' é importante para caracteres especiais (acentos, etc.)</div>
+                        <div class="jupyter-output"></div>
+                        <div class="jupyter-print">✅ Arquivo criado!</div>
+                    </div>
+
+                    <div class="exemplo-box" style="margin-top: 20px;">
+                        <strong>💡 Dica Importante:</strong>
+                        <p style="margin: 10px 0;">
+                            Sempre use <code>encoding='utf-8'</code> ao trabalhar com arquivos de texto em português.
+                            Isso garante que acentos e caracteres especiais sejam salvos e lidos corretamente!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
                 <h2><span class="emoji">📖</span>Ler Arquivos de Texto</h2>
                 <h3>Usando open() e with statement</h3>
                 <p style="font-size: 1.1em; margin: 20px 0;">
@@ -1086,7 +1156,7 @@ Pedro: R$ 300.00</div>
             <div class="controles">
                 <button class="btn btn-voltar-menu" onclick="voltarMenu()">← Voltar ao Menu</button>
                 <button class="btn" onclick="slideAnterior()">← Anterior</button>
-                <span class="contador-slides" id="contador8">1 / 15</span>
+                <span class="contador-slides" id="contador8">1 / 16</span>
                 <button class="btn" onclick="proximoSlide()">Próximo →</button>
             </div>
         </div>
